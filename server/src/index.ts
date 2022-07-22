@@ -15,5 +15,3 @@ chatServer.run();
 server.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
 });
-
-export { io };

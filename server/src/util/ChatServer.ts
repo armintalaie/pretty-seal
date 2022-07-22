@@ -7,6 +7,11 @@ export interface ChatServerInterface {
   run(): void;
 }
 
+export enum EVENTS {
+  ROOM = "room:post",
+  MESSAGE = "message",
+}
+
 export class ChatServer implements ChatServerInterface {
   private readonly io: Server;
   private roomHandler: RoomHandler;
@@ -18,7 +23,6 @@ export class ChatServer implements ChatServerInterface {
 
   run() {
     this.io.on("connection", (socket) => {
-      console.log("user connected");
       socket.on("room:post", (roomId) =>
         this.handleRoomRequest(socket, "post", roomId)
       );
@@ -32,21 +36,18 @@ export class ChatServer implements ChatServerInterface {
   }
 
   handleMessageRequest(roomId: string, socket: Socket, message: string) {
-    console.log(roomId + "/  " + message);
     this.roomHandler.sendMessageInRoom(roomId, socket, message);
   }
 
   handleRoomRequest(socket: Socket, method: string, roomId?: string) {
-    console.log("m " + roomId);
     if (method === "delete") {
       roomId && this.roomHandler.leaveRoom(socket, roomId);
     } else {
       if (!roomId) {
-        this.roomHandler.createRoom(socket);
-        return;
+        return this.roomHandler.createRoom(socket);
       }
       if (this.roomHandler.roomExists(roomId)) {
-        this.roomHandler.joinRoom(socket, roomId);
+        return this.roomHandler.joinRoom(socket, roomId);
       }
     }
   }

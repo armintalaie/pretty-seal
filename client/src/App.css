@@ -10,7 +10,7 @@ html {
     box-sizing: border-box;
 }
 
-.App-header {
+.intro {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,7 +27,7 @@ h2 {
 }
 
 body {
-    background-color: #17181a;
+    background-color: #222222;
     color: #ffffff;
     width: 100%;
     display: flex;
@@ -40,50 +40,88 @@ body {
     display: flex;
     text-align: left;
     flex-direction: column;
-    height: 80vh;
-    max-height: 100%;
-    overflow: scroll;
+    flex: 1;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-.message-section {
-    border-top: 2px solid rgba(42, 188, 140, 0.744);
-    border-bottom: 2px solid rgba(42, 188, 140, 0.744);
-    width: 100vw;
-    padding: 2rem;
-    border-radius: 3px;
+.messages::-webkit-scrollbar {
+    display: none;
 }
 
 .message {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .message.blue {
     flex-direction: row-reverse;
 }
 
-.green .message-text {
-    background-color: rgba(0, 164, 109, 0.744);
-    padding: 0rem 1.1rem;
-    border-radius: 20px;
+.message-text {
+    padding: 1px 20px 1px 10px;
+    border-radius: 10px;
     width: fit-content;
+    max-width: 60%;
+}
+
+.message-text * {
+    padding-top: 3px;
+    margin: 1px;
+}
+
+.message-text h6 {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.message-text p {
+    font-weight: 400;
+    padding-bottom: 4px;
+}
+
+.green .message-text {
+    background-color: #222222;
 }
 
 .blue .message-text {
-    background-color: rgba(42, 42, 46, 0.744);
-    padding: 0rem 1.1rem;
-    border-radius: 20px;
-    width: fit-content;
+    background-color: #3d7f6e;
 }
 
 .room {
     display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    min-width: 400px;
+    max-width: 800px;
+    background-color: #4d4b4b;
+    height: 700px;
+    border-radius: 10px;
+}
+
+.room-page {
+    display: flex;
     flex-direction: row;
+    padding: 1rem;
     justify-content: center;
     align-items: center;
-    padding: 5px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.room-page>* {
+    flex: 1;
+    height: 100%;
+    background-color: #2c2c2c;
+    margin: 5px;
+    border-radius: 10px;
 }
 
 .room h3 {
@@ -100,69 +138,89 @@ body {
     color: #ffffff;
 }
 
-.avatar {
-    background-color: rgba(0, 164, 109, 0.744);
-    width: 30px;
-    height: 30px;
-    border-radius: 30%;
-    margin-right: 10px;
-    margin-left: 10px;
-}
-
 p {
     max-width: 500px;
     font-size: 1.2rem;
-}
-
-.start button {
-    background-color: rgb(67, 154, 125);
-    border: none;
-    padding: 10px 15px;
-    margin: 5px;
-    border-radius: 3px;
-    color: #ffffff;
-    min-width: 300px;
-    font-size: 1.6rem;
-    font-weight: 600;
-}
-
-button:hover {
-    background-color: rgb(66, 167, 133);
 }
 
 .start {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 300px;
+    max-width: 100%;
+}
+
+.start button {
+    background-color: #3d7f6e;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 600;
+    width: 100%;
+}
+
+.start input {
+    background-color: #3f3f3fca;
+    color: #ffffff;
+    border: 0.3px solid transparent;
+    padding: 5px 10px;
+    border-radius: 0.3rem;
+    margin: 5px;
+    height: 40px;
+    width: 100%;
+    border-radius: 2px;
+}
+
+button:hover {
+    background-color: rgb(66, 167, 133);
 }
 
 .send-section {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    max-height: 50px;
 }
 
 .send-section button {
     width: 50px;
-    border-radius: 0.3rem;
-    height: 30px;
+    border-radius: 5px;
+    height: 100%;
     padding: 5px 10px;
     margin: 5px;
     border: 0;
-    background-color: rgba(42, 188, 140, 0.744);
+    background-color: #3d7f6e;
 }
 
-input {
+.send-section input {
     flex: 1;
-    background-color: rgba(215, 215, 215, 0.766);
-    border: 0.3px solid transparent;
-    padding: 5px 10px;
-    border-radius: 0.3rem;
+    height: 100%;
+    border-radius: 5px;
+    padding: 5px 5px;
     margin: 5px;
-    height: 30px;
-    border-radius: 2px;
+    border: 0;
+    background-color: #3f3f3fca;
+    color: #ffffff;
 }
 
 input:focus {
-    border: 0.3px solid rgb(23, 90, 68);
+    border: 0.3px solid #3d7f6e;
     outline: none;
+}
+
+.info {
+    width: 100%;
+    background-color: #3f3f3fca;
+    padding: 1.3rem 1.6rem;
+    margin: 20px 5px;
+    border-radius: 5px;
+}
+
+.info h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
 }
