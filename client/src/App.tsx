@@ -5,6 +5,12 @@ import Room from "./room";
 const SERVER = "http://localhost:8080";
 const socket = io(SERVER);
 
+export interface RoomRequest {
+  roomId?: string;
+  displayName?: string;
+  roomToken: number;
+}
+
 function App() {
   const [isConnected, setIsConnected] = useState(socket.connected);
   const [isInRoom, setisInRoom] = useState(false);
@@ -33,11 +39,11 @@ function App() {
   }, [isConnected]);
 
   function createRoom() {
-    socket.emit("room:post", undefined);
+    socket.emit("room:post", { roomId: roomId, displayName: displayName });
   }
 
   function joinRoom() {
-    socket.emit("room:post", roomId);
+    socket.emit("room:post", { roomId: roomId, displayName: displayName });
   }
 
   const intro = () => {

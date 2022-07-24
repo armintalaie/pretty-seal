@@ -14,7 +14,7 @@ export default function MessageBubble(message: Message) {
       }
     >
       <div className="message-text">
-        <h6>{message.displayName}</h6>
+        <h6>{message.username}</h6>
         <p>{message.text}</p>
       </div>
     </div>

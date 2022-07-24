@@ -9,26 +9,6 @@ export interface RoomProps {
   socket: Socket;
 }
 
-const m = {
-  text: "Hello, my name is Armin. What's your name?",
-  date: "",
-  username: "1",
-  displayName: "armin",
-};
-
-const m2 = {
-  text: "Hello, my name is O. What's your name?",
-  date: "",
-  username: "1",
-  displayName: "Jack",
-};
-
-const m3 = {
-  text: "Hello, my name is O. What's your name? djfsl;dj jkjf;lkqwjf;ej nlqjfwlefjwelk; nwnf;lwnf we;l jn nw;lfqnf;lwnflw; ;lwnf;lwenfweql; n",
-  date: "",
-  username: "1",
-  displayName: "Mike",
-};
 export default function Room(props: RoomProps) {
   const { socket, roomId } = props;
   const [draft, setDraft] = useState<string>("");
@@ -41,8 +21,8 @@ export default function Room(props: RoomProps) {
         {
           text: draft,
           date: Date(),
+          username: "me",
           displayName: "me",
-          username: socket.id,
         },
       ])
     );
