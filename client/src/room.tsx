@@ -1,16 +1,17 @@
-import { useEffect, useState } from "react";
-import Info from "./components/info";
-import MessageBubble, { Message } from "./components/message";
-import { Socket } from "socket.io-client";
-
+import { useContext, useEffect, useState } from "react";
+import Button from "./components/common/button";
+import Info from "./components/common/info";
+import MessageBubble, { Message } from "./components/common/message";
+import { SocketContext } from "./setup/socketContext";
 export interface RoomProps {
   roomname?: string;
   roomId: string;
-  socket: Socket;
+  leaveRoom: Function;
 }
 
 export default function Room(props: RoomProps) {
-  const { socket, roomId } = props;
+  const { roomId } = props;
+  const socket = useContext(SocketContext);
   const [draft, setDraft] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -41,30 +42,29 @@ export default function Room(props: RoomProps) {
   }, []);
 
   return (
-    <section className="room-page">
-      {/* <section className="rooms"></section> */}
-      <section className="room">
-        {/* <h2>room name</h2> */}
-        <div className="info">{roomId}</div>
-        <div className="messages">
-          <Info />
-          {messages.map((msg) => (
-            <MessageBubble {...msg} />
-          ))}
-        </div>
-        <div className="send-section">
-          <input
-            type="text"
-            name="name"
-            value={draft}
-            onChange={(e) => setDraft(e.target.value)}
-          />
-          <button disabled={draft.length <= 0} onClick={() => sendMessage()}>
-            send
-          </button>
-        </div>
-      </section>
-      {/* <section className="members"></section> */}
-    </section>
+    <div className="room">
+      {/* <h2>room name</h2> */}
+      <div
+        className="info"
+        //style={{ backgroundColor: value.theme.primaryColor }}
+      >
+        {roomId}
+      </div>
+      <div className="messages">
+        <Info />
+        {messages.map((msg) => (
+          <MessageBubble {...msg} />
+        ))}
+      </div>
+      <div className="send-section">
+        <textarea
+          name="name"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+        ></textarea>
+
+        <Button label="Send" onClick={() => sendMessage()} />
+      </div>
+    </div>
   );
 }
