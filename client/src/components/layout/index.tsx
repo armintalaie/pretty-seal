@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Modal from "../modal";
+import Modal from "../common/modal/modal";
+import Settings from "../settings";
 import ThemeSelector from "../theming/themeSelector";
 import "./index.css";
 
@@ -16,7 +17,7 @@ export default function Layout({ children }: { children: JSX.Element }) {
         </ul>
       </nav>
       <Modal
-        component={<ThemeSelector />}
+        component={<Settings />}
         showModal={show}
         handleClose={() => {
           setShow(false);

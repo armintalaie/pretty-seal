@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../setup/themeContext";
+import { ThemeContext } from "../../../setup/themeContext";
+import "./index.css";
 
 export interface Message {
   text: string;

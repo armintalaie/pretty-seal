@@ -1,3 +1,5 @@
+import "./index.css";
+
 interface ModalProps {
   component: JSX.Element;
   handleClose: Function;

@@ -1,16 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import Button from "./components/common/button";
-import Info from "./components/common/info";
-import MessageBubble, { Message } from "./components/common/message";
-import { SocketContext } from "./setup/socketContext";
-export interface RoomProps {
-  roomname?: string;
-  roomId: string;
-  leaveRoom: Function;
-}
+import { SocketContext } from "../../../setup/socketContext";
+import Button from "../button";
+import Info from "../info";
+import MessageBubble, { Message } from "./message";
+import "./index.css";
 
-export default function Room(props: RoomProps) {
-  const { roomId } = props;
+export default function Messages({ roomId }: { roomId: string }) {
   const socket = useContext(SocketContext);
   const [draft, setDraft] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -29,7 +24,6 @@ export default function Room(props: RoomProps) {
     );
     setDraft("");
   }
-  useEffect(() => {}, []);
 
   useEffect(() => {
     socket.on("message", (...args: Message[]) => {
@@ -42,14 +36,7 @@ export default function Room(props: RoomProps) {
   }, []);
 
   return (
-    <div className="room">
-      {/* <h2>room name</h2> */}
-      <div
-        className="info"
-        //style={{ backgroundColor: value.theme.primaryColor }}
-      >
-        {roomId}
-      </div>
+    <div className="messages-section">
       <div className="messages">
         <Info />
         {messages.map((msg) => (

@@ -1,7 +1,7 @@
 import "./App.css";
 import { SocketContextProvider } from "./setup/socketContext";
 import ThemeProvider from "./setup/themeContext";
-import Home from "./home";
+import Home from "./pages/home";
 import Layout from "./components/layout";
 
 export interface RoomRequest {

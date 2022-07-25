@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import Button from "./components/common/button";
-import { SocketContext } from "./setup/socketContext";
-import { ThemeContext } from "./setup/themeContext";
+import Button from "../components/common/button";
+import { SocketContext } from "../setup/socketContext";
+import { ThemeContext } from "../setup/themeContext";
 
 export default function Setup({ updateRoomId }: { updateRoomId: Function }) {
   const { currentTheme } = useContext(ThemeContext);
