@@ -48,7 +48,7 @@ export class ChatServer implements ChatServerInterface {
       socket.on("room:post", (roomRequest: RoomRequest) =>
         this.handleRoomRequest(socket, "post", roomRequest)
       );
-      socket.on("room:delete", (roomId) =>
+      socket.on("room:leave", (roomId) =>
         this.handleRoomRequest(socket, "delete", roomId)
       );
       socket.on("message", (roomId, message) =>

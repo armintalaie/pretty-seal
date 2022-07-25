@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import Button from "../components/common/button";
 import Messages from "../components/common/message/messages";
 import { SocketContext } from "../setup/socketContext";
 export interface RoomProps {
@@ -8,18 +9,12 @@ export interface RoomProps {
 }
 
 export default function Room(props: RoomProps) {
-  const { roomId } = props;
-  const socket = useContext(SocketContext);
+  const { leaveRoom, roomId } = props;
 
   return (
     <div className="room">
-      {/* <h2>room name</h2> */}
-      <div
-        className="info"
-        //style={{ backgroundColor: value.theme.primaryColor }}
-      >
-        {roomId}
-      </div>
+      <Button label="Leave Room" onClick={() => leaveRoom()} />
+      <div className="info">{roomId}</div>
       <Messages roomId={roomId} />
     </div>
   );
