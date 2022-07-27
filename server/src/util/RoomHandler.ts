@@ -22,6 +22,7 @@ interface UserDirectory {
 }
 
 export class RoomHandler implements RoomHandlerI {
+  private readonly MAX_ROOM_MEMBERS = 3;
   private readonly server: Server;
   private users: UserDirectory = {};
 
@@ -70,6 +71,12 @@ export class RoomHandler implements RoomHandlerI {
   }
 
   joinRoom(socket: Socket, roomRequest: RoomRequest): void {
+    if (
+      this.server.sockets.adapter.rooms.get(roomRequest.roomId!)?.size ===
+      this.MAX_ROOM_MEMBERS
+    ) {
+      return;
+    }
     socket.join(roomRequest.roomId!);
     this.users[socket.id] = {
       userId: socket.id,
@@ -82,7 +89,7 @@ export class RoomHandler implements RoomHandlerI {
 
   leaveRoom(socket: Socket, roomId: string): void {
     socket.leave(roomId);
-    if (this.server.sockets.adapter.rooms.get(roomId)?.size == 1) {
+    if (this.server.sockets.adapter.rooms.get(roomId)?.size === 1) {
       this.deleteRoom(roomId);
     }
   }

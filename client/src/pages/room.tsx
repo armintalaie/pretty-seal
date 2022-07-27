@@ -1,7 +1,8 @@
-import { useContext } from "react";
+import { useState } from "react";
 import Button from "../components/common/button";
 import Messages from "../components/common/message/messages";
-import { SocketContext } from "../setup/socketContext";
+import Modal from "../components/common/modal/modal";
+import Invite from "../components/invites/invite";
 export interface RoomProps {
   roomname?: string;
   roomId: string;
@@ -10,12 +11,20 @@ export interface RoomProps {
 
 export default function Room(props: RoomProps) {
   const { leaveRoom, roomId } = props;
+  const [showInvite, setShowInvite] = useState(false);
 
   return (
     <div className="room">
-      <Button label="Leave Room" onClick={() => leaveRoom()} />
-      <div className="info">{roomId}</div>
+      <div className="room-top-bar">
+        <Button label="Leave Room" onClick={() => leaveRoom()} />
+        <Button label="Invite" onClick={() => setShowInvite(true)} />
+      </div>
       <Messages roomId={roomId} />
+      <Modal
+        component={<Invite roomId={roomId} />}
+        showModal={showInvite}
+        handleClose={() => setShowInvite(false)}
+      />
     </div>
   );
 }
