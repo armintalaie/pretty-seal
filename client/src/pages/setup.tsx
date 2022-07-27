@@ -1,12 +1,16 @@
 import { useContext, useEffect, useState } from "react";
 import Button from "../components/common/button";
 import { SocketContext } from "../setup/socketContext";
-import { ThemeContext } from "../setup/themeContext";
 
-export default function Setup({ updateRoomId }: { updateRoomId: Function }) {
-  const { currentTheme } = useContext(ThemeContext);
+export default function Setup({
+  updateRoomId,
+  placeHolderId,
+}: {
+  updateRoomId: Function;
+  placeHolderId: string;
+}) {
   const socket = useContext(SocketContext);
-  const [roomId, setRoomId] = useState("");
+  const [roomId, setRoomId] = useState(placeHolderId);
   const [displayName, setdisplayName] = useState("");
 
   const createRoom = () => {
@@ -21,6 +25,8 @@ export default function Setup({ updateRoomId }: { updateRoomId: Function }) {
       setRoomId(roomId);
       updateRoomId(roomId);
     });
+
+    setRoomId(placeHolderId);
 
     return () => {
       socket.off("room:post");

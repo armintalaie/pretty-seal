@@ -54,7 +54,14 @@ export class ChatServer implements ChatServerInterface {
       socket.on("message", (roomId, message) =>
         this.handleMessageRequest(roomId, socket, message)
       );
+
+      socket.on("invite", (roomId, emails: string[]) =>
+        this.handleInviteRequest(roomId, socket, emails)
+      );
     });
+  }
+  handleInviteRequest(roomId: any, socket: Socket, emails: string[]): void {
+    //TODO: s
   }
 
   handleMessageRequest(roomId: string, socket: Socket, message: string) {

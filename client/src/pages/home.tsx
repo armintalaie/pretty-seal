@@ -4,6 +4,14 @@ import Room from "./room";
 import Setup from "./setup";
 
 export default function Home() {
+  let search = window.location.search;
+  let params = new URLSearchParams(search);
+  let roomIdQuery = "";
+
+  if (params.has("roomId")) {
+    roomIdQuery = params.get("roomId")!;
+  }
+
   const [roomId, setRoomId] = useState("");
   const socket = useContext(SocketContext);
 
@@ -19,6 +27,6 @@ export default function Home() {
   if (roomId.length) {
     return <Room leaveRoom={leaveRoom} roomId={roomId} />;
   } else {
-    return <Setup updateRoomId={updateRoomId} />;
+    return <Setup placeHolderId={roomIdQuery} updateRoomId={updateRoomId} />;
   }
 }
