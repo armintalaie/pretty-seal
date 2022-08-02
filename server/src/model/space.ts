@@ -2,6 +2,7 @@ import { DEFAULT_LIMITATION, Limitation } from "./limitation";
 import { v4 as uuidv4 } from "uuid";
 import { Configration, DEFAULT_CONFIG } from "./configuration";
 import { Namespace } from "socket.io";
+import { IUser, Room } from "./roomHandler";
 
 export interface SpaceInfo {
   domainId: string;
@@ -15,8 +16,8 @@ export interface SpaceInfo {
 export interface SpaceI {
   domainId: string;
   createRoom(): string;
-  getRoom(): string;
-  joinRoom(id: string, roomId: string): void;
+  getRoom(roomId: string): Room;
+  joinRoom(user: IUser, roomId: string): void;
   deleteRoom(roomId: string): void;
   getSpaceConfiguration(): Configration;
   updateSpaceConfiguration(configuration: Configration): void;
@@ -30,7 +31,7 @@ export class Space implements SpaceI {
   private clientSecret: string;
   private configuration: Configration;
   private limitation: Limitation;
-  private rooms: string[] = [];
+  private rooms: Room[] = [];
   private MAIN_ROOM = "MAIN_ROOM";
 
   constructor(name: string, namespace: Namespace) {
@@ -47,11 +48,12 @@ export class Space implements SpaceI {
     this.namespace.on("connection", async (socket) => {
       socket.join(this.MAIN_ROOM);
       socket.on("message", (roomId, message) => {
+        console.log(this.getRoom(roomId).getUsers());
         const messageToSend = {
           text: message,
           date: Date(),
           username: socket.id,
-          displayName: socket.data.name ? socket.data.name : socket.id,
+          displayName: this.getRoom(roomId).getUser(socket.id)?.name,
         };
         socket.in(roomId).emit("message", messageToSend);
       });
@@ -65,26 +67,30 @@ export class Space implements SpaceI {
       clientSecret: this.clientSecret,
       configuration: this.configuration,
       limitation: this.limitation,
-      rooms: this.rooms.map((room) => room),
+      rooms: this.rooms.map((room) => room.getRoomInfo()),
     };
   }
 
   createRoom(): string {
-    const newRoomId = uuidv4();
-    this.rooms.push(newRoomId);
-    return newRoomId;
+    const roomId = uuidv4();
+    const newRoom = new Room(roomId, this.namespace.in(roomId));
+    this.rooms.push(newRoom);
+    return newRoom.id;
   }
 
   deleteRoom(roomId: string): void {
     this.namespace.in(roomId).disconnectSockets(true);
   }
 
-  getRoom(): string {
-    return "";
+  getRoom(roomId: string): Room {
+    return this.rooms.find((room) => room.id === roomId)!;
   }
 
-  joinRoom(id: string, roomId: string): void {
-    this.namespace.in(id).socketsJoin(roomId);
+  joinRoom(user: IUser, roomId: string): void {
+    this.namespace.in(user.id).socketsJoin(roomId);
+    const room = this.rooms.find((room) => room.id === roomId)!;
+    console.log(user);
+    room.addUser(user);
   }
 
   getSpaceConfiguration(): Configration {

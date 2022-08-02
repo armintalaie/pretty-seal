@@ -21,7 +21,7 @@ export default function Setup({
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: socket.id }),
+      body: JSON.stringify({ id: socket.id, name: displayName }),
     });
     console.log(result);
 
@@ -36,7 +36,10 @@ export default function Setup({
       {
         method: "POST",
         mode: "cors",
-        body: JSON.stringify({ id: socket.id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: socket.id, name: displayName }),
       }
     );
 

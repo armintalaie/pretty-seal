@@ -1,6 +1,7 @@
 import express from "express";
 import { Configration } from "../model/configuration";
 import { spaceManager } from "../index";
+import { IUser } from "../model/roomHandler";
 
 const router = express.Router();
 
@@ -39,7 +40,8 @@ router.put("/:id/configuration", (req, res) => {
 router.post("/:id/rooms", (req, res) => {
   const domainId: string = req.params.id;
   const roomId = spaceManager.getSpace(domainId).createRoom();
-  spaceManager.getSpace(domainId).joinRoom(req.body.id, roomId);
+  const user: IUser = { ...req.body };
+  spaceManager.getSpace(domainId).joinRoom(user, roomId);
   res.send({ room: roomId });
 });
 
@@ -52,7 +54,9 @@ router.get("/:spaceid/rooms/:roomid", (req, res) => {
 router.post("/:spaceid/rooms/:roomid/users", (req, res) => {
   const domainId: string = req.params.spaceid;
   const roomId: string = req.params.roomid;
-  spaceManager.getSpace(domainId).joinRoom(req.body.id, roomId);
+  const user: IUser = { ...req.body };
+  console.log(user);
+  spaceManager.getSpace(domainId).joinRoom(user, roomId);
   res.send({ room: roomId });
 });
 

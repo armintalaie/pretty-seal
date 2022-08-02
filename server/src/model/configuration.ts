@@ -16,5 +16,5 @@ export const DEFAULT_CONFIG: Configration = {
   canInvite: true,
   showLeave: false,
   chatBackup: false,
-  showNavBar: false,
+  showNavBar: true,
 };
