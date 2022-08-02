@@ -13,11 +13,36 @@ export default function Setup({
   const [roomId, setRoomId] = useState(placeHolderId);
   const [displayName, setdisplayName] = useState("");
 
-  const createRoom = () => {
-    socket.emit("room:post", { roomId: roomId, displayName: displayName });
+  const createRoom = async () => {
+    console.log("result");
+    const result = await fetch("http://localhost:8080/spaces/1/rooms", {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: socket.id }),
+    });
+    console.log(result);
+
+    const room: string = (await result.json()).room;
+    setRoomId(room);
+    updateRoomId(room);
   };
-  const joinRoom = () => {
-    socket.emit("room:post", { roomId: roomId, displayName: displayName });
+
+  const joinRoom = async () => {
+    const result = await fetch(
+      `http://localhost:8080/spaces/1/rooms/${roomId}/users`,
+      {
+        method: "POST",
+        mode: "cors",
+        body: JSON.stringify({ id: socket.id }),
+      }
+    );
+
+    const room: string = (await result.json()).room;
+    setRoomId(room);
+    updateRoomId(room);
   };
 
   useEffect(() => {

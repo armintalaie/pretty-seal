@@ -3,6 +3,7 @@ export interface ThemeDetail {
   secondaryColor: string;
   textColor: string;
   secondaryTextColor: string;
+  isLightMode: boolean;
 }
 
 const evergreen: ThemeDetail = {
@@ -10,6 +11,7 @@ const evergreen: ThemeDetail = {
   secondaryColor: "#3d7f6e",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const blueOasis: ThemeDetail = {
@@ -17,6 +19,7 @@ const blueOasis: ThemeDetail = {
   secondaryColor: "#41778a",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const burningRed: ThemeDetail = {
@@ -24,6 +27,7 @@ const burningRed: ThemeDetail = {
   secondaryColor: "#9c3d3d",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const purePurple: ThemeDetail = {
@@ -31,6 +35,7 @@ const purePurple: ThemeDetail = {
   secondaryColor: "#4f408f",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const copper: ThemeDetail = {
@@ -38,6 +43,7 @@ const copper: ThemeDetail = {
   secondaryColor: "#B26E63",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 export const defaultThemes = {

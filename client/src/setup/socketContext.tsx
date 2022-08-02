@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 const SERVER = "http://localhost:8080";
-const socket = io(SERVER);
+const socket = io(SERVER + "/MAIN_SPACE");
 
 export const SocketContext = createContext(socket);
 

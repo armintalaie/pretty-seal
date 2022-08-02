@@ -12,6 +12,7 @@ export default function ThemeSelector() {
     secondaryColor: "#ffffff",
     textColor: "#ffffff",
     secondaryTextColor: "#ffffff",
+    isLightMode: false,
   });
 
   const applyCustomTheme = (theme: ThemeDetail) => {
@@ -64,6 +65,7 @@ function CustomThemeSelector({ applyTheme }: { applyTheme: Function }) {
     secondaryColor: primaryColor,
     textColor: "#ffffff",
     secondaryTextColor: "#ffffff",
+    isLightMode: false,
   };
   return (
     <div>

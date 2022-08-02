@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import {
+  Configration,
+  ConfigurationContext,
+} from "../../setup/configurationContext";
 import Modal from "../common/modal/modal";
 import Settings from "../settings";
 import ThemeSelector from "../theming/themeSelector";
@@ -6,8 +10,13 @@ import "./index.css";
 
 export default function Layout({ children }: { children: JSX.Element }) {
   const [show, setShow] = useState(false);
-  return (
-    <div className="layout">
+  const configuration: Configration = useContext(ConfigurationContext);
+
+  const navbar = () => {
+    if (!configuration.showNavBar) {
+      return <></>;
+    }
+    return (
       <nav>
         <h1>Chatty Seal</h1>
         <ul>
@@ -16,6 +25,12 @@ export default function Layout({ children }: { children: JSX.Element }) {
           </li>
         </ul>
       </nav>
+    );
+  };
+
+  return (
+    <div className="layout">
+      {navbar()}
       <Modal
         component={<Settings />}
         showModal={show}

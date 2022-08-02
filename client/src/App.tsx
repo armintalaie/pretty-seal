@@ -3,6 +3,7 @@ import { SocketContextProvider } from "./setup/socketContext";
 import ThemeProvider from "./setup/themeContext";
 import Home from "./pages/home";
 import Layout from "./components/layout";
+import { ConfigurationContextProvider } from "./setup/configurationContext";
 
 export interface RoomRequest {
   roomId?: string;
@@ -12,15 +13,17 @@ export interface RoomRequest {
 
 function App() {
   return (
-    <ThemeProvider>
-      <SocketContextProvider>
-        <Layout>
-          <div>
-            <Home />
-          </div>
-        </Layout>
-      </SocketContextProvider>
-    </ThemeProvider>
+    <ConfigurationContextProvider>
+      <ThemeProvider>
+        <SocketContextProvider>
+          <Layout>
+            <div>
+              <Home />
+            </div>
+          </Layout>
+        </SocketContextProvider>
+      </ThemeProvider>
+    </ConfigurationContextProvider>
   );
 }
 
