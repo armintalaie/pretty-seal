@@ -11,7 +11,7 @@ export interface ISpaceManager {
   updateSpaceConfiguration(
     domainId: string,
     newConfiguration: Configration
-  ): void;
+  ): Configration;
 }
 
 export class SpaceManager implements ISpaceManager {
@@ -36,7 +36,7 @@ export class SpaceManager implements ISpaceManager {
       this.server.of(`/${domainname}`)
     );
     this.spaces.push(space);
-    return space.getSpaceInfo();
+    return space.getSpaceInfo(space.getSpaceSecret());
   }
 
   public deleteSpace(domainId: string) {
@@ -72,7 +72,8 @@ export class SpaceManager implements ISpaceManager {
   public updateSpaceConfiguration(
     domainId: string,
     newConfiguration: Configration
-  ): void {
+  ): Configration {
     this.getAdminSpace(domainId).updateSpaceConfiguration(newConfiguration);
+    return this.getSpace(domainId).getSpaceConfiguration();
   }
 }

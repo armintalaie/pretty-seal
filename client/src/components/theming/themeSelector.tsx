@@ -3,23 +3,32 @@ import { ThemeContext } from "../../setup/themeContext";
 import Button from "../common/button";
 import Modal from "../common/modal/modal";
 import { defaultThemes, ThemeDetail } from "./themes";
+import "./index.css";
 
-export default function ThemeSelector() {
+export interface ThemeSelectorProps {
+  theme?: ThemeDetail;
+  onClick?: Function;
+}
+
+const templateTheme = {
+  primaryColor: "#ffffff",
+  secondaryColor: "#ffffff",
+  textColor: "#ffffff",
+  secondaryTextColor: "#ffffff",
+  isLightMode: false,
+};
+
+export default function ThemeSelector(props: ThemeSelectorProps) {
   const { currentTheme, changeTheme } = useContext(ThemeContext);
   const [showCustomModal, setShowCustomModal] = useState(false);
-  const [customTheme, setCustomTheme] = useState<ThemeDetail>({
-    primaryColor: "#ffffff",
-    secondaryColor: "#ffffff",
-    textColor: "#ffffff",
-    secondaryTextColor: "#ffffff",
-    isLightMode: false,
-  });
+  const [customTheme, setCustomTheme] = useState<ThemeDetail>(
+    props.theme ? props.theme : templateTheme
+  );
 
   const applyCustomTheme = (theme: ThemeDetail) => {
     setShowCustomModal(false);
     setCustomTheme(theme);
     changeTheme(theme);
-    console.log(theme);
   };
 
   return (
@@ -36,7 +45,9 @@ export default function ThemeSelector() {
                   ? "2px solid #c5c5c5c5"
                   : "2px solid transparent",
             }}
-            onClick={() => changeTheme(val)}
+            onClick={() =>
+              props.onClick ? props.onClick(val) : changeTheme(val)
+            }
           ></button>
         );
       })}
@@ -50,7 +61,12 @@ export default function ThemeSelector() {
         Custom Theme
       </button>
       <Modal
-        component={<CustomThemeSelector applyTheme={applyCustomTheme} />}
+        component={
+          <CustomThemeSelector
+            currentTheme={currentTheme}
+            applyTheme={props.onClick ? props.onClick : applyCustomTheme}
+          />
+        }
         handleClose={setShowCustomModal}
         showModal={showCustomModal}
       />
@@ -58,24 +74,82 @@ export default function ThemeSelector() {
   );
 }
 
-function CustomThemeSelector({ applyTheme }: { applyTheme: Function }) {
-  const [primaryColor, setPrimaryColor] = useState("#ffffff");
-  const theme: ThemeDetail = {
-    primaryColor: primaryColor,
-    secondaryColor: primaryColor,
-    textColor: "#ffffff",
-    secondaryTextColor: "#ffffff",
-    isLightMode: false,
+function CustomThemeSelector({
+  currentTheme,
+  applyTheme,
+}: {
+  currentTheme: ThemeDetail;
+  applyTheme: Function;
+}) {
+  const [newTheme, setNewTheme] = useState(currentTheme);
+
+  const updateNewTheme = (field: string, value: string) => {
+    setNewTheme((prev) => {
+      return { ...prev, [field]: value };
+    });
   };
+
   return (
     <div>
       <h1>Custom Theme</h1>
-      <input
-        name="name"
-        value={primaryColor}
-        onChange={(e) => setPrimaryColor(e.target.value)}
-      ></input>
-      <Button label="Apply Theme" onClick={() => applyTheme(theme)} />
+
+      <h3>
+        Create your own custom theme by provide HEX color codes (inlcuding the
+        #){" "}
+      </h3>
+
+      <div className="form">
+        <div>
+          <label
+            htmlFor="name"
+            style={{
+              backgroundColor: newTheme.primaryColor,
+              color: newTheme.textColor,
+            }}
+          >
+            Primary Color
+          </label>
+          <input
+            name="primary-color"
+            value={newTheme.primaryColor}
+            onChange={(e) => updateNewTheme("primaryColor", e.target.value)}
+          ></input>
+          <input
+            name="text-color"
+            value={newTheme.textColor}
+            onChange={(e) => updateNewTheme("textColor", e.target.value)}
+          ></input>
+        </div>
+
+        <div>
+          <label
+            htmlFor="name"
+            style={{
+              backgroundColor: newTheme.secondaryColor,
+              color: newTheme.secondaryTextColor,
+            }}
+          >
+            Secondary Color
+          </label>
+
+          <input
+            name="secondary-color"
+            value={newTheme.secondaryColor}
+            onChange={(e) => updateNewTheme("secondaryColor", e.target.value)}
+          ></input>
+          <input
+            value={newTheme.secondaryTextColor}
+            name="secondary-text-color"
+            onChange={(e) =>
+              updateNewTheme("secondaryTextColor", e.target.value)
+            }
+          ></input>
+        </div>
+
+        <div>
+          <Button label="Save" onClick={() => applyTheme(newTheme)} />
+        </div>
+      </div>
     </div>
   );
 }

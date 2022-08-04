@@ -4,6 +4,7 @@ import ThemeProvider from "./setup/themeContext";
 import Home from "./pages/home";
 import Layout from "./components/layout";
 import { ConfigurationContextProvider } from "./setup/configurationContext";
+import SpaceProvider from "./setup/spaceContext";
 
 export interface RoomRequest {
   roomId?: string;
@@ -13,17 +14,19 @@ export interface RoomRequest {
 
 function App() {
   return (
-    <ConfigurationContextProvider>
-      <ThemeProvider>
-        <SocketContextProvider>
-          <Layout>
-            <div>
-              <Home />
-            </div>
-          </Layout>
-        </SocketContextProvider>
-      </ThemeProvider>
-    </ConfigurationContextProvider>
+    <SpaceProvider>
+      <ConfigurationContextProvider>
+        <ThemeProvider>
+          <SocketContextProvider>
+            <Layout>
+              <div>
+                <Home />
+              </div>
+            </Layout>
+          </SocketContextProvider>
+        </ThemeProvider>
+      </ConfigurationContextProvider>
+    </SpaceProvider>
   );
 }
 

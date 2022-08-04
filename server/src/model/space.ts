@@ -7,7 +7,7 @@ import { IUser, Room } from "./roomHandler";
 export interface SpaceInfo {
   domainId: string;
   name: string;
-  clientSecret: string;
+  clientSecret?: string;
   configuration: Configration;
   limitation: Limitation;
   rooms: string[];
@@ -21,7 +21,8 @@ export interface SpaceI {
   deleteRoom(roomId: string): void;
   getSpaceConfiguration(): Configration;
   updateSpaceConfiguration(configuration: Configration): void;
-  getSpaceInfo(): SpaceInfo;
+  getSpaceInfo(clientSecret?: string): SpaceInfo;
+  getSpaceSecret(): string;
 }
 
 export class Space implements SpaceI {
@@ -33,6 +34,10 @@ export class Space implements SpaceI {
   private limitation: Limitation;
   private rooms: Room[] = [];
   private MAIN_ROOM = "MAIN_ROOM";
+
+  getSpaceSecret() {
+    return this.clientSecret;
+  }
 
   constructor(name: string, namespace: Namespace) {
     this.name = name;
@@ -48,7 +53,6 @@ export class Space implements SpaceI {
     this.namespace.on("connection", async (socket) => {
       socket.join(this.MAIN_ROOM);
       socket.on("message", (roomId, message) => {
-        console.log(this.getRoom(roomId).getUsers());
         const messageToSend = {
           text: message,
           date: Date(),
@@ -60,14 +64,16 @@ export class Space implements SpaceI {
     });
   }
 
-  getSpaceInfo(): SpaceInfo {
+  getSpaceInfo(clientSecret?: string): SpaceInfo {
     return {
       domainId: this.domainId,
       name: this.name,
-      clientSecret: this.clientSecret,
       configuration: this.configuration,
       limitation: this.limitation,
       rooms: this.rooms.map((room) => room.getRoomInfo()),
+      ...(clientSecret === this.clientSecret && {
+        clientSecret: this.clientSecret,
+      }),
     };
   }
 
@@ -89,7 +95,6 @@ export class Space implements SpaceI {
   joinRoom(user: IUser, roomId: string): void {
     this.namespace.in(user.id).socketsJoin(roomId);
     const room = this.rooms.find((room) => room.id === roomId)!;
-    console.log(user);
     room.addUser(user);
   }
 

@@ -5,15 +5,17 @@ import {
 } from "../../setup/configurationContext";
 import Modal from "../common/modal/modal";
 import Settings from "../settings";
+import SpaceSetup from "../spaceSetup/spaceSetup";
 import ThemeSelector from "../theming/themeSelector";
 import "./index.css";
 
 export default function Layout({ children }: { children: JSX.Element }) {
   const [show, setShow] = useState(false);
-  const configuration: Configration = useContext(ConfigurationContext);
+  const [showSettings, setShowSettings] = useState(false);
+  const { config } = useContext(ConfigurationContext);
 
   const navbar = () => {
-    if (!configuration.showNavBar) {
+    if (!config.showNavBar) {
       return <></>;
     }
     return (
@@ -21,7 +23,12 @@ export default function Layout({ children }: { children: JSX.Element }) {
         <h1>Chatty Seal</h1>
         <ul>
           <li>
-            <button onClick={() => setShow(true)}>Settings</button>
+            <button onClick={() => setShow(true)}>
+              <b>Spaces</b>
+            </button>
+          </li>
+          <li>
+            <button onClick={() => setShowSettings(true)}>Settings</button>
           </li>
         </ul>
       </nav>
@@ -32,10 +39,18 @@ export default function Layout({ children }: { children: JSX.Element }) {
     <div className="layout">
       {navbar()}
       <Modal
-        component={<Settings />}
+        component={<SpaceSetup updateRoomId={() => {}} placeHolderId="" />}
         showModal={show}
         handleClose={() => {
           setShow(false);
+        }}
+      />
+
+      <Modal
+        component={<Settings />}
+        showModal={showSettings}
+        handleClose={() => {
+          setShowSettings(false);
         }}
       />
       <main>{children}</main>

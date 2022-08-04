@@ -27,6 +27,7 @@ export default function Messages({ roomId }: { roomId: string }) {
 
   useEffect(() => {
     socket.on("message", (...args: Message[]) => {
+      console.log(args);
       setMessages((prev) => prev.concat(args));
     });
 

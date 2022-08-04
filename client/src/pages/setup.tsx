@@ -14,7 +14,6 @@ export default function Setup({
   const [displayName, setdisplayName] = useState("");
 
   const createRoom = async () => {
-    console.log("result");
     const result = await fetch("http://localhost:8080/spaces/1/rooms", {
       method: "POST",
       mode: "cors",
@@ -23,7 +22,6 @@ export default function Setup({
       },
       body: JSON.stringify({ id: socket.id, name: displayName }),
     });
-    console.log(result);
 
     const room: string = (await result.json()).room;
     setRoomId(room);

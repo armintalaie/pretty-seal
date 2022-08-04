@@ -16,7 +16,7 @@ const evergreen: ThemeDetail = {
 
 const blueOasis: ThemeDetail = {
   primaryColor: "#41778a",
-  secondaryColor: "#41778a",
+  secondaryColor: "#7cbed6",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
   isLightMode: false,

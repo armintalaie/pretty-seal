@@ -6,14 +6,21 @@ import { IUser } from "../model/roomHandler";
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  const domainId: string = req.body.domainId;
+  const domainId: string = req.body.name;
   const spaceInfo = spaceManager.createSpace(domainId);
   res.send(spaceInfo);
 });
 
 router.get("/:id", (req, res) => {
   const domainId: string = req.params.id;
-  const spaceInfo = spaceManager.getSpace(domainId);
+  const spaceInfo = spaceManager.getSpace(domainId).getSpaceInfo();
+  res.send(spaceInfo);
+});
+
+router.post("/:id", (req, res) => {
+  const domainId: string = req.params.id;
+  const clientSecret: string | undefined = req.body.clientSecret;
+  const spaceInfo = spaceManager.getSpace(domainId).getSpaceInfo(clientSecret);
   res.send(spaceInfo);
 });
 
@@ -32,9 +39,13 @@ router.get("/:id/configuration", (req, res) => {
 
 router.put("/:id/configuration", (req, res) => {
   const domainId: string = req.params.id;
-  const newConfiguration = req.body.configuration;
-  spaceManager.updateSpaceConfiguration(domainId, newConfiguration);
-  res.sendStatus(200);
+  const newConfiguration = req.body;
+  const configuration: Configration = spaceManager.updateSpaceConfiguration(
+    domainId,
+    newConfiguration
+  );
+
+  res.send(configuration);
 });
 
 router.post("/:id/rooms", (req, res) => {
@@ -55,7 +66,6 @@ router.post("/:spaceid/rooms/:roomid/users", (req, res) => {
   const domainId: string = req.params.spaceid;
   const roomId: string = req.params.roomid;
   const user: IUser = { ...req.body };
-  console.log(user);
   spaceManager.getSpace(domainId).joinRoom(user, roomId);
   res.send({ room: roomId });
 });

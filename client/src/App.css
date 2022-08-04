@@ -129,3 +129,45 @@ p {
     font-size: 1.3rem;
     border-radius: 5px;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 600px;
+    max-width: 100%;
+    padding: 5px;
+}
+
+.row h4 {
+    min-width: fit-content;
+    width: 200px;
+    max-width: 100%;
+}
+
+.space {
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.space button {
+    border: none;
+    padding: 10px 10px;
+    margin: 40px 10px 10px;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    max-width: 100%;
+    width: 150px;
+}
+
+.space h1 {
+    width: 100%;
+}
+
+input:focus {
+    border: 1px solid #ffffff;
+    outline: none;
+}

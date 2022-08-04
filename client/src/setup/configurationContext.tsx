@@ -1,7 +1,6 @@
-import { createContext, useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import { createContext, useContext, useEffect, useState } from "react";
 import { ThemeDetail } from "../components/theming/themes";
-const SERVER = "http://localhost:8080";
+import { SpaceContext } from "./spaceContext";
 
 export const DEFAULT_THEME = {
   primaryColor: "#fdff",
@@ -20,7 +19,15 @@ export const DEFAULT_CONFIG: Configration = {
   showNavBar: true,
 };
 
-export const ConfigurationContext = createContext<Configration>(DEFAULT_CONFIG);
+export interface IConfigContext {
+  config: Configration;
+  updateConfig: Function;
+}
+
+export const ConfigurationContext = createContext<IConfigContext>({
+  config: DEFAULT_CONFIG,
+  updateConfig: () => {},
+});
 
 export interface Configration {
   theme: ThemeDetail;
@@ -37,19 +44,28 @@ export const ConfigurationContextProvider = ({
 }: {
   children: JSX.Element;
 }) => {
+  const { domainId } = useContext(SpaceContext);
   const [configuration, setConfiguration] =
     useState<Configration>(DEFAULT_CONFIG);
 
   useEffect(() => {
-    fetch("http://localhost:8080/spaces/MAIN_ROOM/configuration", {
+    updateConfig();
+  }, []);
+
+  const updateConfig = (ssp?: string) => {
+    fetch(`http://localhost:8080/spaces/${domainId}/configuration`, {
       method: "GET",
     })
       .then((res) => res.json())
-      .then((config) => setConfiguration(config));
-  }, []);
+      .then((config) => {
+        setConfiguration(config);
+      });
+  };
 
   return (
-    <ConfigurationContext.Provider value={configuration}>
+    <ConfigurationContext.Provider
+      value={{ config: configuration, updateConfig }}
+    >
       {children}
     </ConfigurationContext.Provider>
   );

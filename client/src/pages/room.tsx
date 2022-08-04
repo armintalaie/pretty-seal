@@ -14,17 +14,17 @@ export interface RoomProps {
 }
 
 export default function Room(props: RoomProps) {
-  const configuration: Configration = useContext(ConfigurationContext);
+  const { config } = useContext(ConfigurationContext);
   const { leaveRoom, roomId } = props;
   const [showInvite, setShowInvite] = useState(false);
 
   return (
     <div className="room">
       <div className="room-top-bar">
-        {configuration.showLeave && (
+        {config.showLeave && (
           <Button label="Leave Room" onClick={() => leaveRoom()} />
         )}
-        {configuration.showInvite && (
+        {config.showInvite && (
           <Button label="Invite" onClick={() => setShowInvite(true)} />
         )}
       </div>
