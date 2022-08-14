@@ -7,8 +7,8 @@ export interface Theme {
 }
 
 export const DEFAULT_THEME = {
-  primaryColor: "#ff3dff",
-  secondaryColor: "#aa1dff",
+  primaryColor: "#1f3dff",
+  secondaryColor: "#a345ff",
   textcolor: "#ffffff",
   secondaryTextColor: "#ffffff",
   isLightMode: false,

@@ -18,9 +18,6 @@ export default function Modal(props: ModalProps) {
     return <></>;
   }
 
-  // component.props = "s";
-  // component.setProps.handleClose = handleClose;
-
   return (
     <div className="modal">
       <section>

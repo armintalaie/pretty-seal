@@ -1,12 +1,13 @@
 nav {
     width: 100vw;
-    background-color: rgb(23, 23, 23);
-    min-height: 30px;
+    background-color: #2a8da8;
+    min-height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     padding: 1px 20px;
     align-items: center;
+    height: 50px;
 }
 
 nav ul {
@@ -26,28 +27,19 @@ nav button {
 }
 
 main {
-    flex: 1;
+    flex: 1 1 1px;
     display: flex;
     flex-direction: column;
     padding: 1rem;
     justify-content: flex-start;
     align-items: center;
     width: 100vw;
-}
-
-main .room {
-    flex: 1;
-    background-color: #2c2c2c;
-    margin: 3px;
-    border-radius: 10px;
-}
-
-main>* {
-    flex: 1;
+    max-height: calc(100vh - 50px);
+    flex-wrap: wrap;
 }
 
 .layout {
-    background-color: #222222;
+    background-color: rgb(17, 17, 17);
     color: #ffffff;
     width: 100%;
     display: flex;

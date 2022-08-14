@@ -1,9 +1,6 @@
 import "./App.css";
-import { SocketContextProvider } from "./setup/socketContext";
-import ThemeProvider from "./setup/themeContext";
-import Home from "./pages/home";
+import Home from "./pages/home/home";
 import Layout from "./components/layout";
-import { ConfigurationContextProvider } from "./setup/configurationContext";
 import SpaceProvider from "./setup/spaceContext";
 
 export interface RoomRequest {
@@ -11,21 +8,12 @@ export interface RoomRequest {
   displayName?: string;
   roomToken: number;
 }
-
 function App() {
   return (
     <SpaceProvider>
-      <ConfigurationContextProvider>
-        <ThemeProvider>
-          <SocketContextProvider>
-            <Layout>
-              <div>
-                <Home />
-              </div>
-            </Layout>
-          </SocketContextProvider>
-        </ThemeProvider>
-      </ConfigurationContextProvider>
+      <Layout>
+        <Home />
+      </Layout>
     </SpaceProvider>
   );
 }

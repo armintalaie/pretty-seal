@@ -2,19 +2,40 @@ import { DEFAULT_THEME, Theme } from "./theme";
 
 export interface Configration {
   theme: Theme;
-  showInvite: boolean;
-  showLeave: boolean;
-  canInvite: boolean;
-  customInfoMessage?: string;
-  chatBackup: boolean;
-  showNavBar: boolean;
+  rooms: RoomsConfig;
+  users: UsersConfig;
+  space: SpaceConfig;
 }
+
+interface RoomsConfig {
+  showInvite: boolean;
+  maxRoomMembers: number;
+  showLeave: boolean;
+  chatBackup: boolean;
+  allowNonSpaceUsers: boolean;
+  infoMessage?: string;
+}
+
+interface SpaceConfig {
+  showAppName: boolean;
+  canCustomize: boolean;
+}
+
+interface UsersConfig {}
 
 export const DEFAULT_CONFIG: Configration = {
   theme: DEFAULT_THEME,
-  showInvite: true,
-  canInvite: true,
-  showLeave: false,
-  chatBackup: false,
-  showNavBar: true,
+  rooms: {
+    showInvite: true,
+    maxRoomMembers: 3,
+    showLeave: true,
+    chatBackup: true,
+    allowNonSpaceUsers: true,
+    infoMessage: "",
+  },
+  users: {},
+  space: {
+    canCustomize: true,
+    showAppName: true,
+  },
 };

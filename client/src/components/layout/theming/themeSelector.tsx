@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { ThemeContext } from "../../setup/themeContext";
-import Button from "../common/button";
-import Modal from "../common/modal/modal";
+import { ThemeContext } from "../../../setup/themeContext";
+import Button from "../../common/button/button";
+import Modal from "../../common/modal/modal";
 import { defaultThemes, ThemeDetail } from "./themes";
 import "./index.css";
 
@@ -35,41 +35,63 @@ export default function ThemeSelector(props: ThemeSelectorProps) {
     <section className="theme-selector">
       <h2>Themes</h2>
       <h3>Select one color shade to apply it across the app</h3>
-      {Object.values(defaultThemes).map((val) => {
-        return (
-          <button
-            style={{
-              backgroundColor: val.primaryColor,
-              border:
-                val.primaryColor === currentTheme.primaryColor
-                  ? "2px solid #c5c5c5c5"
-                  : "2px solid transparent",
-            }}
-            onClick={() =>
-              props.onClick ? props.onClick(val) : changeTheme(val)
-            }
-          ></button>
-        );
-      })}
-      <button
-        style={{
-          // backgroundColor: customTheme.primaryColor,
-          border: "2px solid #ffffff",
-        }}
-        onClick={() => setShowCustomModal(true)}
-      >
-        Custom Theme
-      </button>
-      <Modal
-        component={
-          <CustomThemeSelector
-            currentTheme={currentTheme}
-            applyTheme={props.onClick ? props.onClick : applyCustomTheme}
-          />
-        }
-        handleClose={setShowCustomModal}
-        showModal={showCustomModal}
-      />
+      <section>
+        {Object.values(defaultThemes).map((val) => {
+          return (
+            <button
+              className="themeBtn"
+              style={{
+                border:
+                  val.primaryColor === currentTheme.primaryColor
+                    ? "2px solid #c5c5c5c5"
+                    : "2px solid transparent",
+              }}
+              onClick={() =>
+                props.onClick ? props.onClick(val) : changeTheme(val)
+              }
+            >
+              <div
+                style={{
+                  backgroundColor: val.primaryColor,
+                  border:
+                    val.primaryColor === currentTheme.primaryColor
+                      ? "2px solid #c5c5c5c5"
+                      : "2px solid transparent",
+                }}
+              ></div>
+
+              <div
+                style={{
+                  backgroundColor: val.secondaryColor,
+                  border:
+                    val.primaryColor === currentTheme.primaryColor
+                      ? "2px solid #c5c5c5c5"
+                      : "2px solid transparent",
+                }}
+              ></div>
+            </button>
+          );
+        })}
+        <button
+          style={{
+            backgroundColor: customTheme.primaryColor,
+            border: "2px solid #ffffff",
+          }}
+          onClick={() => setShowCustomModal(true)}
+        >
+          Custom
+        </button>
+        <Modal
+          component={
+            <CustomThemeSelector
+              currentTheme={currentTheme}
+              applyTheme={props.onClick ? props.onClick : applyCustomTheme}
+            />
+          }
+          handleClose={setShowCustomModal}
+          showModal={showCustomModal}
+        />
+      </section>
     </section>
   );
 }

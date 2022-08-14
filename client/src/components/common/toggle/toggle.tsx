@@ -11,7 +11,6 @@ interface ButtonProps {
 export default function Toggle(props: ButtonProps) {
   const { currentTheme } = useContext(ThemeContext);
   const { id, status, onClick } = props;
-
   const element = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -25,7 +24,7 @@ export default function Toggle(props: ButtonProps) {
       <div
         className="toggle-switch"
         onClick={() => {
-          onClick({ [id]: !status });
+          onClick(!status);
         }}
         style={{ backgroundColor: currentTheme.primaryColor }}
       >

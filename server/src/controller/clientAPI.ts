@@ -1,58 +1,93 @@
 import express from "express";
 import { Configration } from "../model/configuration";
 import { spaceManager } from "../index";
-import { IUser } from "../model/roomHandler";
+import { IUser, Room } from "../model/roomHandler";
+import { SpaceI } from "../model/space";
 
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  const domainId: string = req.body.name;
-  const spaceInfo = spaceManager.createSpace(domainId);
-  res.send(spaceInfo);
+  const domainName: string = req.body.name;
+  const spaceInfo = spaceManager.createSpace(domainName);
+  res.status(200).send(spaceInfo);
+});
+
+router.get("/", (req, res) => {
+  res.status(200).send(spaceManager.getSpaces());
 });
 
 router.get("/:id", (req, res) => {
-  const domainId: string = req.params.id;
-  const spaceInfo = spaceManager.getSpace(domainId).getSpaceInfo();
-  res.send(spaceInfo);
+  try {
+    const domainId: string = req.params.id;
+    const spaceInfo = spaceManager.getSpace(domainId).getSpaceInfo();
+    res.status(200).send(spaceInfo);
+  } catch (e) {
+    res.status(400).send(e);
+  }
 });
 
 router.post("/:id", (req, res) => {
-  const domainId: string = req.params.id;
-  const clientSecret: string | undefined = req.body.clientSecret;
-  const spaceInfo = spaceManager.getSpace(domainId).getSpaceInfo(clientSecret);
-  res.send(spaceInfo);
+  try {
+    const domainId: string = req.params.id;
+    const clientSecret: string | undefined = req.body.clientSecret;
+    const spaceInfo = spaceManager
+      .getSpace(domainId)
+      .getSpaceInfo(clientSecret);
+    res.status(200).send(spaceInfo);
+  } catch (e) {
+    res.status(400).send(e);
+  }
 });
 
 router.delete("/:id", (req, res) => {
-  const domainId: string = req.params.id;
-  spaceManager.deleteSpace(domainId);
-  res.sendStatus(200);
+  try {
+    const domainId: string = req.params.id;
+    const clientSecret: string = req.body.clientSecret;
+    spaceManager.deleteSpace(domainId, clientSecret);
+    res.sendStatus(200);
+  } catch (e) {
+    res.sendStatus(500);
+  }
 });
 
 router.get("/:id/configuration", (req, res) => {
-  const domainId: string = req.params.id;
-  const configuration: Configration =
-    spaceManager.getSpaceConfiguration(domainId);
-  res.send(configuration);
+  try {
+    const domainId: string = req.params.id;
+    const space: SpaceI = spaceManager.getSpace(domainId);
+    const configuration: Configration = space.getSpaceConfiguration();
+    res.send(configuration);
+  } catch (e) {
+    res.status(400).send(e);
+  }
 });
 
 router.put("/:id/configuration", (req, res) => {
-  const domainId: string = req.params.id;
-  const newConfiguration = req.body;
-  const configuration: Configration = spaceManager.updateSpaceConfiguration(
-    domainId,
-    newConfiguration
-  );
+  try {
+    const domainId: string = req.params.id;
+    const newConfiguration = req.body.configuration;
+    const clientSecret: string = req.body.clientSecret;
 
-  res.send(configuration);
+    const space = spaceManager.getSpace(domainId);
+    space.updateSpaceConfiguration(newConfiguration, clientSecret);
+    res.sendStatus(200);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+router.get("/:id/rooms", (req, res) => {
+  const domainId: string = req.params.id;
+  const rooms: Room[] = spaceManager.getSpace(domainId).getRooms();
+  //const user: IUser = { ...req.body };
+  //  spaceManager.getSpace(domainId).joinRoom(user, roomId);
+  res.send(rooms);
 });
 
 router.post("/:id/rooms", (req, res) => {
   const domainId: string = req.params.id;
-  const roomId = spaceManager.getSpace(domainId).createRoom();
-  const user: IUser = { ...req.body };
-  spaceManager.getSpace(domainId).joinRoom(user, roomId);
+  const roomId = spaceManager.getSpace(domainId).createRoom(req.body.name);
+  // const user: IUser = { ...req.body };
+  //  spaceManager.getSpace(domainId).joinRoom(user, roomId);
   res.send({ room: roomId });
 });
 
@@ -66,7 +101,7 @@ router.post("/:spaceid/rooms/:roomid/users", (req, res) => {
   const domainId: string = req.params.spaceid;
   const roomId: string = req.params.roomid;
   const user: IUser = { ...req.body };
-  spaceManager.getSpace(domainId).joinRoom(user, roomId);
+  // spaceManager.getSpace(domainId).joinRoom(user, roomId);
   res.send({ room: roomId });
 });
 

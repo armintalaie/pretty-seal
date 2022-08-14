@@ -1,5 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { ThemeDetail } from "../components/theming/themes";
+import {
+  defaultThemes,
+  ThemeDetail,
+} from "../components/layout/theming/themes";
 import { SpaceContext } from "./spaceContext";
 
 export const DEFAULT_THEME = {
@@ -10,50 +13,78 @@ export const DEFAULT_THEME = {
   isLightMode: false,
 };
 
-export const DEFAULT_CONFIG: Configration = {
-  theme: DEFAULT_THEME,
-  showInvite: true,
-  canInvite: true,
-  showLeave: true,
-  chatBackup: false,
-  showNavBar: true,
-};
-
 export interface IConfigContext {
   config: Configration;
   updateConfig: Function;
 }
 
-export const ConfigurationContext = createContext<IConfigContext>({
-  config: DEFAULT_CONFIG,
-  updateConfig: () => {},
-});
-
+export const ConfigurationContext = createContext<IConfigContext>(
+  null as unknown as IConfigContext
+);
 export interface Configration {
   theme: ThemeDetail;
-  showInvite: boolean;
-  showLeave: boolean;
-  canInvite: boolean;
-  customInfoMessage?: string;
-  chatBackup: boolean;
-  showNavBar: boolean;
+  rooms: RoomsConfig;
+  users: UsersConfig;
+  space: SpaceConfig;
 }
 
+export interface Config {
+  [key: string]: boolean | number | string | undefined;
+}
+
+export interface RoomsConfig extends Config {
+  showInvite: boolean;
+  maxRoomMembers: number;
+  showLeave: boolean;
+  chatBackup: boolean;
+  allowNonSpaceUsers: boolean;
+  infoMessage?: string;
+}
+export interface SpaceConfig extends Config {
+  showAppName: boolean;
+  canCustomize: boolean;
+}
+
+export interface UsersConfig extends Config {}
+
+const DEFAULT_ROOM_CONFIG = {
+  showInvite: true,
+  maxRoomMembers: 10,
+  showLeave: true,
+  chatBackup: false,
+  allowNonSpaceUsers: true,
+};
+
+const DEFAULT_SPACE_CONFIG = {
+  showAppName: true,
+  canCustomize: true,
+};
+
+const DEFAULT_CONFIG: Configration = {
+  theme: defaultThemes.burningRed,
+  rooms: DEFAULT_ROOM_CONFIG,
+  users: {},
+  space: DEFAULT_SPACE_CONFIG,
+};
+
 export const ConfigurationContextProvider = ({
+  domain,
   children,
 }: {
+  domain: string;
   children: JSX.Element;
 }) => {
-  const { domainId } = useContext(SpaceContext);
-  const [configuration, setConfiguration] =
-    useState<Configration>(DEFAULT_CONFIG);
+  const spaceConfig = useContext(SpaceContext).spaceInfo;
+  const [configuration, setConfiguration] = useState<Configration>(
+    spaceConfig ? spaceConfig.configuration : DEFAULT_CONFIG
+  );
 
   useEffect(() => {
     updateConfig();
   }, []);
 
   const updateConfig = (ssp?: string) => {
-    fetch(`http://localhost:8080/spaces/${domainId}/configuration`, {
+    fetch(`http://localhost:8080/spaces/${domain}/configuration`, {
       method: "GET",
     })
       .then((res) => res.json())

@@ -1,15 +1,16 @@
 import { v4 as uuidv4 } from "uuid";
-import { BroadcastOperator, Event } from "socket.io";
+import { BroadcastOperator, Event, Socket } from "socket.io";
+import { Message } from "../controller/chatServer";
+import { stringify } from "querystring";
 
 export class Room {
   private users: User[] = [];
-  private name: string = "Room";
+  name: string = "Room";
   id: string;
-  room: BroadcastOperator<Event, any>;
 
-  constructor(roomId: string, room: BroadcastOperator<Event, any>) {
+  constructor(roomId: string, name: string) {
     this.id = roomId;
-    this.room = room;
+    this.name = name;
   }
 
   public getUser(userId: string) {
@@ -19,12 +20,14 @@ export class Room {
     this.users = this.users.filter((user) => user.id !== userId);
   }
 
-  public getRoomInfo(): string {
-    return this.name;
+  public getRoomInfo(): any {
+    return { name: this.name, id: this.id, users: this.users.length };
   }
 
   public addUser(user: IUser) {
+    if (this.users.find((current) => current.id === user.id)) return;
     const newUser = new User();
+
     newUser.id = user.id;
     newUser.name = user.name;
     this.users.push(newUser);

@@ -4,7 +4,7 @@
 
 .toggle-switch {
     position: relative;
-    width: 75px;
+    width: 50px;
     display: inline-block;
     text-align: left;
     top: 8px;
@@ -12,10 +12,14 @@
     border-radius: 10px;
 }
 
+.toggle-switch h4 {
+    width: fit-content;
+}
+
 .toggle-switch div {
     position: absolute;
     border-radius: 10px;
-    width: 40px;
+    width: 30px;
     height: 100%;
     top: 0;
     -webkit-transition: all 0.2s ease-in;

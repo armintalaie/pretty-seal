@@ -45,3 +45,16 @@
     width: fit-content;
     height: fit-content;
 }
+
+.themeBtn {
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    display: relative;
+    padding: 0;
+}
+
+.themeBtn div {
+    width: 50%;
+    height: 100%;
+}

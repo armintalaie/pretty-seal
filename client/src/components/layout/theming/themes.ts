@@ -46,10 +46,19 @@ const copper: ThemeDetail = {
   isLightMode: false,
 };
 
+const sealyBlue: ThemeDetail = {
+  primaryColor: "#2a8da8",
+  secondaryColor: "#72a3b0",
+  textColor: "#ffffff",
+  secondaryTextColor: "#000000",
+  isLightMode: false,
+};
+
 export const defaultThemes = {
   evergreen: evergreen,
   blueOasis: blueOasis,
   burningRed: burningRed,
   purePurple: purePurple,
   copper: copper,
+  sealyBlue: sealyBlue,
 };
