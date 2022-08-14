@@ -13,7 +13,7 @@ const options: cors.CorsOptions = {
 };
 app.use(cors(options));
 app.use(express.json());
-const port = 8080;
+const port = process.env.PORT || 8080;
 
 const server = http.createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
