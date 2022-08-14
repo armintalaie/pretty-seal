@@ -1,8 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import { manager } from "../pages/home/home";
+import { API_BASE_URL } from "../services/apiHandler";
 
-export const SocketContext = createContext<Socket>(io("http://localhost:8080"));
+export const SocketContext = createContext<Socket>(io(API_BASE_URL));
 
 export const SocketContextProvider = ({
   children,

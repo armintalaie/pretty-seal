@@ -5,8 +5,8 @@ import "./index.scss";
 import "../index.scss";
 import { Manager } from "socket.io-client";
 import { SpaceContext } from "../../setup/spaceContext";
-const SERVER = "http://localhost:8080";
-export const manager = new Manager(SERVER);
+import { API_BASE_URL } from "../../services/apiHandler";
+export const manager = new Manager(API_BASE_URL);
 
 export default function Home() {
   const currentspace = useContext(SpaceContext);

@@ -3,6 +3,7 @@ import {
   defaultThemes,
   ThemeDetail,
 } from "../components/layout/theming/themes";
+import { API_BASE_URL } from "../services/apiHandler";
 import { SpaceContext } from "./spaceContext";
 
 export const DEFAULT_THEME = {
@@ -84,7 +85,7 @@ export const ConfigurationContextProvider = ({
   }, []);
 
   const updateConfig = (ssp?: string) => {
-    fetch(`http://localhost:8080/spaces/${domain}/configuration`, {
+    fetch(`${API_BASE_URL}/spaces/${domain}/configuration`, {
       method: "GET",
     })
       .then((res) => res.json())

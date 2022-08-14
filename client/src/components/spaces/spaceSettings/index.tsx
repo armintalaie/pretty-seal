@@ -10,6 +10,7 @@ import {
 } from "../../../setup/configurationContext";
 import { SpaceContext } from "../../../setup/spaceContext";
 import "./index.scss";
+import { API_BASE_URL } from "../../../services/apiHandler";
 
 export interface ConfigrationTemplate {
   theme?: ThemeDetail;
@@ -54,20 +55,17 @@ export default function SpaceSettings() {
   };
 
   const applyConfigurationChanges = async () => {
-    await fetch(
-      `http://localhost:8080/spaces/${spaceInfo.domainId}/configuration`,
-      {
-        method: "PUT",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          configuration: config,
-          clientSecret: spaceInfo.clientSecret,
-        }),
-      }
-    );
+    await fetch(`${API_BASE_URL}/spaces/${spaceInfo.domainId}/configuration`, {
+      method: "PUT",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        configuration: config,
+        clientSecret: spaceInfo.clientSecret,
+      }),
+    });
     spaceConfig.updateConfig(spaceInfo.domainId);
   };
 
