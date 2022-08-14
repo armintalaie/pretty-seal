@@ -9,8 +9,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node dist/index.js",
         "dev": "nodemon src/index.ts",
-        "build": "rimraf ./dist && tsc",
-        "tsc": "./node_modules/typescript/bin/tsc"
+        "build": "rimraf ./dist && tsc"
     },
     "author": "Armin Talaie",
     "license": "ISC",
