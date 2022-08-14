@@ -9,11 +9,10 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node dist/index.js",
         "dev": "nodemon src/index.ts",
-        "build": "tsc -p .",
-        "tsc": "./node_modules/typescript/bin/tsc",
-        "postinstall": "npm run tsc"
+        "build": "rimraf ./dist && tsc",
+        "tsc": "./node_modules/typescript/bin/tsc"
     },
-    "author": "",
+    "author": "Armin Talaie",
     "license": "ISC",
     "devDependencies": {
         "@types/node": "^18.0.5",
@@ -28,6 +27,7 @@
         "@types/uuid": "^8.3.4",
         "cors": "^2.8.5",
         "express": "^4.18.1",
+        "rimraf": "^3.0.2",
         "socket.io": "^4.5.1",
         "socket.io-client": "^4.5.1",
         "uuid": "^8.3.2"
