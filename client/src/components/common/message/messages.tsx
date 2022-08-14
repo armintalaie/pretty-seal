@@ -1,17 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { SocketContext } from "../../../setup/socketContext";
-import Button from "../button";
-import Info from "../info";
+import Button from "../button/button";
+import Info from "../info/info";
 import MessageBubble, { Message } from "./message";
 import "./index.css";
+import { SpaceContext } from "../../../setup/spaceContext";
 
 export default function Messages({ roomId }: { roomId: string }) {
+  const { domainId } = useContext(SpaceContext).spaceInfo!;
   const socket = useContext(SocketContext);
   const [draft, setDraft] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
 
   function sendMessage() {
-    socket.emit("message", roomId, draft);
+    console.log(draft);
+    socket.emit("message", domainId, roomId, draft);
     setMessages((prev) =>
       prev.concat([
         {
@@ -33,7 +36,7 @@ export default function Messages({ roomId }: { roomId: string }) {
     return () => {
       socket.off("message");
     };
-  }, []);
+  }, [socket]);
 
   return (
     <div className="messages-section">

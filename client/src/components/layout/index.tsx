@@ -1,29 +1,21 @@
-import { useState } from "react";
-import Modal from "../common/modal/modal";
-import Settings from "../settings";
-import ThemeSelector from "../theming/themeSelector";
+import ThemeProvider from "../../setup/themeContext";
 import "./index.css";
 
 export default function Layout({ children }: { children: JSX.Element }) {
-  const [show, setShow] = useState(false);
-  return (
-    <div className="layout">
+  const navbar = () => {
+    return (
       <nav>
-        <h1>Chatty Seal</h1>
-        <ul>
-          <li>
-            <button onClick={() => setShow(true)}>Settings</button>
-          </li>
-        </ul>
+        <h1>Chatty Seal </h1>
       </nav>
-      <Modal
-        component={<Settings />}
-        showModal={show}
-        handleClose={() => {
-          setShow(false);
-        }}
-      />
-      <main>{children}</main>
-    </div>
+    );
+  };
+
+  return (
+    <ThemeProvider>
+      <div className="layout">
+        {navbar()}
+        <main>{children}</main>
+      </div>
+    </ThemeProvider>
   );
 }

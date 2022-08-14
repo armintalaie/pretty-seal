@@ -3,6 +3,7 @@ export interface ThemeDetail {
   secondaryColor: string;
   textColor: string;
   secondaryTextColor: string;
+  isLightMode: boolean;
 }
 
 const evergreen: ThemeDetail = {
@@ -10,13 +11,15 @@ const evergreen: ThemeDetail = {
   secondaryColor: "#3d7f6e",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const blueOasis: ThemeDetail = {
   primaryColor: "#41778a",
-  secondaryColor: "#41778a",
+  secondaryColor: "#7cbed6",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const burningRed: ThemeDetail = {
@@ -24,6 +27,7 @@ const burningRed: ThemeDetail = {
   secondaryColor: "#9c3d3d",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const purePurple: ThemeDetail = {
@@ -31,6 +35,7 @@ const purePurple: ThemeDetail = {
   secondaryColor: "#4f408f",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 const copper: ThemeDetail = {
@@ -38,6 +43,15 @@ const copper: ThemeDetail = {
   secondaryColor: "#B26E63",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
+  isLightMode: false,
+};
+
+const sealyBlue: ThemeDetail = {
+  primaryColor: "#2a8da8",
+  secondaryColor: "#72a3b0",
+  textColor: "#ffffff",
+  secondaryTextColor: "#000000",
+  isLightMode: false,
 };
 
 export const defaultThemes = {
@@ -46,4 +60,5 @@ export const defaultThemes = {
   burningRed: burningRed,
   purePurple: purePurple,
   copper: copper,
+  sealyBlue: sealyBlue,
 };

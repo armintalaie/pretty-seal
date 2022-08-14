@@ -1,30 +1,30 @@
 import { createContext, useEffect, useState } from "react";
-import { io } from "socket.io-client";
-const SERVER = "http://localhost:8080";
-const socket = io(SERVER);
+import { io, Socket } from "socket.io-client";
+import { manager } from "../pages/home/home";
+import { API_BASE_URL } from "../services/apiHandler";
 
-export const SocketContext = createContext(socket);
+export const SocketContext = createContext<Socket>(io(API_BASE_URL));
 
 export const SocketContextProvider = ({
   children,
+  domain,
 }: {
   children: JSX.Element;
+  domain: string;
 }) => {
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  useEffect(() => {
-    socket.on("connect", () => {
-      setIsConnected(true);
-    });
+  const [socket, setSocket] = useState(manager.socket(`/${domain}`));
 
-    socket.on("disconnect", () => {
-      setIsConnected(false);
-    });
+  useEffect(() => {
+    socket.on("connect", () => {});
+
+    socket.on("disconnect", () => {});
 
     return () => {
       socket.off("connect");
       socket.off("disconnect");
     };
-  }, [isConnected]);
+  }, [socket]);
+
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
   );

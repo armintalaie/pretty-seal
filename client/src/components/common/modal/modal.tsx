@@ -1,9 +1,14 @@
+import { ReactElement } from "react";
 import "./index.css";
 
 interface ModalProps {
-  component: JSX.Element;
+  component: ReactElement;
   handleClose: Function;
   showModal: boolean;
+}
+
+export interface ModalComponent {
+  handleClose?: Function;
 }
 
 export default function Modal(props: ModalProps) {
@@ -16,8 +21,11 @@ export default function Modal(props: ModalProps) {
   return (
     <div className="modal">
       <section>
-        {component}
-        <button onClick={() => handleClose()}>Close</button>
+        <div className="buttons">
+          <button onClick={() => handleClose()}>Dismiss</button>
+        </div>
+
+        <div className="content">{component}</div>
       </section>
     </div>
   );
