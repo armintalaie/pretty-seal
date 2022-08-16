@@ -18,6 +18,9 @@
         margin: 0;
         padding: 0;
         min-width: 100%;
+        .top-bar {
+            margin-bottom: 0;
+        }
     }
     .top-bar {
         display: flex;
@@ -31,6 +34,9 @@
             margin: 3px;
             border-radius: 2px;
             font-size: 1rem;
+        }
+        h2 {
+            padding: 10px;
         }
     }
 }

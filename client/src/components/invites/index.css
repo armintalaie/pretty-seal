@@ -8,13 +8,19 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    padding: 0;
     margin: 4px;
-    margin-bottom: 5px;
+    max-width: 90%;
 }
 
-.invite-code>div {
+.invite-code div {
     background: #ffffff;
     padding: 10px;
-    max-width: 300px;
     border-radius: 10px;
+    max-width: 100%;
+}
+
+.invite-code>.info {
+    margin: 0;
+    width: inherit;
 }

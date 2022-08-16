@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import Button from "../../common/button/button";
+import Button, { BUTTON_TYPE } from "../../common/button/button";
 import Toggle from "../../common/toggle/toggle";
 import { ThemeDetail } from "../../layout/theming/themes";
 import ThemeSelector from "../../layout/theming/themeSelector";
@@ -11,6 +11,7 @@ import {
 import { SpaceContext } from "../../../setup/spaceContext";
 import "./index.scss";
 import { API_BASE_URL } from "../../../services/apiHandler";
+import Modal from "../../common/modal/modal";
 
 export interface ConfigrationTemplate {
   theme?: ThemeDetail;
@@ -22,27 +23,26 @@ export interface ConfigrationTemplate {
   showNavBar?: boolean;
 }
 
-// interface optionI {
-//   theme: string;
-//   showInvite: string;
-//   showLeave: string;
-//   canInvite: string;
-//   customInfoMessage: string;
-//   chatBackup: string;
-//   showNavBar: string;
-// }
+const option = {
+  showInvite: "Show Invite button",
+  showLeave: "Show leave button",
+  canInvite: "User can invite",
+  customInfoMessage: "Show custom message in rooms",
+  chatBackup: "Back up chats to server",
+  showNavBar: "Show space top bar in room",
+  showAppName: "Show space top bar in room",
+  maxRoomMembers: "Maximum number of users in a room",
+  allowNonSpaceUsers: "Allow users not in space to join rooms",
+  infoMessage: "Show info message in rooms",
+  canCustomize: "Allow custom themes to be applied",
+};
 
-// const option: optionI = {
-//   theme: "User can customize theme",
-//   showInvite: "Show invite button",
-//   showLeave: "Show leave button",
-//   canInvite: "User can invite",
-//   customInfoMessage: "Show custom message in rooms",
-//   chatBackup: "Back up chats to server",
-//   showNavBar: "show navigation bar",
-// };
+interface SettingsModalProps {
+  handleClose: Function;
+  showModal: boolean;
+}
 
-export default function SpaceSettings() {
+export default function SpaceSettings(props: SettingsModalProps) {
   const spaceConfig = useContext(ConfigurationContext);
   const spaceContext = useContext(SpaceContext);
   const spaceInfo = spaceContext.spaceInfo!;
@@ -69,16 +69,18 @@ export default function SpaceSettings() {
     spaceConfig.updateConfig(spaceInfo.domainId);
   };
 
-  return (
+  const component = (
     <div className="intro">
-      <div className="info">
-        <div>
-          <b>Domain Id: </b>
-          {spaceInfo.domainId}{" "}
-        </div>
-        <div>
-          <b>Client Secret: </b>
-          {spaceInfo.clientSecret}{" "}
+      <div className="top-bar">
+        <div className="info">
+          <div>
+            <b>Domain Id: </b>
+            {spaceInfo.domainId}{" "}
+          </div>
+          <div>
+            <b>Client Secret: </b>
+            {spaceInfo.clientSecret}{" "}
+          </div>
         </div>
       </div>
 
@@ -103,12 +105,16 @@ export default function SpaceSettings() {
 
           return (
             <div className="settings">
-              <h2>{item}</h2>
+              <h2>{item.toUpperCase()}</h2>
               {Object.entries(spaceInfo.configuration[key]).map(
                 (value, settingsItem) => {
                   return (
-                    <section className="row boxed">
-                      <h4>{value[0]}</h4>
+                    <section className="">
+                      <h4>
+                        {Object.hasOwn(option, value[0])
+                          ? option[value[0] as keyof typeof option]
+                          : value[0]}
+                      </h4>
                       <Toggle
                         id={value[0]}
                         status={value[1] as boolean}
@@ -126,18 +132,32 @@ export default function SpaceSettings() {
             </div>
           );
         })}
+      </div>
+    </div>
+  );
 
-        <div>
+  return (
+    <Modal
+      component={component}
+      handleClose={props.handleClose}
+      showModal={props.showModal}
+      topBarButtons={
+        <>
           <Button
-            label="Apply Changes"
+            buttonType={BUTTON_TYPE.b2}
+            icon={"save.svg"}
             onClick={() => {
               applyConfigurationChanges();
             }}
           />
 
-          <Button label="Log Out" onClick={logOutOfSpace} />
-        </div>
-      </div>
-    </div>
+          <Button
+            buttonType={BUTTON_TYPE.b2}
+            icon={"log-out.svg"}
+            onClick={logOutOfSpace}
+          />
+        </>
+      }
+    />
   );
 }

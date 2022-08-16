@@ -7,7 +7,10 @@ import { SpaceManager, ISpaceManager } from "./model/spaceManager";
 import { ChatServer, ChatServerInterface } from "./controller/chatServer";
 
 const app = express();
-const allowedOrigins = ["https://chatty-seal-ui.herokuapp.com"];
+const allowedOrigins = [
+  "https://chatty-seal-ui.herokuapp.com",
+  "http://localhost:3000",
+];
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
 };

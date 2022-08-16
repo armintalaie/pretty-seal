@@ -1,21 +1,29 @@
-.space {
+.settings {
+    display: flex;
     justify-content: center;
-    width: 100%;
     align-items: center;
-}
-
-.space button {
-    border: none;
-    padding: 10px 10px;
-    margin: 40px 10px 10px;
-    border-radius: 3px;
-    color: #ffffff;
-    font-size: 1.3rem;
-    font-weight: 600;
-    max-width: 100%;
-    width: 150px;
-}
-
-.space h1 {
-    width: 100%;
+    flex-direction: column;
+    section {
+        width: fit-content;
+        display: flex;
+        min-width: 350px;
+        max-width: 100%;
+        width: 500px;
+        justify-content: space-between;
+        padding: 10px;
+        margin: 3px;
+        border-bottom: 1px solid #545454;
+        h4 {
+            font-size: 1.2rem;
+        }
+    }
+    padding: 5px;
+    margin: 5px;
+    h2 {
+        width: 100%;
+        text-align: left;
+        font-size: 1.8rem;
+        padding: 5px;
+        border-top: 1.8px solid #545454;
+    }
 }

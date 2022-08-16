@@ -82,6 +82,7 @@
     background-color: #3f3f3fca;
     color: #ffffff;
     resize: none;
+    font-family: inherit;
 }
 
 .messages-section {

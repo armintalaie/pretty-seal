@@ -22,14 +22,6 @@ const blueOasis: ThemeDetail = {
   isLightMode: false,
 };
 
-const burningRed: ThemeDetail = {
-  primaryColor: "#9c3d3d",
-  secondaryColor: "#9c3d3d",
-  textColor: "#ffffff",
-  secondaryTextColor: "#000000",
-  isLightMode: false,
-};
-
 const purePurple: ThemeDetail = {
   primaryColor: "#4f408f",
   secondaryColor: "#4f408f",
@@ -57,7 +49,6 @@ const sealyBlue: ThemeDetail = {
 export const defaultThemes = {
   evergreen: evergreen,
   blueOasis: blueOasis,
-  burningRed: burningRed,
   purePurple: purePurple,
   copper: copper,
   sealyBlue: sealyBlue,

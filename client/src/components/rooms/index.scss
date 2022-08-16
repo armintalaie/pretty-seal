@@ -1,10 +1,6 @@
 button {
-    height: fit-content;
-    background-color: rgb(31, 61, 255);
-    border: none;
-    padding: 15px;
     margin: 5px;
-    border-radius: 3px;
+    border-radius: 10px;
     color: #ffffff;
     font-size: 1.6rem;
     font-weight: 600;
@@ -18,9 +14,9 @@ button {
     justify-content: flex-start;
     flex-wrap: wrap;
     div {
-        border: 1.4px solid transparent;
+        border: 1.4px solid rgb(35, 35, 35);
         margin: 10px;
-        border-radius: 3px;
+        border-radius: 4px;
         padding: 4px 20px;
         justify-content: space-between;
         max-width: 300px;
@@ -33,4 +29,11 @@ button {
             border: 1.4px solid #ffffff;
         }
     }
+}
+
+.multi {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: scroll;
 }

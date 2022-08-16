@@ -30,17 +30,18 @@ export default function SpaceView({
                   onClick={() => {
                     setShowSpaceSettings((prev) => !prev);
                   }}
-                  label="Settings"
+                  icon={"settings.svg"}
                 />
               </div>
             )}
-            <Modal
-              component={<SpaceSettings />}
+
+            <SpaceSettings
               showModal={showSpaceSettings}
               handleClose={() => {
                 setShowSpaceSettings(false);
               }}
             />
+
             <Rooms
               setIsInRoom={setIsInRoom}
               domainId={spaceInfromation.domainId}

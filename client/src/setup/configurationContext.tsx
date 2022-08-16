@@ -62,7 +62,7 @@ const DEFAULT_SPACE_CONFIG = {
 };
 
 const DEFAULT_CONFIG: Configration = {
-  theme: defaultThemes.burningRed,
+  theme: defaultThemes.blueOasis,
   rooms: DEFAULT_ROOM_CONFIG,
   users: {},
   space: DEFAULT_SPACE_CONFIG,
