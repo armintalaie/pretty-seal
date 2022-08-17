@@ -1,10 +1,12 @@
 import { ReactElement } from "react";
+import Button, { BUTTON_TYPE, ColorOptions } from "../button/button";
 import "./index.css";
 
 interface ModalProps {
   component: ReactElement;
   handleClose: Function;
   showModal: boolean;
+  topBarButtons?: ReactElement;
 }
 
 export interface ModalComponent {
@@ -12,7 +14,7 @@ export interface ModalComponent {
 }
 
 export default function Modal(props: ModalProps) {
-  const { component, handleClose, showModal } = props;
+  const { component, handleClose, showModal, topBarButtons } = props;
 
   if (!showModal) {
     return <></>;
@@ -22,7 +24,13 @@ export default function Modal(props: ModalProps) {
     <div className="modal">
       <section>
         <div className="buttons">
-          <button onClick={() => handleClose()}>Dismiss</button>
+          <Button
+            buttonType={BUTTON_TYPE.b2}
+            customizations={{ bg: ColorOptions.SECONDARY }}
+            icon={"x.svg"}
+            onClick={() => handleClose()}
+          />
+          {topBarButtons}
         </div>
 
         <div className="content">{component}</div>

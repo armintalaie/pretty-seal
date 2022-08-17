@@ -1,6 +1,7 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
 
+import { ThemeContext } from "../../../setup/themeContext";
+import "./index.scss";
 export enum ColorOptions {
   PRIMARY = "primaryColor",
   SECONDARY = "secondaryColor",
@@ -17,7 +18,8 @@ interface Customizations {
 
 interface ButtonProps {
   onClick: Function;
-  label: string;
+  label?: string;
+  icon?: string;
   customizations?: Customizations;
   buttonType?: BUTTON_TYPE;
 }
@@ -33,17 +35,29 @@ export default function Button(props: ButtonProps) {
   const customizations = { ...DEFAULT_CUSTOMIZATIONS, ...props.customizations };
   const bgColor = customizations.bg;
 
-  if (props.buttonType === BUTTON_TYPE.b2) {
+  if (!props.label) {
     return (
       <button
         style={{
-          borderRadius: "5px",
-          border: `1px solid ${currentTheme[bgColor]}`,
-          background: "none",
+          backgroundColor: currentTheme[bgColor],
+          color: "#ffffff",
+          height: "30px",
+          width: "30px",
+          textAlign: "center",
+          verticalAlign: "middle",
+          borderRadius: "50%",
         }}
         onClick={() => onClick()}
       >
-        {label}
+        <>
+          {props.icon && (
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/${props.icon}`}
+              style={{ height: "16px" }}
+            />
+          )}
+          {label}
+        </>
       </button>
     );
   }

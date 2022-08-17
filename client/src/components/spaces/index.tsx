@@ -26,9 +26,14 @@ export default function Spaces() {
 
   return (
     <div className="block">
-      <div className="top-bar">
-        <h1>Spaces</h1>
-      </div>
+      <nav>
+        <img
+          src={`${process.env.PUBLIC_URL}/assets/seal.png`}
+          alt="Chatty Seal logo"
+        />
+        <h1>Chatty Seal </h1>
+      </nav>
+
       {mainContent()}
     </div>
   );

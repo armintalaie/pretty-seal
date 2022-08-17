@@ -5,6 +5,7 @@ import { SocketContext } from "../../setup/socketContext";
 import Setup from "./setup/setup";
 import "./index.scss";
 import Room from "./room";
+import { ThemeContext } from "../../setup/themeContext";
 
 export interface RoomsProps {
   domainId: string;
@@ -17,6 +18,7 @@ export interface RoomProps {
 }
 
 export default function Rooms(props: RoomsProps) {
+  const { currentTheme } = useContext(ThemeContext);
   const [showAddRoom, setShowAddRoom] = useState(false);
   const { domainId } = props;
   const socket = useContext(SocketContext);
@@ -61,8 +63,8 @@ export default function Rooms(props: RoomsProps) {
         <Room
           roomname={currentRoom.roomName}
           roomId={currentRoom.domainId}
-          leaveRoom={() => {
-            socket.emit("room:leave", currentRoom.domainId);
+          leaveRoom={(exitRoom?: boolean) => {
+            exitRoom && socket.emit("room:leave", currentRoom.domainId);
             setCurrentRoom(undefined);
           }}
         />
@@ -77,7 +79,7 @@ export default function Rooms(props: RoomsProps) {
               onClick={() => {
                 setShowAddRoom((prev) => !prev);
               }}
-              label={"Add a Room"}
+              icon={"plus.svg"}
             />
           </div>
           <div className="room-list">

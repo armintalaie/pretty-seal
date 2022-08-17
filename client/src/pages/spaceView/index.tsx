@@ -7,6 +7,9 @@ import { ConfigurationContextProvider } from "../../setup/configurationContext";
 import { SocketContextProvider } from "../../setup/socketContext";
 import ThemeProvider from "../../setup/themeContext";
 import Modal from "../../components/common/modal/modal";
+import Invite from "../../components/invites/invite";
+import QRCode from "react-qr-code";
+import { API_BASE_URL } from "../../services/apiHandler";
 
 export default function SpaceView({
   spaceInfromation,
@@ -30,17 +33,20 @@ export default function SpaceView({
                   onClick={() => {
                     setShowSpaceSettings((prev) => !prev);
                   }}
-                  label="Settings"
+                  icon={"settings.svg"}
                 />
               </div>
             )}
-            <Modal
-              component={<SpaceSettings />}
+
+            <SpaceSettings
               showModal={showSpaceSettings}
               handleClose={() => {
                 setShowSpaceSettings(false);
               }}
             />
+
+            {/* {  <InviteToSpace spaceId={spaceInfromation.domainId} />} */}
+
             <Rooms
               setIsInRoom={setIsInRoom}
               domainId={spaceInfromation.domainId}
@@ -49,5 +55,22 @@ export default function SpaceView({
         </ThemeProvider>
       </ConfigurationContextProvider>
     </SocketContextProvider>
+  );
+}
+
+function InviteToSpace({ spaceId }: { spaceId: string }) {
+  return (
+    <div>
+      <h1>Invite</h1>
+
+      <section className="invite-code">
+        <h4>
+          You can share the QR code that will prompt others to join this room
+        </h4>
+        <div>
+          <QRCode size={150} value={`${API_BASE_URL}/spaces/${spaceId}`} />
+        </div>
+      </section>
+    </div>
   );
 }

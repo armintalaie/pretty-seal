@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "../../../setup/socketContext";
 import Button from "../button/button";
 import Info from "../info/info";
@@ -11,9 +11,9 @@ export default function Messages({ roomId }: { roomId: string }) {
   const socket = useContext(SocketContext);
   const [draft, setDraft] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const messagesRef = useRef<HTMLDivElement>(null);
 
   function sendMessage() {
-    console.log(draft);
     socket.emit("message", domainId, roomId, draft);
     setMessages((prev) =>
       prev.concat([
@@ -26,11 +26,22 @@ export default function Messages({ roomId }: { roomId: string }) {
       ])
     );
     setDraft("");
+    scrollMessages();
+  }
+
+  function scrollMessages() {
+    if (messagesRef.current) {
+      messagesRef.current.scrollTo({
+        top: messagesRef.current.scrollHeight,
+        behavior: "auto",
+      });
+    }
   }
 
   useEffect(() => {
     socket.on("message", (...args: Message[]) => {
       setMessages((prev) => prev.concat(args));
+      scrollMessages();
     });
 
     return () => {
@@ -40,21 +51,40 @@ export default function Messages({ roomId }: { roomId: string }) {
 
   return (
     <div className="messages-section">
-      <div className="messages">
+      <div ref={messagesRef} className="messages">
         <Info />
         {messages.map((msg) => (
           <MessageBubble {...msg} />
         ))}
       </div>
-      <div className="send-section">
+
+      <form
+        className="send-section"
+        action="submit"
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <textarea
           name="name"
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && e.metaKey) {
+              e.preventDefault();
+              sendMessage();
+            }
+          }}
         ></textarea>
 
-        <Button label="Send" onClick={() => sendMessage()} />
-      </div>
+        <Button
+          label="Send"
+          onClick={() => {
+            sendMessage();
+          }}
+        />
+      </form>
+      <label>Enter CMD + ENTER to send message</label>
     </div>
   );
 }
