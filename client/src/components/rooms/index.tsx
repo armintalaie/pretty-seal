@@ -84,12 +84,7 @@ export default function Rooms(props: RoomsProps) {
           </div>
           <div className="room-list">
             {rooms.map((room) => (
-              <div
-                onClick={() => openRoom(room.id)}
-                style={{
-                  background: `linear-gradient(0.35turn, ${currentTheme.primaryColor},  rgb(35, 35, 35))`,
-                }}
-              >
+              <div onClick={() => openRoom(room.id)}>
                 <h3>{room.name}</h3>
                 <h6>Users: {room.users}</h6>
               </div>

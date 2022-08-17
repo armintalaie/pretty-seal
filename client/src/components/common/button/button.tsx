@@ -45,6 +45,7 @@ export default function Button(props: ButtonProps) {
           width: "30px",
           textAlign: "center",
           verticalAlign: "middle",
+          borderRadius: "50%",
         }}
         onClick={() => onClick()}
       >
