@@ -21,3 +21,22 @@ export default function Home() {
     </div>
   );
 }
+
+export function HomePage() {
+  return (
+    <div className="homepage">
+      <div className="homepage">
+        <a href={"https://www.craft.do/s/o6G7z0fKIr59dL"}>HomePage</a>
+      </div>
+      <div className="homepage">
+        <a
+          href={
+            "https://www.craft.do/s/o6G7z0fKIr59dL/b/AC6856A4-B2CB-4D68-8495-AD22A6F75419/The_Great_Flood"
+          }
+        >
+          Hector de Seal
+        </a>
+      </div>
+    </div>
+  );
+}

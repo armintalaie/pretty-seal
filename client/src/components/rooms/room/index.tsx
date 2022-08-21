@@ -5,6 +5,11 @@ import Modal from "../../common/modal/modal";
 import Invite from "../../invites/invite";
 import { ConfigurationContext } from "../../../setup/configurationContext";
 import "./index.scss";
+import {
+  CloseCircleOutlined,
+  HomeOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 
 export interface RoomProps {
   roomname?: string;
@@ -24,7 +29,7 @@ export default function Room(props: RoomProps) {
           <Button
             buttonType={BUTTON_TYPE.b2}
             customizations={{ bg: ColorOptions.SECONDARY }}
-            icon={"box.svg"}
+            icon={<HomeOutlined />}
             onClick={() => leaveRoom()}
           />
         )}
@@ -34,7 +39,7 @@ export default function Room(props: RoomProps) {
             <Button
               buttonType={BUTTON_TYPE.b2}
               customizations={{ bg: ColorOptions.SECONDARY }}
-              icon={"x-square.svg"}
+              icon={<CloseCircleOutlined />}
               onClick={() => leaveRoom(true)}
             />
           )}
@@ -44,7 +49,7 @@ export default function Room(props: RoomProps) {
               buttonType={BUTTON_TYPE.b2}
               customizations={{ bg: ColorOptions.SECONDARY }}
               onClick={() => setShowInvite(true)}
-              icon={"user-plus.svg"}
+              icon={<UserOutlined />}
             />
           )}
         </div>

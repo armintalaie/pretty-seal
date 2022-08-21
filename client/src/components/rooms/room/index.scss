@@ -1,11 +1,11 @@
 .top-bar {
     button {
-        width: 30px;
-        height: 30px;
-        border-radius: 4px;
+        max-width: 30px;
+        max-height: 30px;
         text-align: center;
     }
     div {
+        display: flex;
         align-items: center;
         justify-content: center;
     }

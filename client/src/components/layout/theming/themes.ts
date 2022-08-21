@@ -49,7 +49,5 @@ const sealyBlue: ThemeDetail = {
 export const defaultThemes = {
   evergreen: evergreen,
   blueOasis: blueOasis,
-  purePurple: purePurple,
-  copper: copper,
   sealyBlue: sealyBlue,
 };

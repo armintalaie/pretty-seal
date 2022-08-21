@@ -12,6 +12,7 @@ import { SpaceContext } from "../../../setup/spaceContext";
 import "./index.scss";
 import { API_BASE_URL } from "../../../services/apiHandler";
 import Modal from "../../common/modal/modal";
+import { LogoutOutlined, SaveOutlined } from "@ant-design/icons";
 
 export interface ConfigrationTemplate {
   theme?: ThemeDetail;
@@ -145,7 +146,7 @@ export default function SpaceSettings(props: SettingsModalProps) {
         <>
           <Button
             buttonType={BUTTON_TYPE.b2}
-            icon={"save.svg"}
+            icon={<SaveOutlined />}
             onClick={() => {
               applyConfigurationChanges();
             }}
@@ -153,7 +154,7 @@ export default function SpaceSettings(props: SettingsModalProps) {
 
           <Button
             buttonType={BUTTON_TYPE.b2}
-            icon={"log-out.svg"}
+            icon={<LogoutOutlined />}
             onClick={logOutOfSpace}
           />
         </>

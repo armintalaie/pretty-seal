@@ -72,7 +72,7 @@ export default function ThemeSelector(props: ThemeSelectorProps) {
             </button>
           );
         })}
-        <button
+        {/* <button
           style={{
             backgroundColor: customTheme.primaryColor,
             border: "2px solid #ffffff",
@@ -90,7 +90,7 @@ export default function ThemeSelector(props: ThemeSelectorProps) {
           }
           handleClose={setShowCustomModal}
           showModal={showCustomModal}
-        />
+        /> */}
       </section>
     </section>
   );
