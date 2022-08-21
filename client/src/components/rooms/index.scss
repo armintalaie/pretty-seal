@@ -19,7 +19,7 @@ button {
         h3 {
             font-size: 1.4rem;
         }
-        border: none;
+        border: 1px solid transparent;
         border-radius: 5px;
         margin: 5px 0px;
         padding: 2px 5px;
@@ -30,7 +30,7 @@ button {
         flex-direction: row;
         flex-wrap: wrap;
         &:hover {
-            box-shadow: rgba(42, 42, 42, 0.242) 0px 5px 5px;
+            border: 1px solid #ffffff73;
         }
     }
 }
