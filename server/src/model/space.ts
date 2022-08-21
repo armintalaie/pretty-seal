@@ -84,7 +84,10 @@ export class Space implements SpaceI {
           roomId = args.roomId;
         }
         this.joinRoom({ name: args.name, id: socket.id }, roomId, socket);
-        socket.emit("room", { roomId: roomId, roomName: args.roomName });
+        socket.emit("room", {
+          roomId: roomId,
+          name: this.getRoom(roomId).name,
+        });
         this.namespace.emit("rooms", this.getRooms());
       });
 

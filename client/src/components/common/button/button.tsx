@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ReactElement, useContext } from "react";
 
 import { ThemeContext } from "../../../setup/themeContext";
 import "./index.scss";
@@ -19,7 +19,7 @@ interface Customizations {
 interface ButtonProps {
   onClick: Function;
   label?: string;
-  icon?: string;
+  icon?: ReactElement;
   customizations?: Customizations;
   buttonType?: BUTTON_TYPE;
 }
@@ -39,25 +39,16 @@ export default function Button(props: ButtonProps) {
     return (
       <button
         style={{
-          backgroundColor: currentTheme[bgColor],
+          backgroundColor: currentTheme.primaryColor,
           color: "#ffffff",
-          height: "30px",
-          width: "30px",
           textAlign: "center",
           verticalAlign: "middle",
           borderRadius: "50%",
         }}
         onClick={() => onClick()}
       >
-        <>
-          {props.icon && (
-            <img
-              src={`${process.env.PUBLIC_URL}/assets/${props.icon}`}
-              style={{ height: "16px" }}
-            />
-          )}
-          {label}
-        </>
+        {props.icon && props.icon}
+        {label}
       </button>
     );
   }

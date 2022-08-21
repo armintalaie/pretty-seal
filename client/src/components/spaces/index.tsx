@@ -1,26 +1,16 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { HomePage } from "../../pages/home/home";
+import { SpaceContext } from "../../setup/spaceContext";
 import SpaceSetup from "./spaceSetup/spaceSetup";
 
 export default function Spaces() {
-  const [showSpaceSetup, setShowSpaceSetup] = useState(true);
+  const space = useContext(SpaceContext);
 
   const mainContent = () => {
-    if (showSpaceSetup) {
-      return (
-        <SpaceSetup
-          handleClose={() => {
-            setShowSpaceSetup((prev) => !prev);
-          }}
-        />
-      );
+    if (!space.spaceInfo) {
+      return <SpaceSetup />;
     } else {
-      return (
-        <>
-          <div className="info">
-            <h6>MULTI-SPACE SUPPORT IN PROGRESS </h6>
-          </div>
-        </>
-      );
+      return <></>;
     }
   };
 
@@ -31,10 +21,12 @@ export default function Spaces() {
           src={`${process.env.PUBLIC_URL}/assets/seal.png`}
           alt="Chatty Seal logo"
         />
-        <h1>Chatty Seal </h1>
+        <h1>Chatty Seal</h1>
       </nav>
-
       {mainContent()}
+      <div className="top-bar">
+        <HomePage />
+      </div>
     </div>
   );
 }

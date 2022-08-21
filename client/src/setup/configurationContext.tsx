@@ -6,13 +6,13 @@ import {
 import { API_BASE_URL } from "../services/apiHandler";
 import { SpaceContext } from "./spaceContext";
 
-export const DEFAULT_THEME = {
-  primaryColor: "#fdff",
-  secondaryColor: "#ff3dff",
-  textColor: "#ffffff",
-  secondaryTextColor: "#ffffff",
-  isLightMode: false,
-};
+// export const DEFAULT_THEME = {
+//   primaryColor: "#fdff",
+//   secondaryColor: "#ff3dff",
+//   textColor: "#ffffff",
+//   secondaryTextColor: "#ffffff",
+//   isLightMode: false,
+// };
 
 export interface IConfigContext {
   config: Configration;
@@ -62,7 +62,7 @@ const DEFAULT_SPACE_CONFIG = {
 };
 
 const DEFAULT_CONFIG: Configration = {
-  theme: defaultThemes.blueOasis,
+  theme: defaultThemes.sealyBlue,
   rooms: DEFAULT_ROOM_CONFIG,
   users: {},
   space: DEFAULT_SPACE_CONFIG,

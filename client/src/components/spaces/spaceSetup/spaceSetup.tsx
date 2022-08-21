@@ -1,3 +1,4 @@
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
 import { Configration } from "../../../setup/configurationContext";
 import { SocketContext } from "../../../setup/socketContext";
@@ -29,7 +30,7 @@ enum SPACESTATUS {
   JOIN = "Join",
 }
 
-export default function SpaceSetup({ handleClose }: { handleClose: Function }) {
+export default function SpaceSetup() {
   const socket = useContext(SocketContext);
   const spaceManager = useContext(SpaceContext);
   const [showCreate, setShowCreate] = useState(SPACESTATUS.SETUP);
@@ -39,18 +40,15 @@ export default function SpaceSetup({ handleClose }: { handleClose: Function }) {
 
   const createSpace = async () => {
     spaceManager.spaceController.createSpace(socket.id, spaceName);
-    handleClose();
   };
 
   const logIntoSpace = async () => {
     spaceManager.spaceController.logIntoSpace(spaceId, spacePassKey);
-    handleClose();
   };
 
   const createSpaceContent = () => {
     return (
       <>
-        <label>Space Name</label>
         <input
           type="text"
           name="name"
@@ -96,25 +94,33 @@ export default function SpaceSetup({ handleClose }: { handleClose: Function }) {
       </div>
 
       <div className="start">
-        {showCreate === SPACESTATUS.SETUP && (
-          <div>
-            <Button
-              label="Create Space"
-              onClick={() => {
-                setShowCreate(SPACESTATUS.CREATE);
-              }}
-            />
-            <Button
-              label="Join Space"
-              onClick={() => {
-                setShowCreate(SPACESTATUS.JOIN);
-              }}
-            />
-          </div>
+        {showCreate !== SPACESTATUS.SETUP && (
+          <Button
+            onClick={() => setShowCreate(SPACESTATUS.SETUP)}
+            icon={<ArrowLeftOutlined />}
+          />
         )}
+        <form onSubmit={(e) => e.preventDefault()}>
+          {showCreate === SPACESTATUS.SETUP && (
+            <>
+              <Button
+                label="Create Space"
+                onClick={() => {
+                  setShowCreate(SPACESTATUS.CREATE);
+                }}
+              />
+              <Button
+                label="Join Space"
+                onClick={() => {
+                  setShowCreate(SPACESTATUS.JOIN);
+                }}
+              />
+            </>
+          )}
 
-        {showCreate === SPACESTATUS.CREATE && createSpaceContent()}
-        {showCreate === SPACESTATUS.JOIN && joinSpaceContent()}
+          {showCreate === SPACESTATUS.CREATE && createSpaceContent()}
+          {showCreate === SPACESTATUS.JOIN && joinSpaceContent()}
+        </form>
       </div>
     </div>
   );

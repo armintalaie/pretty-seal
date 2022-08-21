@@ -5,7 +5,7 @@ import { SocketContext } from "../../setup/socketContext";
 import Setup from "./setup/setup";
 import "./index.scss";
 import Room from "./room";
-import { ThemeContext } from "../../setup/themeContext";
+import { PlusOutlined } from "@ant-design/icons";
 
 export interface RoomsProps {
   domainId: string;
@@ -18,7 +18,6 @@ export interface RoomProps {
 }
 
 export default function Rooms(props: RoomsProps) {
-  const { currentTheme } = useContext(ThemeContext);
   const [showAddRoom, setShowAddRoom] = useState(false);
   const { domainId } = props;
   const socket = useContext(SocketContext);
@@ -36,7 +35,7 @@ export default function Rooms(props: RoomsProps) {
     });
 
     socket.on("room", (args) => {
-      setCurrentRoom({ domainId: args.roomId, roomName: args.roomName });
+      setCurrentRoom({ domainId: args.roomId, roomName: args.name });
     });
 
     return () => {
@@ -47,7 +46,7 @@ export default function Rooms(props: RoomsProps) {
 
   useEffect(() => {
     props.setIsInRoom(currentRoom !== undefined);
-  }, [currentRoom]);
+  }, [currentRoom, props]);
 
   const openRoom = (roomId: string) => {
     socket.emit("room", {
@@ -79,14 +78,14 @@ export default function Rooms(props: RoomsProps) {
               onClick={() => {
                 setShowAddRoom((prev) => !prev);
               }}
-              icon={"plus.svg"}
+              icon={<PlusOutlined />}
             />
           </div>
           <div className="room-list">
             {rooms.map((room) => (
               <div onClick={() => openRoom(room.id)}>
                 <h3>{room.name}</h3>
-                <h6>Users: {room.users}</h6>
+                <h6>{room.users} in room</h6>
               </div>
             ))}
           </div>

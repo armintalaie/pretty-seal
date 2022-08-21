@@ -20,7 +20,9 @@ export default function MessageBubble(message: Message) {
     >
       <div
         className="message-text"
-        style={{ backgroundColor: currentTheme.primaryColor }}
+        style={{
+          background: `linear-gradient(0.3turn, ${currentTheme.primaryColor}, transparent)`,
+        }}
       >
         <h6>{message.displayName}</h6>
         <p>{message.text}</p>
