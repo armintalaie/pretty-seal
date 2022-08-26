@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
+import { ThemeContext } from "../../../context/themeContext";
 import "./index.scss";
 
 export default function Info({ children }: { children: JSX.Element }) {

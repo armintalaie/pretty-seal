@@ -1,5 +1,5 @@
 import { CSSProperties, useContext } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
+import { ThemeContext } from "../../../context/themeContext";
 import "./index.css";
 
 export interface Message {

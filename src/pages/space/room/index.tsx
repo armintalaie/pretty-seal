@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import Button, { BUTTON_TYPE, ColorOptions } from "../../common/button/button";
-import Messages from "../../common/message/messages";
-import Modal from "../../common/modal/modal";
-import Invite from "../../invites/invite";
-import { ConfigurationContext } from "../../../setup/configurationContext";
+import Button, { BUTTON_TYPE, ColorOptions } from "../../../components/common/button/button";
+import Messages from "../../../components/common/message/messages";
+import Modal from "../../../components/common/modal/modal";
+import Invite from "../../../components/invites/invite";
+import { ConfigurationContext } from "../../../context/configurationContext";
 import "./index.scss";
 import { CloseCircleOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
 

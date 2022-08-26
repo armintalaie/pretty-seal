@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { SpaceInfo } from "../components/spaces/spaceSetup/spaceSetup";
+import { SpaceInfo } from "../pages/setup/spaceSetup";
 import { API_BASE_URL } from "../services/apiHandler";
 
 interface SpaceController {
@@ -83,9 +83,5 @@ export default function SpaceProvider({ children }: { children: JSX.Element }) {
     setCurrentSpace(spaceHandler);
   }, []);
 
-  return (
-    <SpaceContext.Provider value={currentSpace}>
-      {children}
-    </SpaceContext.Provider>
-  );
+  return <SpaceContext.Provider value={currentSpace}>{children}</SpaceContext.Provider>;
 }

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { ThemeDetail, defaultThemes } from "../components/layout/theming/themes";
+import { ThemeDetail, defaultThemes } from "../components/theming/themes";
 import { ConfigurationContext } from "./configurationContext";
 
 interface ThemeContextInterface {
@@ -8,7 +8,7 @@ interface ThemeContextInterface {
 }
 
 export const ThemeContext = createContext<ThemeContextInterface>({
-  currentTheme: defaultThemes.sealyBlue,
+  currentTheme: defaultThemes.sealyLight,
   changeTheme: () => {},
 });
 

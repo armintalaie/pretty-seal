@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import { HomePage } from "../../pages/home/home";
-import { SpaceContext } from "../../setup/spaceContext";
+import { SpaceContext } from "../../context/spaceContext";
 import Block from "../common/block";
-import SpaceSetup from "./spaceSetup/spaceSetup";
+import SpaceSetup from "../../pages/setup/spaceSetup";
 
 export default function Spaces() {
   const space = useContext(SpaceContext);

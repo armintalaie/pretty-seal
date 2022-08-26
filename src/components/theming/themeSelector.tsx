@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
-import Button from "../../common/button/button";
+import { ThemeContext } from "../../context/themeContext";
+import Button from "../common/button/button";
 import { defaultThemes, ThemeDetail } from "./themes";
 import "./index.css";
 import { CoffeeOutlined, BulbOutlined } from "@ant-design/icons";

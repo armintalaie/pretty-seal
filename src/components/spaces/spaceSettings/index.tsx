@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import Button, { BUTTON_TYPE } from "../../common/button/button";
 import Toggle from "../../common/toggle/toggle";
-import { ThemeDetail } from "../../layout/theming/themes";
-import ThemeSelector from "../../layout/theming/themeSelector";
-import { Config, Configration, ConfigurationContext } from "../../../setup/configurationContext";
-import { SpaceContext } from "../../../setup/spaceContext";
+import { ThemeDetail } from "../../theming/themes";
+import ThemeSelector from "../../theming/themeSelector";
+import { Config, Configration, ConfigurationContext } from "../../../context/configurationContext";
+import { SpaceContext } from "../../../context/spaceContext";
 import "./index.scss";
 import { API_BASE_URL } from "../../../services/apiHandler";
 import Modal from "../../common/modal/modal";

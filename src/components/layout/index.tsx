@@ -1,5 +1,4 @@
-import ThemeProvider from "../../setup/themeContext";
-import "./index.css";
+import "./index.scss";
 
 export default function Layout({ children }: { children: JSX.Element }) {
   return (

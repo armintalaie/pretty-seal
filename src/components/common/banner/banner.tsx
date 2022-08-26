@@ -1,6 +1,6 @@
 import { CloseOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useContext } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
+import { ThemeContext } from "../../../context/themeContext";
 import "./index.scss";
 
 interface AlertProps {
@@ -17,10 +17,7 @@ export default function Alert(props: AlertProps) {
   const theme = useContext(ThemeContext).currentTheme;
   const { text, alertType } = props;
   return (
-    <div
-      className={`banner ${alertType}`}
-      style={{ backgroundColor: `${theme.primaryColor}` }}
-    >
+    <div className={`banner ${alertType}`} style={{ backgroundColor: `${theme.primaryColor}` }}>
       <h3>
         <span className="icon">
           <LoadingOutlined />{" "}

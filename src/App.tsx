@@ -1,7 +1,6 @@
-import "./App.css";
 import Home from "./pages/home/home";
 import Layout from "./components/layout";
-import SpaceProvider from "./setup/spaceContext";
+import SpaceProvider from "./context/spaceContext";
 
 export interface RoomRequest {
   roomId?: string;
