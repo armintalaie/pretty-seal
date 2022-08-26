@@ -4,7 +4,6 @@ import Modal from "../common/modal/modal";
 import { SocketContext } from "../../setup/socketContext";
 import Setup from "./setup/setup";
 import "./index.scss";
-import Room from "./room";
 import { PlusOutlined } from "@ant-design/icons";
 
 export interface RoomsProps {
@@ -22,9 +21,6 @@ export default function Rooms(props: RoomsProps) {
   const { domainId } = props;
   const socket = useContext(SocketContext);
   const [rooms, setRooms] = useState<any[]>([]);
-  const [currentRoom, setCurrentRoom] = useState<RoomProps | undefined>(
-    undefined
-  );
   useEffect(() => {
     socket.on("rooms", (rooms) => {
       setRooms(rooms);
@@ -35,7 +31,7 @@ export default function Rooms(props: RoomsProps) {
     });
 
     socket.on("room", (args) => {
-      setCurrentRoom({ domainId: args.roomId, roomName: args.name });
+      props.setIsInRoom({ domainId: args.roomId, roomName: args.name });
     });
 
     return () => {
@@ -43,10 +39,6 @@ export default function Rooms(props: RoomsProps) {
       socket.off("room");
     };
   }, [socket]);
-
-  useEffect(() => {
-    props.setIsInRoom(currentRoom !== undefined);
-  }, [currentRoom, props]);
 
   const openRoom = (roomId: string) => {
     socket.emit("room", {
@@ -56,49 +48,31 @@ export default function Rooms(props: RoomsProps) {
     });
   };
 
-  const mainContent = () => {
-    if (currentRoom) {
-      return (
-        <Room
-          roomname={currentRoom.roomName}
-          roomId={currentRoom.domainId}
-          leaveRoom={(exitRoom?: boolean) => {
-            exitRoom && socket.emit("room:leave", currentRoom.domainId);
-            setCurrentRoom(undefined);
+  const mainContent = (
+    <>
+      <div className="top-bar">
+        <h2>Rooms</h2>
+        <Button
+          buttonType={BUTTON_TYPE.b2}
+          onClick={() => {
+            setShowAddRoom((prev) => !prev);
           }}
+          icon={<PlusOutlined />}
         />
-      );
-    } else {
-      return (
-        <>
-          <div className="top-bar">
-            <h2>Rooms</h2>
-            <Button
-              buttonType={BUTTON_TYPE.b2}
-              onClick={() => {
-                setShowAddRoom((prev) => !prev);
-              }}
-              icon={<PlusOutlined />}
-            />
+      </div>
+      <div className="room-list">
+        {rooms.map((room) => (
+          <div onClick={() => openRoom(room.id)}>
+            <h3>{room.name}</h3>
+            <h6>{room.users} in room</h6>
           </div>
-          <div className="room-list">
-            {rooms.map((room) => (
-              <div onClick={() => openRoom(room.id)}>
-                <h3>{room.name}</h3>
-                <h6>{room.users} in room</h6>
-              </div>
-            ))}
-          </div>
-        </>
-      );
-    }
-  };
-
+        ))}
+      </div>
+    </>
+  );
   const RoomCreationModal = (
     <Modal
-      component={
-        <Setup domainId={domainId} handleClose={() => setShowAddRoom(false)} />
-      }
+      component={<Setup domainId={domainId} handleClose={() => setShowAddRoom(false)} />}
       showModal={showAddRoom}
       handleClose={() => {
         setShowAddRoom(false);
@@ -108,7 +82,7 @@ export default function Rooms(props: RoomsProps) {
 
   return (
     <div className="sub block">
-      {mainContent()}
+      {mainContent}
       {RoomCreationModal}
     </div>
   );

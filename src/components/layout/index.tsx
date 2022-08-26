@@ -3,10 +3,8 @@ import "./index.css";
 
 export default function Layout({ children }: { children: JSX.Element }) {
   return (
-    <ThemeProvider>
-      <div className="layout">
-        <main>{children}</main>
-      </div>
-    </ThemeProvider>
+    <div className="layout">
+      <main>{children}</main>
+    </div>
   );
 }

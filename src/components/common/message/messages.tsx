@@ -52,7 +52,13 @@ export default function Messages({ roomId }: { roomId: string }) {
   return (
     <div className="messages-section">
       <div ref={messagesRef} className="messages">
-        <Info />
+        <Info>
+          <>
+            <h2>The chat will be active as long a more than two are in the room</h2>
+            <h2>You can leave the room by just closing the tab</h2>
+            <h2>The chat will not be saved</h2>
+          </>
+        </Info>
         {messages.map((msg) => (
           <MessageBubble {...msg} />
         ))}

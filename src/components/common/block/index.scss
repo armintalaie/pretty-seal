@@ -1,0 +1,123 @@
+.block {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 10px;
+    margin: 0px 5px;
+    height: 100%;
+    max-width: 750px;
+    min-width: 300px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: initial;
+    box-sizing: border-box;
+    &.dark {
+        color: #ffffff;
+        background-color: #393939;
+        box-shadow: none;
+    }
+    &.light {
+        color: #141414;
+        background-color: #ebebeb;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 50px -10px, rgba(0, 0, 0, 0.2) 0px 20px 10px -10px;
+    }
+    &.sub {
+        background: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        min-width: 100%;
+        position: initial;
+        .top-bar {
+            margin-bottom: 0;
+        }
+    }
+    .top-bar {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 1%;
+        button {
+            min-width: fit-content;
+            padding: 5px;
+            margin: 3px;
+            border-radius: 2px;
+            font-size: 1rem;
+        }
+        h2 {
+            padding: 0px 10px;
+            margin: 0;
+        }
+        h1 {
+            padding: 0px 10px;
+            margin: 0;
+        }
+    }
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 3px;
+    form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        button {
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            color: #ffffff;
+            font-size: 1.6rem;
+            font-weight: 500;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        input {
+            max-width: 300px;
+            background-color: #cfcfcf49;
+            color: #ffffff;
+            border: 0.3px solid transparent;
+            padding: 5px 10px;
+            margin: 5px;
+            min-height: 40px;
+            width: 100%;
+            flex: 1;
+            border-radius: 5px;
+        }
+    }
+}
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 2.3rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+}
+
+p {
+    max-width: 500px;
+    font-size: 1.2rem;
+}
+
+input:focus {
+    border: 1px solid #ffffff;
+    outline: none;
+}

@@ -35,12 +35,12 @@ main {
     flex: 1 1 1px;
     display: flex;
     flex-direction: column;
-    padding: 1rem;
     justify-content: flex-start;
     align-items: center;
     width: 100vw;
     flex-wrap: wrap;
     height: inherit;
+    border-radius: 0;
 }
 
 .layout {

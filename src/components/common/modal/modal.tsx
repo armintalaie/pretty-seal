@@ -1,7 +1,8 @@
 import { CloseOutlined } from "@ant-design/icons";
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
+import { ThemeContext } from "../../../setup/themeContext";
 import Button, { BUTTON_TYPE, ColorOptions } from "../button/button";
-import "./index.css";
+import "./index.scss";
 
 interface ModalProps {
   component: ReactElement;
@@ -16,13 +17,14 @@ export interface ModalComponent {
 
 export default function Modal(props: ModalProps) {
   const { component, handleClose, showModal, topBarButtons } = props;
+  const theme = useContext(ThemeContext).currentTheme;
 
   if (!showModal) {
     return <></>;
   }
 
   return (
-    <div className="modal">
+    <div className={`modal ${theme.isLightMode ? "light" : "dark"}`}>
       <section>
         <div className="buttons">
           <Button

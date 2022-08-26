@@ -47,7 +47,7 @@
     font-weight: 400;
     font-size: 1.5rem;
     padding-bottom: 4px;
-    max-width: inherit;
+    max-width: 100%;
     white-space: pre-line;
     word-wrap: break-word;
 }
@@ -81,7 +81,7 @@
     border-radius: 5px;
     padding: 5px;
     border: 0;
-    background-color: #3f3f3fca;
+    background-color: #cfcfcf49;
     color: #ffffff;
     resize: none;
     font-family: inherit;

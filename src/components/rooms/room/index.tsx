@@ -5,11 +5,7 @@ import Modal from "../../common/modal/modal";
 import Invite from "../../invites/invite";
 import { ConfigurationContext } from "../../../setup/configurationContext";
 import "./index.scss";
-import {
-  CloseCircleOutlined,
-  HomeOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { CloseCircleOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
 
 export interface RoomProps {
   roomname?: string;
@@ -25,15 +21,18 @@ export default function Room(props: RoomProps) {
   return (
     <>
       <div className="top-bar">
-        {config.rooms.showLeave && (
-          <Button
-            buttonType={BUTTON_TYPE.b2}
-            customizations={{ bg: ColorOptions.SECONDARY }}
-            icon={<HomeOutlined />}
-            onClick={() => leaveRoom()}
-          />
-        )}
-        <h2> {props.roomname}</h2>
+        <div>
+          {config.rooms.showLeave && (
+            <Button
+              buttonType={BUTTON_TYPE.b2}
+              customizations={{ bg: ColorOptions.SECONDARY }}
+              icon={<HomeOutlined />}
+              onClick={() => leaveRoom()}
+            />
+          )}
+          <h2> {props.roomname}</h2>
+        </div>
+
         <div>
           {config.rooms.showLeave && (
             <Button
