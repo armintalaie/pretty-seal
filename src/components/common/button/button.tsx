@@ -1,6 +1,6 @@
 import { ReactElement, useContext } from "react";
 
-import { ThemeContext } from "../../../setup/themeContext";
+import { ThemeContext } from "../../../context/themeContext";
 import "./index.scss";
 export enum ColorOptions {
   PRIMARY = "primaryColor",
@@ -54,10 +54,7 @@ export default function Button(props: ButtonProps) {
   }
 
   return (
-    <button
-      style={{ backgroundColor: currentTheme[bgColor] }}
-      onClick={() => onClick()}
-    >
+    <button style={{ backgroundColor: currentTheme[bgColor] }} onClick={() => onClick()}>
       {label}
     </button>
   );

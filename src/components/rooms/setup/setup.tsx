@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import Button from "../../common/button/button";
-import { SocketContext } from "../../../setup/socketContext";
+import { SocketContext } from "../../../context/socketContext";
 
 export default function Setup({
   handleClose,

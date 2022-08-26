@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import Button, { BUTTON_TYPE } from "../../components/common/button/button";
-import { SpaceInfo } from "../../components/spaces/spaceSetup/spaceSetup";
+import { SpaceInfo } from "../setup/spaceSetup";
 import Rooms, { RoomProps } from "../../components/rooms";
 import SpaceSettings from "../../components/spaces/spaceSettings";
-import { ConfigurationContextProvider } from "../../setup/configurationContext";
-import { SocketContext, SocketContextProvider } from "../../setup/socketContext";
-import ThemeProvider from "../../setup/themeContext";
+import { ConfigurationContextProvider } from "../../context/configurationContext";
+import { SocketContext, SocketContextProvider } from "../../context/socketContext";
+import ThemeProvider from "../../context/themeContext";
 import QRCode from "react-qr-code";
 import { API_BASE_URL } from "../../services/apiHandler";
 import { MoreOutlined } from "@ant-design/icons";
-import Room from "../../components/rooms/room";
+import Room from "./room";
 import Block from "../../components/common/block";
 
 export default function SpaceView({ spaceInfromation }: { spaceInfromation: SpaceInfo }) {

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Button, { BUTTON_TYPE } from "../common/button/button";
 import Modal from "../common/modal/modal";
-import { SocketContext } from "../../setup/socketContext";
+import { SocketContext } from "../../context/socketContext";
 import Setup from "./setup/setup";
 import "./index.scss";
 import { PlusOutlined } from "@ant-design/icons";

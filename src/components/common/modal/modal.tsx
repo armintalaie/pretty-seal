@@ -1,6 +1,6 @@
 import { CloseOutlined } from "@ant-design/icons";
 import { ReactElement, useContext } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
+import { ThemeContext } from "../../../context/themeContext";
 import Button, { BUTTON_TYPE, ColorOptions } from "../button/button";
 import "./index.scss";
 

@@ -1,15 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { defaultThemes, ThemeDetail } from "../components/layout/theming/themes";
+import { defaultThemes, ThemeDetail } from "../components/theming/themes";
 import { API_BASE_URL } from "../services/apiHandler";
 import { SpaceContext } from "./spaceContext";
-
-// export const DEFAULT_THEME = {
-//   primaryColor: "#fdff",
-//   secondaryColor: "#ff3dff",
-//   textColor: "#ffffff",
-//   secondaryTextColor: "#ffffff",
-//   isLightMode: false,
-// };
 
 export interface IConfigContext {
   config: Configration;

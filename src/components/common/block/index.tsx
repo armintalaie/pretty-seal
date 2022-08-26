@@ -1,7 +1,6 @@
 import "./index.scss";
-
 import { useContext } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
+import { ThemeContext } from "../../../context/themeContext";
 
 export default function Block({ children }: { children: JSX.Element }) {
   const theme = useContext(ThemeContext).currentTheme;

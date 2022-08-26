@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { SocketContext } from "../../../setup/socketContext";
+import { SocketContext } from "../../../context/socketContext";
 import Button from "../button/button";
 import Info from "../info/info";
 import MessageBubble, { Message } from "./message";
 import "./index.css";
-import { SpaceContext } from "../../../setup/spaceContext";
+import { SpaceContext } from "../../../context/spaceContext";
 
 export default function Messages({ roomId }: { roomId: string }) {
   const { domainId } = useContext(SpaceContext).spaceInfo!;

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { ThemeContext } from "../../../setup/themeContext";
+import { ThemeContext } from "../../../context/themeContext";
 import "./index.css";
 
 interface ButtonProps {
@@ -28,10 +28,7 @@ export default function Toggle(props: ButtonProps) {
         }}
         style={{ backgroundColor: currentTheme.primaryColor }}
       >
-        <div
-          ref={element}
-          style={{ backgroundColor: currentTheme.secondaryColor }}
-        >
+        <div ref={element} style={{ backgroundColor: currentTheme.secondaryColor }}>
           {status ? "ON" : "OFF"}
         </div>
       </div>
