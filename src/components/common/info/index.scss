@@ -1,12 +1,27 @@
-.info {
+.info-wrapper {
+    display: flex;
+    justify-content: center;
     width: 100%;
-    background-color: #3f3f3fca;
-    padding: 1.3rem 1.6rem;
-    margin: 20px 5px;
-    border-radius: 5px;
-}
-
-.info h2 {
-    font-size: 1.3rem;
-    font-weight: normal;
+    .info {
+        padding: 10px;
+        width: 100%;
+        max-width: 650px;
+        margin: 20px 5px;
+        border-radius: 5px;
+        position: relative;
+        &.dark {
+            color: #ffffff;
+            background-color: #2c2c2c;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+        }
+        &.light {
+            color: #141414;
+            background-color: #e5e1e1;
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 2px 1px;
+        }
+    }
+    .info h2 {
+        font-size: 1.3rem;
+        font-weight: normal;
+    }
 }

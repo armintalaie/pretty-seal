@@ -4,6 +4,7 @@ import { Configration } from "../../../setup/configurationContext";
 import { SocketContext } from "../../../setup/socketContext";
 import { SpaceContext } from "../../../setup/spaceContext";
 import Button from "../../common/button/button";
+import Info from "../../common/info/info";
 
 export interface Limitation {
   applyTheme: boolean;
@@ -86,19 +87,16 @@ export default function SpaceSetup() {
 
   return (
     <div className="sub block">
-      <div className="info">
+      <Info>
         <p>
-          A <b>Space</b> is a fully customizable and scalable chatty seal
-          variant for your needs. customize, limit and configure all your rooms
+          A <b>Space</b> is a fully customizable and scalable chatty seal variant for your needs.
+          customize, limit and configure all your rooms
         </p>
-      </div>
+      </Info>
 
       <div className="start">
         {showCreate !== SPACESTATUS.SETUP && (
-          <Button
-            onClick={() => setShowCreate(SPACESTATUS.SETUP)}
-            icon={<ArrowLeftOutlined />}
-          />
+          <Button onClick={() => setShowCreate(SPACESTATUS.SETUP)} icon={<ArrowLeftOutlined />} />
         )}
         <form onSubmit={(e) => e.preventDefault()}>
           {showCreate === SPACESTATUS.SETUP && (

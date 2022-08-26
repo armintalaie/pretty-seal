@@ -11,7 +11,7 @@
 }
 
 .form div input {
-    background-color: #3f3f3fca;
+    background-color: #cfcfcf49;
     color: #ffffff;
     border: 0.3px solid transparent;
     padding: 5px 10px;
@@ -48,26 +48,19 @@
 
 .themeBtn {
     display: flex;
-    flex-direction: row;
+    background: none;
+    flex-direction: column;
     width: fit-content;
     display: relative;
     padding: 0;
+    border-radius: 40px;
+    width: 40px;
+    height: 40px;
 }
 
 .themeBtn div {
     width: 50%;
     height: 100%;
-}
-
-.theme-selector button {
-    border-radius: 5px;
-    width: 150px;
-    height: 50px;
-    padding: 2px;
-    margin: 3px;
-    border: 0;
-    text-align: center;
-    vertical-align: middle;
 }
 
 .theme-selector {

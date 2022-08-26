@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../../setup/themeContext";
 import Button from "../../common/button/button";
-import Modal from "../../common/modal/modal";
 import { defaultThemes, ThemeDetail } from "./themes";
 import "./index.css";
+import { CoffeeOutlined, BulbOutlined } from "@ant-design/icons";
 
 export interface ThemeSelectorProps {
   theme?: ThemeDetail;
@@ -33,42 +33,23 @@ export default function ThemeSelector(props: ThemeSelectorProps) {
 
   return (
     <section className="theme-selector">
-      <h2>Themes</h2>
-      <h3>Select one color shade to apply it across the app</h3>
+      <h3>Themes</h3>
+      <p>Select one color shade to apply it across the app</p>
       <section>
         {Object.values(defaultThemes).map((val) => {
           return (
             <button
               className="themeBtn"
               style={{
-                border:
-                  val.primaryColor === currentTheme.primaryColor
-                    ? "2px solid #c5c5c5c5"
-                    : "2px solid transparent",
+                background: `radial-gradient( 
+                
+                   ${val.primaryColor}, 
+                   ${val.secondaryColor}
+               `,
               }}
-              onClick={() =>
-                props.onClick ? props.onClick(val) : changeTheme(val)
-              }
+              onClick={() => (props.onClick ? props.onClick(val) : changeTheme(val))}
             >
-              <div
-                style={{
-                  backgroundColor: val.primaryColor,
-                  border:
-                    val.primaryColor === currentTheme.primaryColor
-                      ? "2px solid #c5c5c5c5"
-                      : "2px solid transparent",
-                }}
-              ></div>
-
-              <div
-                style={{
-                  backgroundColor: val.secondaryColor,
-                  border:
-                    val.primaryColor === currentTheme.primaryColor
-                      ? "2px solid #c5c5c5c5"
-                      : "2px solid transparent",
-                }}
-              ></div>
+              {val.isLightMode ? <CoffeeOutlined /> : <BulbOutlined />}
             </button>
           );
         })}
@@ -115,10 +96,7 @@ function CustomThemeSelector({
     <div>
       <h1>Custom Theme</h1>
 
-      <h3>
-        Create your own custom theme by provide HEX color codes (inlcuding the
-        #){" "}
-      </h3>
+      <h3>Create your own custom theme by provide HEX color codes (inlcuding the #) </h3>
 
       <div className="form">
         <div>
@@ -162,9 +140,7 @@ function CustomThemeSelector({
           <input
             value={newTheme.secondaryTextColor}
             name="secondary-text-color"
-            onChange={(e) =>
-              updateNewTheme("secondaryTextColor", e.target.value)
-            }
+            onChange={(e) => updateNewTheme("secondaryTextColor", e.target.value)}
           ></input>
         </div>
 

@@ -1,8 +1,5 @@
 import { createContext, useContext } from "react";
-import {
-  ThemeDetail,
-  defaultThemes,
-} from "../components/layout/theming/themes";
+import { ThemeDetail, defaultThemes } from "../components/layout/theming/themes";
 import { ConfigurationContext } from "./configurationContext";
 
 interface ThemeContextInterface {
@@ -16,13 +13,11 @@ export const ThemeContext = createContext<ThemeContextInterface>({
 });
 
 export default function ThemeProvider({ children }: { children: JSX.Element }) {
-  const spaceTheme = useContext(ConfigurationContext);
+  let spaceTheme = useContext(ConfigurationContext);
   return (
     <ThemeContext.Provider
       value={{
-        currentTheme: spaceTheme
-          ? spaceTheme.config.theme
-          : defaultThemes.sealyBlue,
+        currentTheme: spaceTheme ? spaceTheme.config.theme : defaultThemes.sealyLight,
         changeTheme: () => {},
       }}
     >

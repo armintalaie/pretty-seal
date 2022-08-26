@@ -1,8 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-  defaultThemes,
-  ThemeDetail,
-} from "../components/layout/theming/themes";
+import { defaultThemes, ThemeDetail } from "../components/layout/theming/themes";
 import { API_BASE_URL } from "../services/apiHandler";
 import { SpaceContext } from "./spaceContext";
 
@@ -77,7 +74,7 @@ export const ConfigurationContextProvider = ({
 }) => {
   const spaceConfig = useContext(SpaceContext).spaceInfo;
   const [configuration, setConfiguration] = useState<Configration>(
-    spaceConfig ? spaceConfig.configuration : DEFAULT_CONFIG
+    spaceConfig ? DEFAULT_CONFIG : DEFAULT_CONFIG
   );
 
   useEffect(() => {
@@ -89,15 +86,14 @@ export const ConfigurationContextProvider = ({
       method: "GET",
     })
       .then((res) => res.json())
-      .then((config) => {
-        setConfiguration(config);
+      .then((result) => {
+        console.log(result);
+        setConfiguration(result.configuration);
       });
   };
 
   return (
-    <ConfigurationContext.Provider
-      value={{ config: configuration, updateConfig }}
-    >
+    <ConfigurationContext.Provider value={{ config: configuration, updateConfig }}>
       {children}
     </ConfigurationContext.Provider>
   );

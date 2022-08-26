@@ -3,16 +3,13 @@ import Button, { BUTTON_TYPE } from "../../common/button/button";
 import Toggle from "../../common/toggle/toggle";
 import { ThemeDetail } from "../../layout/theming/themes";
 import ThemeSelector from "../../layout/theming/themeSelector";
-import {
-  Config,
-  Configration,
-  ConfigurationContext,
-} from "../../../setup/configurationContext";
+import { Config, Configration, ConfigurationContext } from "../../../setup/configurationContext";
 import { SpaceContext } from "../../../setup/spaceContext";
 import "./index.scss";
 import { API_BASE_URL } from "../../../services/apiHandler";
 import Modal from "../../common/modal/modal";
 import { LogoutOutlined, SaveOutlined } from "@ant-design/icons";
+import Info from "../../common/info/info";
 
 export interface ConfigrationTemplate {
   theme?: ThemeDetail;
@@ -72,8 +69,8 @@ export default function SpaceSettings(props: SettingsModalProps) {
 
   const component = (
     <div className="intro">
-      <div className="top-bar">
-        <div className="info">
+      <Info>
+        <>
           <div>
             <b>Domain Id: </b>
             {spaceInfo.domainId}{" "}
@@ -82,11 +79,11 @@ export default function SpaceSettings(props: SettingsModalProps) {
             <b>Client Secret: </b>
             {spaceInfo.clientSecret}{" "}
           </div>
-        </div>
-      </div>
+        </>
+      </Info>
 
-      <div className="room space">
-        <h1>Configurations</h1>
+      <div>
+        <h2>Configurations</h2>
 
         {Object.keys(spaceInfo.configuration).map((item) => {
           const key = item as keyof Configration;
@@ -97,39 +94,35 @@ export default function SpaceSettings(props: SettingsModalProps) {
                 onClick={(newTheme: ThemeDetail) => {
                   const cop = Object.assign({}, config);
                   cop[key] = newTheme;
-
                   updateConfiguration(cop);
                 }}
               />
             );
           }
-
           return (
             <div className="settings">
-              <h2>{item.toUpperCase()}</h2>
-              {Object.entries(spaceInfo.configuration[key]).map(
-                (value, settingsItem) => {
-                  return (
-                    <section className="">
-                      <h4>
-                        {Object.hasOwn(option, value[0])
-                          ? option[value[0] as keyof typeof option]
-                          : value[0]}
-                      </h4>
-                      <Toggle
-                        id={value[0]}
-                        status={value[1] as boolean}
-                        onClick={(status: boolean) => {
-                          const k2 = value[0] as keyof Config;
-                          const cop = Object.assign({}, config);
-                          spaceInfo.configuration[key][k2] = status;
-                          updateConfiguration(cop);
-                        }}
-                      />
-                    </section>
-                  );
-                }
-              )}
+              <h3>{item}</h3>
+              {Object.entries(spaceInfo.configuration[key]).map((value, settingsItem) => {
+                return (
+                  <section className="">
+                    <h4>
+                      {Object.hasOwn(option, value[0])
+                        ? option[value[0] as keyof typeof option]
+                        : value[0]}
+                    </h4>
+                    <Toggle
+                      id={value[0]}
+                      status={value[1] as boolean}
+                      onClick={(status: boolean) => {
+                        const k2 = value[0] as keyof Config;
+                        const cop = Object.assign({}, config);
+                        spaceInfo.configuration[key][k2] = status;
+                        updateConfiguration(cop);
+                      }}
+                    />
+                  </section>
+                );
+              })}
             </div>
           );
         })}
@@ -152,11 +145,7 @@ export default function SpaceSettings(props: SettingsModalProps) {
             }}
           />
 
-          <Button
-            buttonType={BUTTON_TYPE.b2}
-            icon={<LogoutOutlined />}
-            onClick={logOutOfSpace}
-          />
+          <Button buttonType={BUTTON_TYPE.b2} icon={<LogoutOutlined />} onClick={logOutOfSpace} />
         </>
       }
     />
