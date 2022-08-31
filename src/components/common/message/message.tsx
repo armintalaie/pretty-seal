@@ -17,10 +17,11 @@ export default function MessageBubble(message: Message) {
     const style: CSSProperties = {};
 
     if (message.displayName === user) {
-      style["background"] = `
-        ${currentTheme.secondaryColor}`;
+      style["background"] = `${currentTheme.primaryColor}`;
+      style["borderRadius"] = "10px 2px 10px 10px";
     } else {
-      style["background"] = "#e5e1e1";
+      style["background"] = `${currentTheme.secondaryColor}`;
+      style["borderRadius"] = "2px 10px 10px 10px";
     }
 
     return style;

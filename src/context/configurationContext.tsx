@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { defaultThemes, ThemeDetail } from "../components/theming/themes";
 import { API_BASE_URL } from "../services/apiHandler";
 import { SpaceContext } from "./spaceContext";
+import { ThemeContext } from "./themeContext";
 
 export interface IConfigContext {
   config: Configration;
@@ -65,6 +66,7 @@ export const ConfigurationContextProvider = ({
   children: JSX.Element;
 }) => {
   const spaceConfig = useContext(SpaceContext).spaceInfo;
+  const { currentTheme, changeTheme } = useContext(ThemeContext);
   const [configuration, setConfiguration] = useState<Configration>(
     spaceConfig ? DEFAULT_CONFIG : DEFAULT_CONFIG
   );
@@ -79,7 +81,7 @@ export const ConfigurationContextProvider = ({
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
+        changeTheme(result.configuration.theme);
         setConfiguration(result.configuration);
       });
   };

@@ -5,19 +5,19 @@ import Rooms, { RoomProps } from "../../components/rooms";
 import SpaceSettings from "../../components/spaces/spaceSettings";
 import { ConfigurationContextProvider } from "../../context/configurationContext";
 import { SocketContext, SocketContextProvider } from "../../context/socketContext";
-import ThemeProvider from "../../context/themeContext";
 import QRCode from "react-qr-code";
 import { API_BASE_URL } from "../../services/apiHandler";
 import { MoreOutlined } from "@ant-design/icons";
 import Room from "./room";
 import Block from "../../components/common/block";
+import Info from "../../components/common/info/info";
 
 export default function SpaceView({ spaceInfromation }: { spaceInfromation: SpaceInfo }) {
   const [showSpaceSettings, setShowSpaceSettings] = useState(false);
   const socket = useContext(SocketContext);
   const [currentRoom, setCurrentRoom] = useState<RoomProps | undefined>(undefined);
   const [width, setWidth] = useState(window.innerWidth);
-  const breakpoint = 680;
+  const breakpoint = 720;
 
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -43,6 +43,10 @@ export default function SpaceView({ spaceInfromation }: { spaceInfromation: Spac
               setShowSpaceSettings(false);
             }}
           />
+          <Info>
+            <p>join or create a room to start communicating right away</p>
+          </Info>
+
           <Rooms setIsInRoom={setCurrentRoom} domainId={spaceInfromation.domainId} />
         </>
       </Block>
@@ -50,7 +54,7 @@ export default function SpaceView({ spaceInfromation }: { spaceInfromation: Spac
 
     if (currentRoom) {
       const room = (
-        <Block>
+        <>
           <Room
             roomname={currentRoom.roomName}
             roomId={currentRoom.domainId}
@@ -59,7 +63,7 @@ export default function SpaceView({ spaceInfromation }: { spaceInfromation: Spac
               setCurrentRoom(undefined);
             }}
           />
-        </Block>
+        </>
       );
 
       return (
@@ -75,7 +79,7 @@ export default function SpaceView({ spaceInfromation }: { spaceInfromation: Spac
   return (
     <SocketContextProvider domain={spaceInfromation.domainId}>
       <ConfigurationContextProvider domain={spaceInfromation.domainId}>
-        <ThemeProvider>{mainContent()}</ThemeProvider>
+        {mainContent()}
       </ConfigurationContextProvider>
     </SocketContextProvider>
   );

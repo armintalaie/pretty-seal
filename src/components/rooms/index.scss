@@ -21,18 +21,32 @@ button {
         }
         box-sizing: border-box;
         border: 1px solid transparent;
-        border-radius: 5px;
-        margin: 5px 0px;
+        border-radius: 3px;
+        margin: 1px 0px;
         padding: 2px 15px;
         justify-content: space-between;
-        background-color: #b9b9b985;
+        background-color: #84848433;
+        border: 1px solid transparent;
         width: 100%;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         &:hover {
-            border: 1px solid #ffffff73;
+            border: 1px solid #594f4f73;
         }
+    }
+    .top-bar {
+        background: none;
+        margin-bottom: 10px;
+        padding: 0 5px;
+        &:hover {
+            border: 1px solid transparent;
+        }
+    }
+    button {
+        width: 30px;
+        max-height: 30px;
+        text-align: center;
     }
 }
 

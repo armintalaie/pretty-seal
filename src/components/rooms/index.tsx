@@ -4,7 +4,7 @@ import Modal from "../common/modal/modal";
 import { SocketContext } from "../../context/socketContext";
 import Setup from "./setup/setup";
 import "./index.scss";
-import { PlusOutlined } from "@ant-design/icons";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 
 export interface RoomsProps {
   domainId: string;
@@ -50,21 +50,21 @@ export default function Rooms(props: RoomsProps) {
 
   const mainContent = (
     <>
-      <div className="top-bar">
-        <h2>Rooms</h2>
-        <Button
-          buttonType={BUTTON_TYPE.b2}
-          onClick={() => {
-            setShowAddRoom((prev) => !prev);
-          }}
-          icon={<PlusOutlined />}
-        />
-      </div>
       <div className="room-list">
+        <div className=" top-bar">
+          <h3>Rooms</h3>
+          <Button
+            buttonType={BUTTON_TYPE.b2}
+            onClick={() => {
+              setShowAddRoom((prev) => !prev);
+            }}
+            label="Create Room"
+            icon={<PlusOutlined />}
+          />
+        </div>
         {rooms.map((room) => (
           <div onClick={() => openRoom(room.id)}>
             <h3>{room.name}</h3>
-            <h6>{room.users} in room</h6>
           </div>
         ))}
       </div>

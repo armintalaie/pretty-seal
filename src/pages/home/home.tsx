@@ -6,15 +6,13 @@ import "../index.scss";
 import { Manager } from "socket.io-client";
 import { SpaceContext } from "../../context/spaceContext";
 import { API_BASE_URL } from "../../services/apiHandler";
-import { ThemeContext } from "../../context/themeContext";
 export const manager = new Manager(API_BASE_URL);
 
 export default function Home() {
   const currentspace = useContext(SpaceContext);
-  const theme = useContext(ThemeContext).currentTheme;
 
   return (
-    <div className={`main-page ${theme.isLightMode ? "light" : "dark"}`}>
+    <div className={"main-page"}>
       {currentspace.spaceInfo ? (
         <SpaceView spaceInfromation={currentspace.spaceInfo} />
       ) : (

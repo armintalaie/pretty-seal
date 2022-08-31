@@ -1,3 +1,4 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import { ReactElement, useContext } from "react";
 
 import { ThemeContext } from "../../../context/themeContext";
@@ -19,6 +20,7 @@ interface Customizations {
 interface ButtonProps {
   onClick: Function;
   label?: string;
+  isDisabled?: boolean;
   icon?: ReactElement;
   customizations?: Customizations;
   buttonType?: BUTTON_TYPE;
@@ -30,7 +32,7 @@ const DEFAULT_CUSTOMIZATIONS = {
 
 export default function Button(props: ButtonProps) {
   const { currentTheme } = useContext(ThemeContext);
-  const { label, onClick } = props;
+  const { label, onClick, isDisabled } = props;
 
   const customizations = { ...DEFAULT_CUSTOMIZATIONS, ...props.customizations };
   const bgColor = customizations.bg;
@@ -38,6 +40,7 @@ export default function Button(props: ButtonProps) {
   if (!props.label) {
     return (
       <button
+        disabled={isDisabled}
         style={{
           backgroundColor: currentTheme.primaryColor,
           color: "#ffffff",
@@ -54,7 +57,11 @@ export default function Button(props: ButtonProps) {
   }
 
   return (
-    <button style={{ backgroundColor: currentTheme[bgColor] }} onClick={() => onClick()}>
+    <button
+      style={{ backgroundColor: currentTheme[bgColor] }}
+      disabled={isDisabled}
+      onClick={() => onClick()}
+    >
       {label}
     </button>
   );

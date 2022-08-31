@@ -5,15 +5,21 @@ import Info from "../info/info";
 import MessageBubble, { Message } from "./message";
 import "./index.css";
 import { SpaceContext } from "../../../context/spaceContext";
+import Slider from "../slider";
+import Action from "./action";
 
 export default function Messages({ roomId }: { roomId: string }) {
   const { domainId } = useContext(SpaceContext).spaceInfo!;
   const socket = useContext(SocketContext);
   const [draft, setDraft] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
+  const [showAction, setShowAction] = useState(false);
   const messagesRef = useRef<HTMLDivElement>(null);
 
   function sendMessage() {
+    if (draft.length === 0) {
+      return;
+    }
     socket.emit("message", domainId, roomId, draft);
     setMessages((prev) =>
       prev.concat([
@@ -64,32 +70,46 @@ export default function Messages({ roomId }: { roomId: string }) {
         ))}
       </div>
 
-      <form
-        className="send-section"
-        action="submit"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <textarea
-          name="name"
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && e.metaKey) {
-              e.preventDefault();
-              sendMessage();
-            }
-          }}
-        ></textarea>
+      <div className="action-section">
+        {showAction && <Slider handleClose={() => {}} showModal={true} component={<Action />} />}
 
-        <Button
-          label="Send"
-          onClick={() => {
-            sendMessage();
+        <form
+          className="send-section"
+          action="submit"
+          onSubmit={(e) => {
+            e.preventDefault();
           }}
-        />
-      </form>
+        >
+          <div>
+            <Button
+              label=" "
+              isDisabled={true}
+              onClick={() => {
+                setShowAction((prev) => !prev);
+              }}
+            />
+            <textarea
+              name="name"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.metaKey) {
+                  e.preventDefault();
+                  sendMessage();
+                }
+              }}
+            ></textarea>
+            <Button
+              isDisabled={draft.length === 0}
+              label="Send"
+              onClick={() => {
+                sendMessage();
+              }}
+            />
+          </div>
+        </form>
+      </div>
+
       <label>Enter CMD + ENTER to send message</label>
     </div>
   );

@@ -1,24 +1,30 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { ThemeDetail, defaultThemes } from "../components/theming/themes";
-import { ConfigurationContext } from "./configurationContext";
-
 interface ThemeContextInterface {
   currentTheme: ThemeDetail;
-  changeTheme: (theme: ThemeDetail) => void;
+  changeTheme: (theme?: ThemeDetail) => void;
 }
 
+const defaultTheme = defaultThemes.purePurple;
 export const ThemeContext = createContext<ThemeContextInterface>({
-  currentTheme: defaultThemes.sealyLight,
+  currentTheme: defaultTheme,
   changeTheme: () => {},
 });
 
 export default function ThemeProvider({ children }: { children: JSX.Element }) {
-  let spaceTheme = useContext(ConfigurationContext);
+  const [theme, setTheme] = useState(defaultTheme);
+  const updateTheme = (newTheme?: ThemeDetail) => {
+    if (newTheme) {
+      setTheme(newTheme);
+    } else {
+      setTheme(defaultTheme);
+    }
+  };
   return (
     <ThemeContext.Provider
       value={{
-        currentTheme: spaceTheme ? spaceTheme.config.theme : defaultThemes.sealyLight,
-        changeTheme: () => {},
+        currentTheme: theme,
+        changeTheme: updateTheme,
       }}
     >
       {children}

@@ -5,7 +5,9 @@ import Modal from "../../../components/common/modal/modal";
 import Invite from "../../../components/invites/invite";
 import { ConfigurationContext } from "../../../context/configurationContext";
 import "./index.scss";
-import { CloseCircleOutlined, HomeOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, HomeOutlined, MenuOutlined, UserOutlined } from "@ant-design/icons";
+import Block from "../../../components/common/block";
+import Action from "../../../components/common/message/action";
 
 export interface RoomProps {
   roomname?: string;
@@ -17,49 +19,52 @@ export default function Room(props: RoomProps) {
   const { config } = useContext(ConfigurationContext);
   const { leaveRoom, roomId } = props;
   const [showInvite, setShowInvite] = useState(false);
+  const [showAction, setShowAction] = useState(false);
 
   return (
     <>
-      <div className="top-bar">
-        <div>
-          {config.rooms.showLeave && (
-            <Button
-              buttonType={BUTTON_TYPE.b2}
-              customizations={{ bg: ColorOptions.SECONDARY }}
-              icon={<HomeOutlined />}
-              onClick={() => leaveRoom()}
-            />
-          )}
-          <h2> {props.roomname}</h2>
-        </div>
+      <Block>
+        <>
+          <div className="top-bar">
+            <div>
+              <h2> {props.roomname}</h2>
+            </div>
 
-        <div>
-          {config.rooms.showLeave && (
-            <Button
-              buttonType={BUTTON_TYPE.b2}
-              customizations={{ bg: ColorOptions.SECONDARY }}
-              icon={<CloseCircleOutlined />}
-              onClick={() => leaveRoom(true)}
-            />
-          )}
+            <div>
+              {config.rooms.showLeave && (
+                <Button
+                  buttonType={BUTTON_TYPE.b2}
+                  customizations={{ bg: ColorOptions.SECONDARY }}
+                  icon={<CloseCircleOutlined />}
+                  onClick={() => leaveRoom()}
+                />
+              )}
+              {/* {config.rooms.showInvite && (
+                <Button
+                  isDisabled={true}
+                  buttonType={BUTTON_TYPE.b2}
+                  customizations={{ bg: ColorOptions.SECONDARY }}
+                  onClick={() => setShowAction((prev) => !prev)}
+                  icon={<MenuOutlined />}
+                />
+              )} */}
+            </div>
+          </div>
+          <Messages roomId={roomId} />
 
-          {config.rooms.showInvite && (
-            <Button
-              buttonType={BUTTON_TYPE.b2}
-              customizations={{ bg: ColorOptions.SECONDARY }}
-              onClick={() => setShowInvite(true)}
-              icon={<UserOutlined />}
-            />
-          )}
-        </div>
-      </div>
-      <Messages roomId={roomId} />
+          <Modal
+            component={<Invite roomId={roomId} />}
+            showModal={showInvite}
+            handleClose={() => setShowInvite(false)}
+          />
+        </>
+      </Block>
 
-      <Modal
-        component={<Invite roomId={roomId} />}
-        showModal={showInvite}
-        handleClose={() => setShowInvite(false)}
-      />
+      {showAction && (
+        <Block>
+          <Action />
+        </Block>
+      )}
     </>
   );
 }

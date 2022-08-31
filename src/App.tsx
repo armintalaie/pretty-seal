@@ -1,6 +1,7 @@
 import Home from "./pages/home/home";
 import Layout from "./components/layout";
 import SpaceProvider from "./context/spaceContext";
+import ThemeProvider from "./context/themeContext";
 
 export interface RoomRequest {
   roomId?: string;
@@ -9,11 +10,13 @@ export interface RoomRequest {
 }
 function App() {
   return (
-    <SpaceProvider>
-      <Layout>
-        <Home />
-      </Layout>
-    </SpaceProvider>
+    <ThemeProvider>
+      <SpaceProvider>
+        <Layout>
+          <Home />
+        </Layout>
+      </SpaceProvider>
+    </ThemeProvider>
   );
 }
 
