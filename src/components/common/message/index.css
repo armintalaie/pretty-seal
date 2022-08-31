@@ -30,11 +30,13 @@
     width: fit-content;
     max-width: 60%;
     min-width: 80px;
+    box-shadow: rgb(0 0 0 / 15%) 0px 2px 2px 1px;
 }
 
 .message-text * {
     padding-top: 3px;
     margin: 1px;
+    color: #ffffff;
 }
 
 .message-text h6 {
@@ -54,35 +56,51 @@
 
 .send-section {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    padding: 8px;
+    border-radius: 3px;
+    margin: 0;
+    justify-content: center;
+    align-self: center;
+    background-color: #cfcfcf21;
+    border-radius: 10px;
+}
+
+.send-section div {
+    display: flex;
     flex-direction: row;
     width: 100%;
     height: fit-content;
-    padding: 5px 0px;
+    border-radius: 3px;
     margin: 0;
-    justify-content: space-between;
-    align-self: center;
+    justify-content: center;
+    border-radius: 10px;
 }
 
 .send-section button {
-    width: 80px;
+    width: 40px;
     border-radius: 5px;
     height: 100%;
     padding: 5px;
+    border-radius: 8px;
     border: 0;
-    color: #ffffff;
-    font-weight: bold;
     margin: 0;
-    margin-left: 10px;
+    margin-left: 2px;
+    color: #ffffff;
+    font-weight: normal;
+    font-size: 1.3rem;
 }
 
 .send-section textarea {
     flex: 1;
     height: 100%;
-    border-radius: 5px;
-    padding: 5px;
-    border: 0;
-    background-color: #cfcfcf49;
+    border-radius: 8px;
+    margin: 0 4px;
     color: #ffffff;
+    background-color: transparent;
+    border: 1px solid #7171716d;
     resize: none;
     font-family: inherit;
 }
@@ -94,4 +112,16 @@
     flex-direction: column;
     width: 100%;
     overflow: hidden;
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+}
+
+label {
+    font-size: 0.8rem;
+    padding-left: 5px;
 }

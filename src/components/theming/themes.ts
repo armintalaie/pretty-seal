@@ -11,7 +11,7 @@ const purePurple: ThemeDetail = {
   secondaryColor: "#5E4C5A",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
-  isLightMode: false,
+  isLightMode: true,
 };
 
 const copper: ThemeDetail = {

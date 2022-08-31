@@ -1,6 +1,7 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { SpaceInfo } from "../pages/setup/spaceSetup";
 import { API_BASE_URL } from "../services/apiHandler";
+import { ThemeContext } from "./themeContext";
 
 interface SpaceController {
   logIntoSpace: Function;
@@ -26,6 +27,7 @@ export const SpaceContext = createContext<ISpace>(DEFAULT_SPACE);
 
 export default function SpaceProvider({ children }: { children: JSX.Element }) {
   const [currentSpace, setCurrentSpace] = useState<ISpace>(DEFAULT_SPACE);
+  const { changeTheme } = useContext(ThemeContext);
 
   const logIntospace = async (spaceId: string, spacePassKey: string) => {
     const result = await fetch(`${API_BASE_URL}/spaces/${spaceId}`, {
@@ -44,6 +46,10 @@ export default function SpaceProvider({ children }: { children: JSX.Element }) {
       });
     }
   };
+
+  useEffect(() => {
+    changeTheme();
+  }, [currentSpace.spaceInfo]);
 
   const createSpace = async (id: string, name: string) => {
     const result = await fetch(`${API_BASE_URL}/spaces/`, {
