@@ -1,27 +1,42 @@
 import { useContext, useEffect, useState } from "react";
 import Button, { BUTTON_TYPE } from "../../components/common/button/button";
-import { SpaceInfo } from "../setup/spaceSetup";
 import Rooms, { RoomProps } from "../../components/rooms";
 import SpaceSettings from "../../components/spaces/spaceSettings";
 import { ConfigurationContextProvider } from "../../context/configurationContext";
-import { SocketContext, SocketContextProvider } from "../../context/socketContext";
-import QRCode from "react-qr-code";
-import { API_BASE_URL } from "../../services/apiHandler";
 import { MoreOutlined } from "@ant-design/icons";
 import Room from "./room";
 import Block from "../../components/common/block";
 import Info from "../../components/common/info/info";
+import { SpaceContext } from "../../context/spaceContext";
+import { Route, Routes, useParams } from "react-router-dom";
+import Login from "./login";
+import { SocketContextProvider } from "../../context/socketContext";
 
-export default function SpaceView({ spaceInfromation }: { spaceInfromation: SpaceInfo }) {
+export default function SpaceView() {
+  const spaceInfromation = useContext(SpaceContext).spaceInfo;
   const [showSpaceSettings, setShowSpaceSettings] = useState(false);
-  const socket = useContext(SocketContext);
   const [currentRoom, setCurrentRoom] = useState<RoomProps | undefined>(undefined);
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 720;
+  let { id } = useParams();
 
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
   }, []);
+
+  // useEffect(() => {
+  //   // if (currentRoom) navigate(window.location.pathname + "/rooms/" + currentRoom.domainId);
+  //   // else {
+  //   //   navigate({ pathname: "" });
+  //   // }
+  // }, [currentRoom]);
+
+  if (!spaceInfromation) {
+    if (id) {
+      return <Login />;
+    }
+    return <Login />;
+  }
 
   const mainContent = () => {
     const rooms = (
@@ -52,14 +67,23 @@ export default function SpaceView({ spaceInfromation }: { spaceInfromation: Spac
       </Block>
     );
 
+    let room =
+      width > breakpoint ? (
+        <></>
+      ) : (
+        <Block>
+          <></>
+        </Block>
+      );
+
     if (currentRoom) {
-      const room = (
+      room = (
         <>
           <Room
             roomname={currentRoom.roomName}
             roomId={currentRoom.domainId}
             leaveRoom={(exitRoom?: boolean) => {
-              exitRoom && socket.emit("room:leave", currentRoom.domainId);
+              // exitRoom && socket.emit("room:leave", currentRoom.domainId);
               setCurrentRoom(undefined);
             }}
           />
@@ -73,31 +97,42 @@ export default function SpaceView({ spaceInfromation }: { spaceInfromation: Spac
         </>
       );
     }
-    return rooms;
+
+    return (
+      <>
+        {rooms}
+        {width > breakpoint && room}
+      </>
+    );
   };
 
   return (
     <SocketContextProvider domain={spaceInfromation.domainId}>
       <ConfigurationContextProvider domain={spaceInfromation.domainId}>
-        {mainContent()}
+        <>
+          {mainContent()}
+          <Routes>
+            {currentRoom && (
+              <Route
+                path={"/rooms/" + currentRoom?.domainId}
+                element={
+                  <>
+                    <Room
+                      roomname={currentRoom.roomName}
+                      roomId={currentRoom.domainId}
+                      leaveRoom={(exitRoom?: boolean) => {
+                        setCurrentRoom(undefined);
+                      }}
+                    />
+                  </>
+                }
+              />
+            )}
+          </Routes>
+        </>
       </ConfigurationContextProvider>
     </SocketContextProvider>
   );
 }
 
-// function InviteToSpace({ spaceId }: { spaceId: string }) {
-//   return (
-//     <div>
-//       <h1>Invite</h1>
-
-//       <section className="invite-code">
-//         <h4>
-//           You can share the QR code that will prompt others to join this room
-//         </h4>
-//         <div>
-//           <QRCode size={150} value={`${API_BASE_URL}/spaces/${spaceId}`} />
-//         </div>
-//       </section>
-//     </div>
-//   );
-// }
+// exitRoom && socket.emit("room:leave", currentRoom.domainId);

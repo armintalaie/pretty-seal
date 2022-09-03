@@ -4,7 +4,7 @@ import Modal from "../common/modal/modal";
 import { SocketContext } from "../../context/socketContext";
 import Setup from "./setup/setup";
 import "./index.scss";
-import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 
 export interface RoomsProps {
   domainId: string;

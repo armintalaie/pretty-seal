@@ -28,7 +28,6 @@
         input {
             max-width: 300px;
             background-color: #cfcfcfca;
-            color: #ffffff;
             border: 0.3px solid transparent;
             padding: 5px 10px;
             margin: 5px;
@@ -73,4 +72,52 @@ input:focus {
     width: 0px;
     background: transparent;
     /* make scrollbar transparent */
+}
+
+.main-page {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 1%;
+    margin: 0;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    width: 100%;
+    border-radius: 0;
+    > :nth-child(2) {
+        flex: 2;
+        width: 100%;
+    }
+    &.dark {
+        color: #ffffff;
+        background-color: #181818;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    }
+    &.light {
+        color: #141414;
+        background-color: #d7d7d7;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+    }
+}
+
+.homepage {
+    background-color: rgb(90, 96, 101);
+    border-radius: 5px;
+    margin: 5px;
+    padding: 1px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: row;
+    a {
+        color: #ffffff;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-decoration: none;
+        border-bottom: 1px solid #ffffff;
+        margin: 10px;
+    }
 }

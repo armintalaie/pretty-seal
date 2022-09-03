@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { ThemeDetail, defaultThemes } from "../components/theming/themes";
 interface ThemeContextInterface {
   currentTheme: ThemeDetail;

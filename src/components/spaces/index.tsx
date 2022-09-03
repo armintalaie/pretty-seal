@@ -1,17 +1,18 @@
 import { useContext } from "react";
 import { SpaceContext } from "../../context/spaceContext";
 import Block from "../common/block";
-import SpaceSetup from "../../pages/setup/spaceSetup";
+import SpaceSetup from "../../pages/space/setup/spaceSetup";
+import { Navigate } from "react-router-dom";
 
 export default function Spaces() {
   const space = useContext(SpaceContext);
 
+  if (space.spaceInfo) {
+    return <Navigate to={`/spaces/${space.spaceInfo.domainId}`} />;
+  }
+
   const mainContent = () => {
-    if (!space.spaceInfo) {
-      return <SpaceSetup />;
-    } else {
-      return <></>;
-    }
+    return <SpaceSetup />;
   };
 
   return (
@@ -22,9 +23,6 @@ export default function Spaces() {
           <h1>Chatty Seal</h1>
         </nav>
         {mainContent()}
-        {/* <div className="top-bar">
-          <HomePage />
-        </div> */}
       </>
     </Block>
   );

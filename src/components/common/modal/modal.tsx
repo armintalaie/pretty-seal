@@ -1,4 +1,5 @@
 import { CloseOutlined } from "@ant-design/icons";
+import { motion } from "framer-motion";
 import { ReactElement, useContext } from "react";
 import { ThemeContext } from "../../../context/themeContext";
 import Button, { BUTTON_TYPE, ColorOptions } from "../button/button";
@@ -25,7 +26,11 @@ export default function Modal(props: ModalProps) {
 
   return (
     <div className={`modal ${theme.isLightMode ? "light" : "dark"}`}>
-      <section>
+      <motion.section
+        initial={{ opacity: 0.4, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ type: "spring", duration: 0.2 }}
+      >
         <div className="buttons">
           <Button
             buttonType={BUTTON_TYPE.b2}
@@ -37,7 +42,7 @@ export default function Modal(props: ModalProps) {
         </div>
 
         <div className="content">{component}</div>
-      </section>
+      </motion.section>
     </div>
   );
 }

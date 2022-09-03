@@ -1,10 +1,10 @@
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
-import { Configration } from "../../context/configurationContext";
-import { SocketContext } from "../../context/socketContext";
-import { SpaceContext } from "../../context/spaceContext";
-import Button from "../../components/common/button/button";
-import Info from "../../components/common/info/info";
+import { Configration } from "../../../context/configurationContext";
+import { SocketContext } from "../../../context/socketContext";
+import { SpaceContext } from "../../../context/spaceContext";
+import Button from "../../../components/common/button/button";
+import Info from "../../../components/common/info/info";
 
 export interface Limitation {
   applyTheme: boolean;
