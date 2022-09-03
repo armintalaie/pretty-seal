@@ -1,7 +1,8 @@
-import Home from "./pages/home/home";
+import Home from "./pages";
 import Layout from "./components/layout";
 import SpaceProvider from "./context/spaceContext";
 import ThemeProvider from "./context/themeContext";
+import { BrowserRouter } from "react-router-dom";
 
 export interface RoomRequest {
   roomId?: string;
@@ -10,13 +11,15 @@ export interface RoomRequest {
 }
 function App() {
   return (
-    <ThemeProvider>
-      <SpaceProvider>
-        <Layout>
-          <Home />
-        </Layout>
-      </SpaceProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <SpaceProvider>
+          <Layout>
+            <Home />
+          </Layout>
+        </SpaceProvider>
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 

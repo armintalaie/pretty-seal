@@ -12,17 +12,17 @@
     height: 100%;
     scroll-behavior: smooth;
     &.light {
-        background-color: #afafafa0;
+        background-color: #afafafca;
         color: #000000;
         >section {
-            background-color: #eaeaeaca;
+            background-color: #f0f0f0;
         }
     }
     &.dark {
         background-color: #2e2e2ed1;
         color: #ffffff;
         section {
-            background-color: #1e1e1eca;
+            background-color: #1e1e1e;
         }
     }
     >section {

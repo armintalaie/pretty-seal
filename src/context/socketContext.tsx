@@ -1,9 +1,8 @@
 import { createContext, useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
-import { manager } from "../pages/home/home";
+import { Manager, Socket } from "socket.io-client";
 import { API_BASE_URL } from "../services/apiHandler";
 
-export const SocketContext = createContext<Socket>(io(API_BASE_URL));
+export const SocketContext = createContext<Socket>({} as Socket);
 
 export const SocketContextProvider = ({
   children,
@@ -12,6 +11,7 @@ export const SocketContextProvider = ({
   children: JSX.Element;
   domain: string;
 }) => {
+  const manager = new Manager(API_BASE_URL);
   const [socket, setSocket] = useState(manager.socket(`/${domain}`));
 
   useEffect(() => {
@@ -25,7 +25,5 @@ export const SocketContextProvider = ({
     };
   }, [socket]);
 
-  return (
-    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
-  );
+  return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 };

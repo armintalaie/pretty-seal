@@ -3,7 +3,7 @@ import { SocketContext } from "../../../context/socketContext";
 import Button from "../button/button";
 import Info from "../info/info";
 import MessageBubble, { Message } from "./message";
-import "./index.css";
+import "./index.scss";
 import { SpaceContext } from "../../../context/spaceContext";
 import Slider from "../slider";
 import Action from "./action";

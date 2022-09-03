@@ -5,10 +5,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 10px;
-    margin: 0px 5px;
+    margin: 0px 2px;
     height: 100%;
     max-width: 750px;
-    min-width: 300px;
+    min-width: 320px;
     border-radius: 6px;
     overflow: hidden;
     position: initial;
@@ -20,8 +20,7 @@
     }
     &.light {
         color: #141414;
-        background-color: #ebebeb;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 50px -10px, rgba(0, 0, 0, 0.2) 0px 20px 10px -10px;
+        box-shadow: -1px 5px 15px -6px rgba(0, 0, 0, 0.3);
     }
     &.sub {
         background: none;
@@ -85,7 +84,6 @@
         input {
             max-width: 300px;
             background-color: #cfcfcf49;
-            color: #ffffff;
             border: 0.3px solid transparent;
             padding: 5px 10px;
             margin: 5px;
