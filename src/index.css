@@ -14,12 +14,12 @@ body {
 }
 
 #root {
-    min-height: -webkit-fill-available;
     height: 100vh;
 }
 
 html {
     font-size: 62.5%;
+    height: -webkit-fill-available;
 }
 
 * {

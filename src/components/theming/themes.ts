@@ -8,7 +8,7 @@ export interface ThemeDetail {
 
 const purePurple: ThemeDetail = {
   primaryColor: "#92778C",
-  secondaryColor: "#5E4C5A",
+  secondaryColor: "#ba9bb3",
   textColor: "#ffffff",
   secondaryTextColor: "#000000",
   isLightMode: true,
@@ -31,18 +31,36 @@ const sealyBlue: ThemeDetail = {
 };
 
 const sealyLight: ThemeDetail = {
-  primaryColor: "#1a8da8",
-  secondaryColor: "#72a3b0",
+  primaryColor: "#2688ff",
+  secondaryColor: "#82b3e8",
+  textColor: "#000000",
+  secondaryTextColor: "#000000",
+  isLightMode: true,
+};
+
+const lavaLight: ThemeDetail = {
+  primaryColor: "#e63549",
+  secondaryColor: "#e07985",
+  textColor: "#000000",
+  secondaryTextColor: "#000000",
+  isLightMode: false,
+};
+
+const mojito: ThemeDetail = {
+  primaryColor: "#5fb54c",
+  secondaryColor: "#c5f598",
   textColor: "#000000",
   secondaryTextColor: "#000000",
   isLightMode: true,
 };
 
 export const defaultThemes = {
-  sealyBlue: sealyBlue,
   sealyLight: sealyLight,
   purePurple: purePurple,
+  mojito: mojito,
+  sealyBlue: sealyBlue,
   copper: copper,
+  lavaLight: lavaLight,
 };
 
 export const lightMode = {
