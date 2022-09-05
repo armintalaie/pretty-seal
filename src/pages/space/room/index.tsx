@@ -38,8 +38,7 @@ export default function Room(props: RoomProps) {
                   onClick={() => leaveRoom()}
                 />
               )}
-            </div>
-            <div>
+
               {config.rooms.showInvite && (
                 <Button
                   buttonType={BUTTON_TYPE.b2}

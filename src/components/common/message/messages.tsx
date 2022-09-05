@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { TextareaHTMLAttributes, useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "../../../context/socketContext";
 import Button from "../button/button";
 import Info from "../info/info";
@@ -15,6 +15,13 @@ export default function Messages({ roomId }: { roomId: string }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [showAction, setShowAction] = useState(false);
   const messagesRef = useRef<HTMLDivElement>(null);
+  const inputElement = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (inputElement.current) {
+      inputElement.current.focus();
+    }
+  }, []);
 
   function sendMessage() {
     if (draft.length === 0) {
@@ -89,6 +96,7 @@ export default function Messages({ roomId }: { roomId: string }) {
               }}
             />
             <textarea
+              ref={inputElement}
               name="name"
               autoFocus
               value={draft}

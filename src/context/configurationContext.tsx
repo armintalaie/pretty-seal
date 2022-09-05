@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { defaultThemes, ThemeDetail } from "../components/theming/themes";
 import { API_BASE_URL } from "../services/apiHandler";
+import { SpaceContext } from "./spaceContext";
 import { ThemeContext } from "./themeContext";
 
 export interface IConfigContext {
@@ -65,11 +66,12 @@ export const ConfigurationContextProvider = ({
   children: JSX.Element;
 }) => {
   const { currentTheme, changeTheme } = useContext(ThemeContext);
+  const { spaceInfo } = useContext(SpaceContext);
   const [configuration, setConfiguration] = useState<Configration>(DEFAULT_CONFIG);
 
   useEffect(() => {
     updateConfig();
-  }, []);
+  }, [spaceInfo]);
 
   const updateConfig = (ssp?: string) => {
     fetch(`${API_BASE_URL}/spaces/${domain}/configuration`, {
@@ -78,6 +80,7 @@ export const ConfigurationContextProvider = ({
       .then((res) => res.json())
       .then((result) => {
         changeTheme(result.configuration.theme);
+        console.log("ss");
         setConfiguration(result.configuration);
       });
   };
