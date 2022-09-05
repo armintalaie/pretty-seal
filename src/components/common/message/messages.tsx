@@ -21,7 +21,7 @@ export default function Messages({ roomId }: { roomId: string }) {
     if (inputElement.current) {
       inputElement.current.focus();
     }
-  }, []);
+  }, [inputElement]);
 
   function sendMessage() {
     if (draft.length === 0) {
@@ -96,6 +96,7 @@ export default function Messages({ roomId }: { roomId: string }) {
               }}
             />
             <textarea
+              key={"text"}
               ref={inputElement}
               name="name"
               autoFocus
