@@ -90,6 +90,7 @@ export default function Messages({ roomId }: { roomId: string }) {
             />
             <textarea
               name="name"
+              autoFocus={true}
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               onKeyDown={(e) => {

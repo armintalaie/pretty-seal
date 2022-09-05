@@ -6,8 +6,7 @@ import { Navigate } from "react-router-dom";
 
 export default function Spaces() {
   const space = useContext(SpaceContext);
-
-  if (space.spaceInfo) {
+  if (space.spaceInfo && space.spaceInfo.clientSecret) {
     return <Navigate to={`/spaces/${space.spaceInfo.domainId}`} />;
   }
 

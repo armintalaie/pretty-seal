@@ -36,14 +36,15 @@ export default function SpaceProvider({ children }: { children: JSX.Element }) {
     window.sessionStorage.setItem("clientSecret", clientSecret);
   };
 
-  const logIntospace = async (spaceId: string, spacePassKey: string) => {
+  const logIntospace = async (spaceId: string, spacePassKey?: string) => {
+    let secret = spacePassKey ? { clientSecret: spacePassKey } : {};
     const result = await fetch(`${API_BASE_URL}/spaces/${spaceId}`, {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ clientSecret: spacePassKey }),
+      body: JSON.stringify(secret),
     });
 
     if (result.status === 200) {
@@ -90,7 +91,6 @@ export default function SpaceProvider({ children }: { children: JSX.Element }) {
   };
 
   const getSpaceBrief = async (id: string) => {
-    console.log("sss\t " + id);
     const result = await fetch(`${API_BASE_URL}/spaces/${id}`, {
       method: "GET",
       mode: "cors",

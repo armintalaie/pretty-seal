@@ -48,7 +48,10 @@ export default function Button(props: ButtonProps) {
           verticalAlign: "middle",
           borderRadius: "50%",
         }}
-        onClick={() => onClick()}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick();
+        }}
       >
         {props.icon && props.icon}
         {label}

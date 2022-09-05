@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button, { BUTTON_TYPE, ColorOptions } from "../../../components/common/button/button";
 import Messages from "../../../components/common/message/messages";
 import Modal from "../../../components/common/modal/modal";
@@ -7,6 +7,7 @@ import { ConfigurationContext } from "../../../context/configurationContext";
 import "./index.scss";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import Block from "../../../components/common/block";
+import { SpaceContext } from "../../../context/spaceContext";
 
 export interface RoomProps {
   roomname?: string;
