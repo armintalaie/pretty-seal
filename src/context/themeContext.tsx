@@ -5,7 +5,7 @@ interface ThemeContextInterface {
   changeTheme: (theme?: ThemeDetail) => void;
 }
 
-const defaultTheme = defaultThemes.sealyBlue;
+const defaultTheme = defaultThemes.sealyLight;
 export const ThemeContext = createContext<ThemeContextInterface>({
   currentTheme: defaultTheme,
   changeTheme: () => {},
