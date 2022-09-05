@@ -5,7 +5,7 @@ import Modal from "../../../components/common/modal/modal";
 import Invite from "../../../components/invites/invite";
 import { ConfigurationContext } from "../../../context/configurationContext";
 import "./index.scss";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, UserOutlined } from "@ant-design/icons";
 import Block from "../../../components/common/block";
 import { SpaceContext } from "../../../context/spaceContext";
 
@@ -36,6 +36,16 @@ export default function Room(props: RoomProps) {
                   customizations={{ bg: ColorOptions.SECONDARY }}
                   icon={<CloseCircleOutlined />}
                   onClick={() => leaveRoom()}
+                />
+              )}
+            </div>
+            <div>
+              {config.rooms.showInvite && (
+                <Button
+                  buttonType={BUTTON_TYPE.b2}
+                  customizations={{ bg: ColorOptions.SECONDARY }}
+                  icon={<UserOutlined />}
+                  onClick={() => setShowInvite(true)}
                 />
               )}
             </div>
