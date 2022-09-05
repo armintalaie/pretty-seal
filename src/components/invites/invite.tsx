@@ -14,7 +14,7 @@ export default function Invite({ roomId }: { roomId: string }) {
         <div>
           <QRCode
             size={150}
-            value={`${API_BASE_URL}/spaces/${spaceInfo?.domainId}/rooms/${roomId}`}
+            value={`https://chatty-seal-ui.herokuapp.com/spaces/${spaceInfo?.domainId}/rooms/${roomId}`}
           />
         </div>
       </section>
