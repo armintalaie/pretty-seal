@@ -26,11 +26,7 @@ export default function Modal(props: ModalProps) {
 
   return (
     <div className={`modal ${theme.isLightMode ? "light" : "dark"}`}>
-      <motion.section
-        initial={{ opacity: 0.4, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: "spring", duration: 0.2 }}
-      >
+      <section>
         <div className="buttons">
           <Button
             buttonType={BUTTON_TYPE.b2}
@@ -42,7 +38,7 @@ export default function Modal(props: ModalProps) {
         </div>
 
         <div className="content">{component}</div>
-      </motion.section>
+      </section>
     </div>
   );
 }

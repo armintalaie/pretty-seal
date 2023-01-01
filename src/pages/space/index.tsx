@@ -8,10 +8,12 @@ import Block from "../../components/common/block";
 import Info from "../../components/common/info/info";
 import { SpaceContext } from "../../context/spaceContext";
 import Login from "./login";
+import SpaceInvite from "../../components/spaces/invite";
 
 export default function SpaceView() {
   const spaceInfromation = useContext(SpaceContext).spaceInfo;
   const [showSpaceSettings, setShowSpaceSettings] = useState(false);
+  const [showSpaceInvite, setShowSpaceInvite] = useState(false);
   const [currentRoom, setCurrentRoom] = useState<RoomProps | undefined>(undefined);
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 720;
@@ -30,20 +32,39 @@ export default function SpaceView() {
         <>
           <div className="top-bar">
             <h1>{spaceInfromation.name}</h1>
-            <Button
-              buttonType={BUTTON_TYPE.b2}
-              onClick={() => {
-                setShowSpaceSettings((prev) => !prev);
+
+            <div>
+              <Button
+                buttonType={BUTTON_TYPE.b2}
+                onClick={() => {
+                  setShowSpaceSettings((prev) => !prev);
+                }}
+                icon={<MoreOutlined />}
+              />
+
+              <Button
+                buttonType={BUTTON_TYPE.b2}
+                onClick={() => {
+                  setShowSpaceInvite((prev) => !prev);
+                }}
+                icon={<MoreOutlined />}
+              />
+            </div>
+          </div>
+          <div>
+            <SpaceSettings
+              showModal={showSpaceSettings}
+              handleClose={() => {
+                setShowSpaceSettings(false);
               }}
-              icon={<MoreOutlined />}
+            />
+            <SpaceInvite
+              showModal={showSpaceInvite}
+              handleClose={() => {
+                setShowSpaceInvite(false);
+              }}
             />
           </div>
-          <SpaceSettings
-            showModal={showSpaceSettings}
-            handleClose={() => {
-              setShowSpaceSettings(false);
-            }}
-          />
           <Info>
             <p>join or create a room to start communicating right away</p>
           </Info>
@@ -79,6 +100,7 @@ export default function SpaceView() {
       return (
         <>
           {width > breakpoint && rooms}
+
           {room}
         </>
       );
@@ -87,6 +109,7 @@ export default function SpaceView() {
     return (
       <>
         {rooms}
+
         {width > breakpoint && room}
       </>
     );

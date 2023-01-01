@@ -4,23 +4,22 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 10px;
-    margin: 0px 2px;
+    padding: 10px 15px;
     height: 100%;
-    max-width: 750px;
+    max-width: 900px;
     min-width: 320px;
-    border-radius: 6px;
     overflow: hidden;
     position: initial;
     box-sizing: border-box;
     &.dark {
         color: #ffffff;
-        background-color: #393939;
+        border-left: 0.3px solid #393939;
+        border-right: 0.3px solid #393939;
         box-shadow: none;
     }
     &.light {
         color: #141414;
-        box-shadow: -1px 5px 15px -6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 5px 15px -6px rgba(0, 0, 0, 0.2);
     }
     &.sub {
         background: none;

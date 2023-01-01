@@ -35,7 +35,7 @@ const option = {
   canCustomize: "Allow custom themes to be applied",
 };
 
-interface SettingsModalProps {
+export interface SettingsModalProps {
   handleClose: Function;
   showModal: boolean;
 }

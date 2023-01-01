@@ -79,14 +79,17 @@ input:focus {
     flex: 1;
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
-    padding: 1%;
+    padding: 3px 0;
     margin: 0;
     height: 100%;
     backdrop-filter: blur(6px);
     width: 100%;
-    border-radius: 0;
+    border-radius: 10px;
+    >.block {
+        flex: 1;
+    }
     > :nth-child(2) {
         flex: 2;
         width: 100%;
@@ -119,5 +122,20 @@ input:focus {
         text-decoration: none;
         border-bottom: 1px solid #ffffff;
         margin: 10px;
+    }
+}
+
+.break {
+    background-color: #393939;
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 2px;
+    >div {
+        background-color: rgb(24, 23, 23);
+        height: 95%;
+        width: 1px;
     }
 }

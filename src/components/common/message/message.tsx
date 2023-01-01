@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { CSSProperties, useContext } from "react";
 import { ThemeContext } from "../../../context/themeContext";
+import Info from "../info/info";
 
 export interface Message {
   text: string;
@@ -26,17 +27,22 @@ export default function MessageBubble(message: Message) {
 
     return style;
   };
+
+  if (message.username === "HECTOR") {
+    return (
+      <Info>
+        <>
+          <p>{message.text}</p>
+        </>
+      </Info>
+    );
+  }
   return (
-    <motion.div
-      className={message.displayName === user ? "message right" : "message left"}
-      initial={{ x: message.displayName === user ? "30" : "-30" }}
-      animate={{ x: 0 }}
-      transition={{ type: "spring", duration: 0.3 }}
-    >
-      <div className="message-text" style={sentStyle()}>
+    <div className={message.displayName === user ? "message right" : "message left"}>
+      <div className="message-text">
         <h6>{message.displayName}</h6>
         <p>{message.text}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }
