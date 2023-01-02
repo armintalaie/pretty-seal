@@ -1,4 +1,11 @@
 .top-bar {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    h1 {
+        vertical-align: middle;
+    }
     button {
         width: 30px;
         max-height: 30px;
@@ -8,5 +15,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    padding: 8px 8px;
+    .top-bar-room {
+        display: flex;
+        justify-content: space-between;
+        button {
+            width: 30px;
+            max-height: 30px;
+            text-align: center;
+        }
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        background-color: rgb(210, 223, 254);
+        margin: 0px;
+        border-radius: 10px;
+        padding: 4px 8px;
+        width: 100%;
     }
 }

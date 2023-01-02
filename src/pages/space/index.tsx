@@ -65,10 +65,6 @@ export default function SpaceView() {
               }}
             />
           </div>
-          <Info>
-            <p>join or create a room to start communicating right away</p>
-          </Info>
-
           <Rooms setIsInRoom={setCurrentRoom} domainId={spaceInfromation.domainId} />
         </>
       </Block>

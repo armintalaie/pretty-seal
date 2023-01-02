@@ -1,4 +1,4 @@
-import { TextareaHTMLAttributes, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { SocketContext } from "../../../context/socketContext";
 import Button from "../button/button";
 import Info from "../info/info";
@@ -16,6 +16,7 @@ export default function Messages({ roomId }: { roomId: string }) {
   const [showAction, setShowAction] = useState(false);
   const messagesRef = useRef<HTMLDivElement>(null);
   const inputElement = useRef<HTMLTextAreaElement>(null);
+  const [updateDate, setUpdateDate] = useState<Date>(new Date());
 
   useEffect(() => {
     if (inputElement.current) {
@@ -35,6 +36,7 @@ export default function Messages({ roomId }: { roomId: string }) {
           date: Date(),
           username: "me",
           displayName: "me",
+          sync: updateDate,
         },
       ])
     );
@@ -65,15 +67,8 @@ export default function Messages({ roomId }: { roomId: string }) {
   return (
     <div className="messages-section">
       <div ref={messagesRef} className="messages">
-        <Info>
-          <>
-            <h2>The chat will be active as long a more than two are in the room</h2>
-            <h2>You can leave the room by just closing the tab</h2>
-            <h2>The chat will not be saved</h2>
-          </>
-        </Info>
         {messages.map((msg) => (
-          <MessageBubble {...msg} />
+          <MessageBubble {...msg} sync={updateDate} />
         ))}
       </div>
 
@@ -88,13 +83,6 @@ export default function Messages({ roomId }: { roomId: string }) {
           }}
         >
           <div>
-            <Button
-              label=" "
-              isDisabled={true}
-              onClick={() => {
-                setShowAction((prev) => !prev);
-              }}
-            />
             <textarea
               key={"text"}
               ref={inputElement}

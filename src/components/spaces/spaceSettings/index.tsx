@@ -89,14 +89,15 @@ export default function SpaceSettings(props: SettingsModalProps) {
           const key = item as keyof Configration;
           if (key === "theme") {
             return (
-              <ThemeSelector
-                theme={spaceInfo.configuration.theme}
-                onClick={(newTheme: ThemeDetail) => {
-                  const cop = Object.assign({}, config);
-                  cop[key] = newTheme;
-                  updateConfiguration(cop);
-                }}
-              />
+              // <ThemeSelector
+              //   theme={spaceInfo.configuration.theme}
+              //   onClick={(newTheme: ThemeDetail) => {
+              //     const cop = Object.assign({}, config);
+              //     cop[key] = newTheme;
+              //     updateConfiguration(cop);
+              //   }}
+              // />
+              <></>
             );
           }
           return (

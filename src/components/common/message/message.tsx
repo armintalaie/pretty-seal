@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { CSSProperties, useContext } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../../../context/themeContext";
 import Info from "../info/info";
 
@@ -8,40 +7,33 @@ export interface Message {
   date: string;
   username: string;
   displayName: string;
+  sync: Date;
 }
 
 export default function MessageBubble(message: Message) {
   const { currentTheme } = useContext(ThemeContext);
   const user = "me";
 
-  const sentStyle = () => {
-    const style: CSSProperties = {};
-
-    if (message.displayName === user) {
-      style["background"] = `${currentTheme.primaryColor}`;
-      style["borderRadius"] = "10px 2px 10px 10px";
-    } else {
-      style["background"] = `${currentTheme.secondaryColor}`;
-      style["borderRadius"] = "2px 10px 10px 10px";
-    }
-
-    return style;
+  const messageStatus = () => {
+    if (message.date > message.sync.toString()) return true;
+    else return false;
   };
 
   if (message.username === "HECTOR") {
     return (
       <Info>
-        <>
-          <p>{message.text}</p>
-        </>
+        <p>{message.text}</p>
       </Info>
     );
   }
   return (
     <div className={message.displayName === user ? "message right" : "message left"}>
-      <div className="message-text">
-        <h6>{message.displayName}</h6>
-        <p>{message.text}</p>
+      <div className={`message-wrapper`}>
+        {message.displayName !== user && <h6>{message.displayName}</h6>}
+
+        <div className={`message-text ${messageStatus() ? "unsent" : "sent"}`}>
+          <p>{message.text}</p>
+        </div>
       </div>
     </div>
   );

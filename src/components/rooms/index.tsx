@@ -51,7 +51,7 @@ export default function Rooms(props: RoomsProps) {
   const mainContent = (
     <>
       <div className="room-list">
-        <div className=" top-bar">
+        <div className="top-bar">
           <h3>Rooms</h3>
           <Button
             buttonType={BUTTON_TYPE.b2}
