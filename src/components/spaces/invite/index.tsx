@@ -1,8 +1,6 @@
-import { SaveOutlined, LogoutOutlined } from "@ant-design/icons";
 import { useContext } from "react";
 import QRCode from "react-qr-code";
 import { SpaceContext } from "../../../context/spaceContext";
-import Button, { BUTTON_TYPE } from "../../common/button/button";
 import Info from "../../common/info/info";
 import Modal from "../../common/modal/modal";
 import { SettingsModalProps } from "../spaceSettings";

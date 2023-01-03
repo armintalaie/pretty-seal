@@ -18,13 +18,6 @@
             background-color: #f0f0f0;
         }
     }
-    &.dark {
-        background-color: #2e2e2ed1;
-        color: #ffffff;
-        section {
-            background-color: #1e1e1e;
-        }
-    }
     >section {
         padding: 25px;
         margin: 10px;
@@ -48,12 +41,13 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        // &::-webkit-scrollbar {
-        //     display: none;
-        // }
     }
     .buttons {
         display: flex;
         flex-direction: row-reverse;
+        justify-content: space-between;
+        div {
+            display: flex;
+        }
     }
 }

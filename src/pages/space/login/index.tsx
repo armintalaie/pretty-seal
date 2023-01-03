@@ -1,9 +1,6 @@
-import { motion, MotionConfig } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { Route, useParams } from "react-router-dom";
-import Alert, { AlertType } from "../../../components/common/banner/banner";
+import { useParams } from "react-router-dom";
 import Block from "../../../components/common/block";
-import Button from "../../../components/common/button/button";
 import Info from "../../../components/common/info/info";
 import { Configration } from "../../../context/configurationContext";
 import { SpaceContext } from "../../../context/spaceContext";
@@ -66,7 +63,7 @@ export default function Login() {
           value={spacePassKey}
           onChange={(e) => setspacePassKey(e.target.value)}
         />
-        <Button label="Log in to Space" onClick={() => logIntoSpace()} />
+        <button onClick={() => logIntoSpace()}>Log in to Space</button>
       </>
     );
   };
@@ -75,13 +72,9 @@ export default function Login() {
     if (!spaceBrief) {
       return (
         <>
-          <motion.nav
-            initial={{ x: 0 }}
-            animate={{ x: "80%" }}
-            transition={{ type: "linear", duration: 3, repeatType: "loop", repeat: Infinity }}
-          >
-            <img src={`${process.env.PUBLIC_URL}/assets/seal.png`} alt="Chatty Seal logo" />
-          </motion.nav>
+          <nav>
+            <img src={`./assets/seal.png`} alt="Chatty Seal logo" />
+          </nav>
           <Info>
             <>
               <h2>Hector de Seal is finding your space</h2>
@@ -94,7 +87,7 @@ export default function Login() {
         <>
           {" "}
           <nav>
-            <img src={`${process.env.PUBLIC_URL}/assets/seal.png`} alt="Chatty Seal logo" />
+            <img src={`./assets/seal.png`} alt="Chatty Seal logo" />
             <h1> / {spaceBrief?.name}</h1>
           </nav>
           <div className="start">

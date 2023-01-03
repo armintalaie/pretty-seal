@@ -38,7 +38,6 @@ export default function SpaceProvider({ children }: { children: JSX.Element }) {
 
   const logIntospace = async (spaceId: string, spacePassKey?: string) => {
     let secret = spacePassKey ? { clientSecret: spacePassKey } : {};
-    console.log(secret);
     const result = await fetch(`${API_BASE_URL}/spaces/${spaceId}`, {
       method: "POST",
       mode: "cors",

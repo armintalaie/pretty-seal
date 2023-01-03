@@ -1,5 +1,4 @@
 import { useContext, useState } from "react";
-import Button from "../../common/button/button";
 import { SocketContext } from "../../../context/socketContext";
 
 export default function Setup({
@@ -41,7 +40,7 @@ export default function Setup({
               value={displayName}
               onChange={(e) => setdisplayName(e.target.value)}
             />
-            <Button label="Create Room" onClick={() => createRoom()} />
+            <button onClick={() => createRoom()}>Create Room</button>
           </form>
         </div>
       </div>

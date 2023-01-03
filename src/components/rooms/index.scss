@@ -1,47 +1,46 @@
-button {
-    margin: 5px;
-    border-radius: 10px;
-    color: #ffffff;
-    font-size: 1.6rem;
-    font-weight: 600;
-    max-width: 100%;
-}
-
 .room-list {
-    padding: 2%;
+    padding: 0px;
     width: 100%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
     overflow-y: scroll;
-    div {
-        h3 {
-            font-size: 1.4rem;
-        }
-        box-sizing: border-box;
-        border: 1px solid transparent;
-        border-radius: 3px;
-        margin: 1px 0px;
-        padding: 2px 15px;
-        justify-content: space-between;
-        background-color: #84848433;
-        border: 1px solid transparent;
+    border-top: 0.3px solid #706f6f73;
+    .rooms {
+        padding: 0;
         width: 100%;
         display: flex;
-        flex-direction: row;
+        align-items: flex-start;
+        justify-content: flex-start;
         flex-wrap: wrap;
-        &:hover {
-            border: 1px solid #594f4f73;
+        div {
+            h3 {
+                font-size: 1.4rem;
+            }
+            box-sizing: border-box;
+            border: 1px solid transparent;
+            padding: 2px 15px;
+            justify-content: space-between;
+            border: 1px solid transparent;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height: 50px;
+            transition: all 0.1s ease-out;
+            &:hover {
+                background-color: #eeefefdd;
+            }
+        }
+        .current {
+            background-color: #d5e3ffdd;
         }
     }
     .top-bar {
         background: none;
         margin-bottom: 10px;
         padding: 0 5px;
-        &:hover {
-            border: 1px solid transparent;
-        }
     }
     button {
         width: 30px;

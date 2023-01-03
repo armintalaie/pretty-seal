@@ -12,14 +12,10 @@
     box-sizing: border-box;
     &.dark {
         color: #ffffff;
-        border-left: 0.3px solid #393939;
-        border-right: 0.3px solid #393939;
+        // border-left: 0.3px solid #393939;
+        // border-right: 0.3px solid #393939;
         box-shadow: none;
-    }
-    &.light {
-        color: #141414;
-        border-left: 0.3px solid #c0c0c0;
-        border-right: 0.3px solid #c0c0c0;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     }
     &.sub {
         background: none;
@@ -55,66 +51,4 @@
             margin: 0;
         }
     }
-}
-
-.start {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    padding: 3px;
-    form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        button {
-            border: none;
-            padding: 10px 15px;
-            margin: 5px;
-            color: #ffffff;
-            font-size: 1.6rem;
-            font-weight: 500;
-            width: 100%;
-            max-width: 300px;
-            border-radius: 5px;
-            text-align: center;
-        }
-        input {
-            max-width: 300px;
-            background-color: #cfcfcf49;
-            border: 0.3px solid transparent;
-            padding: 5px 10px;
-            margin: 5px;
-            min-height: 40px;
-            width: 100%;
-            flex: 1;
-            border-radius: 5px;
-        }
-    }
-}
-
-.intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-h1 {
-    font-size: 2.3rem;
-}
-
-h2 {
-    font-size: 1.6rem;
-}
-
-p {
-    max-width: 500px;
-    font-size: 1.2rem;
-}
-
-input:focus {
-    border: 1px solid #ffffff;
-    outline: none;
 }

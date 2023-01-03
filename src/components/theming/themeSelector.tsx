@@ -1,9 +1,7 @@
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../context/themeContext";
-import Button from "../common/button/button";
 import { defaultThemes, ThemeDetail } from "./themes";
 import "./index.css";
-import { CoffeeOutlined, BulbOutlined } from "@ant-design/icons";
 
 export interface ThemeSelectorProps {
   theme?: ThemeDetail;
@@ -36,7 +34,7 @@ export default function ThemeSelector(props: ThemeSelectorProps) {
       <h3>Themes</h3>
       <p>Select one color shade to apply it across the app</p>
       <section>
-        {Object.values(defaultThemes).map((val) => {
+        {/*  {Object.values(defaultThemes).map((val) => {
           return (
             <button
               className="themeBtn"
@@ -49,11 +47,11 @@ export default function ThemeSelector(props: ThemeSelectorProps) {
               }}
               onClick={() => (props.onClick ? props.onClick(val) : changeTheme(val))}
             >
-              {val.isLightMode ? <CoffeeOutlined /> : <BulbOutlined />}
+           
             </button>
           );
         })}
-        {/* <button
+         <button
           style={{
             backgroundColor: customTheme.primaryColor,
             border: "2px solid #ffffff",
@@ -145,7 +143,7 @@ function CustomThemeSelector({
         </div>
 
         <div>
-          <Button label="Save" onClick={() => applyTheme(newTheme)} />
+          <button onClick={() => applyTheme(newTheme)}>Save</button>
         </div>
       </div>
     </div>

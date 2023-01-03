@@ -18,7 +18,7 @@ export default function Spaces() {
     <Block>
       <>
         <nav>
-          <img src={`${process.env.PUBLIC_URL}/assets/seal.png`} alt="Chatty Seal logo" />
+          <img src={`./assets/seal.png`} alt="Chatty Seal logo" />
           <h1>Chatty Seal</h1>
         </nav>
         {mainContent()}

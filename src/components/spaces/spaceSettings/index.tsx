@@ -1,14 +1,11 @@
 import { useContext, useState } from "react";
-import Button, { BUTTON_TYPE } from "../../common/button/button";
 import Toggle from "../../common/toggle/toggle";
 import { ThemeDetail } from "../../theming/themes";
-import ThemeSelector from "../../theming/themeSelector";
 import { Config, Configration, ConfigurationContext } from "../../../context/configurationContext";
 import { SpaceContext } from "../../../context/spaceContext";
 import "./index.scss";
 import { API_BASE_URL } from "../../../services/apiHandler";
 import Modal from "../../common/modal/modal";
-import { LogoutOutlined, SaveOutlined } from "@ant-design/icons";
 import Info from "../../common/info/info";
 
 export interface ConfigrationTemplate {
@@ -81,7 +78,6 @@ export default function SpaceSettings(props: SettingsModalProps) {
           </div>
         </>
       </Info>
-
       <div>
         <h2>Configurations</h2>
 
@@ -97,7 +93,7 @@ export default function SpaceSettings(props: SettingsModalProps) {
               //     updateConfiguration(cop);
               //   }}
               // />
-              <></>
+              <div key={"theme"}></div>
             );
           }
           return (
@@ -105,7 +101,7 @@ export default function SpaceSettings(props: SettingsModalProps) {
               <h3>{item}</h3>
               {Object.entries(spaceInfo.configuration[key]).map((value, settingsItem) => {
                 return (
-                  <section className="">
+                  <section className="" key={settingsItem}>
                     <h4>
                       {Object.hasOwn(option, value[0])
                         ? option[value[0] as keyof typeof option]
@@ -137,17 +133,75 @@ export default function SpaceSettings(props: SettingsModalProps) {
       handleClose={props.handleClose}
       showModal={props.showModal}
       topBarButtons={
-        <>
-          <Button
-            buttonType={BUTTON_TYPE.b2}
-            icon={<SaveOutlined />}
+        <div>
+          <button
             onClick={() => {
               applyConfigurationChanges();
             }}
-          />
-
-          <Button buttonType={BUTTON_TYPE.b2} icon={<LogoutOutlined />} onClick={logOutOfSpace} />
-        </>
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clipPath="url(#clip0_1_27793)">
+                <path
+                  d="M4 14.6667L7.2 18.9333C7.56667 19.4222 7.75 19.6667 8 19.6667C8.25 19.6667 8.43333 19.4222 8.8 18.9333L20 4"
+                  stroke="black"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_1_27793">
+                  <rect width="24" height="24" fill="black" />
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
+          <button onClick={() => logOutOfSpace()}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clipPath="url(#clip0_1_27835)">
+                <g clipPath="url(#clip1_1_27835)">
+                  <path
+                    d="M16.5001 12L3.00006 12M3.00006 12L7.70129 7M3.00006 12L7.70129 17"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M14 21L17 21C18.8856 21 19.8284 21 20.4142 20.4142C21 19.8284 21 18.8856 21 17L21 7C21 5.11438 21 4.17157 20.4142 3.58579C19.8284 3 18.8856 3 17 3L14 3"
+                    stroke="black"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </g>
+              </g>
+              <defs>
+                <clipPath id="clip0_1_27835">
+                  <rect width="24" height="24" fill="black" />
+                </clipPath>
+                <clipPath id="clip1_1_27835">
+                  <rect
+                    width="24"
+                    height="24"
+                    fill="black"
+                    transform="translate(0 24) rotate(-90)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
       }
     />
   );

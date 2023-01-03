@@ -36,11 +36,11 @@
         box-sizing: border-box;
         border-radius: 10px;
         width: fit-content;
-        max-width: 60%;
-        min-width: 100px;
+        max-width: 650px;
+        width: 85%;
         position: relative;
         margin: 0;
-        border: 1px solid #6a6a6a6d;
+        background-color: rgb(242, 242, 242);
     }
 }
 
@@ -120,14 +120,12 @@
 
 .send-section button {
     border-radius: inherit;
-    padding: 15px;
+    padding: 10px;
     border: 0;
     margin: 0;
-    margin: 2px;
     font-weight: bold;
     font-size: 12px;
-    width: 10%;
-    min-width: 50px;
+    background: transparent;
 }
 
 .send-section textarea {
@@ -161,9 +159,4 @@
     flex-direction: column;
     width: 100%;
     height: fit-content;
-}
-
-label {
-    font-size: 0.8rem;
-    padding-left: 5px;
 }
