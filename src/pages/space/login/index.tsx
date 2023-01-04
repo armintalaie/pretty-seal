@@ -57,6 +57,7 @@ export default function Login() {
     return (
       <>
         <input
+          autoFocus
           type="password"
           name="name"
           placeholder="Space Passkey"
@@ -73,7 +74,7 @@ export default function Login() {
       return (
         <>
           <nav>
-            <img src={`./assets/seal.png`} alt="Chatty Seal logo" />
+            <img src={`/public/assets/seal.png`} alt="Chatty Seal logo" />
           </nav>
           <Info>
             <>
@@ -87,7 +88,7 @@ export default function Login() {
         <>
           {" "}
           <nav>
-            <img src={`./assets/seal.png`} alt="Chatty Seal logo" />
+            <img src={`/public/assets/seal.png`} alt="Chatty Seal logo" />
             <h1> / {spaceBrief?.name}</h1>
           </nav>
           <div className="start">

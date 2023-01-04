@@ -3,6 +3,7 @@ import Modal from "../common/modal/modal";
 import { SocketContext } from "../../context/socketContext";
 import Setup from "./setup/setup";
 import "./index.scss";
+import RoomSettings from "./settings";
 
 export interface RoomsProps {
   domainId: string;
@@ -42,7 +43,6 @@ export default function Rooms(props: RoomsProps) {
   const openRoom = (roomId: string) => {
     socket.emit("room", {
       roomId: roomId,
-      name: "displayName",
       roomName: roomId,
     });
   };
@@ -95,6 +95,7 @@ export default function Rooms(props: RoomsProps) {
       </div>
     </>
   );
+
   const RoomCreationModal = (
     <Modal
       component={<Setup domainId={domainId} handleClose={() => setShowAddRoom(false)} />}

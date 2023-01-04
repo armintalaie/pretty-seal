@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import Messages from "../../../components/common/message/messages";
 import Modal from "../../../components/common/modal/modal";
-import Invite from "../../../components/invites/invite";
 import { ConfigurationContext } from "../../../context/configurationContext";
 import "./index.scss";
-import { SpaceContext } from "../../../context/spaceContext";
 import CallSection from "../../../components/call";
+import RoomSettings from "../../../components/rooms/settings";
+import { SocketContext } from "../../../context/socketContext";
 
 export interface RoomProps {
   roomname?: string;
@@ -17,11 +17,20 @@ const pc = new RTCPeerConnection();
 
 export default function Room(props: RoomProps) {
   const { config } = useContext(ConfigurationContext);
+  const socket = useContext(SocketContext);
+  const [displayName, setDisplayName] = useState<string>(socket.id);
   const { leaveRoom, roomId } = props;
-  const [showInvite, setShowInvite] = useState(false);
-
+  const [roomSettings, setRoomSettings] = useState(false);
   const [extendedBtns, setExtendedBtns] = useState<JSX.Element | undefined>(undefined);
   const [showCallSection, setShowCallSection] = useState(false);
+
+  useEffect(() => {
+    socket.emit("room", {
+      roomId: roomId,
+      name: displayName,
+      roomName: roomId,
+    });
+  }, []);
   return (
     <>
       <div className="block room" key={props.roomId}>
@@ -105,26 +114,43 @@ export default function Room(props: RoomProps) {
                     </svg>
                   </button>
                 )}
-
-                {/*
-                {config.rooms.showInvite && (
-                  <Button
-                    buttonType={BUTTON_TYPE.b2}
-                    customizations={{ bg: ColorOptions.SECONDARY }}
-                    icon={<UserOutlined />}
-                    onClick={() => setShowInvite(true)}
-                  />
-                )} */}
+                <button
+                  onClick={() => {
+                    setRoomSettings((prev) => !prev);
+                  }}
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_1_27951)">
+                      <path
+                        d="M5 12H19M5 7H19M5 17H19"
+                        stroke="black"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_1_27951">
+                        <rect width="24" height="24" fill="black" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
           {showCallSection && <CallSection roomId={roomId} buttonAccess={setExtendedBtns} />}
-          <Messages roomId={roomId} />
+          <Messages displayname={displayName} roomId={roomId} />
 
           <Modal
-            component={<Invite roomId={roomId} />}
-            showModal={showInvite}
-            handleClose={() => setShowInvite(false)}
+            component={<RoomSettings {...props} name={{ displayName, setDisplayName }} />}
+            showModal={roomSettings}
+            handleClose={() => setRoomSettings(false)}
           />
         </>
       </div>

@@ -4,7 +4,7 @@ import MessageBubble, { Message } from "./message";
 import "./index.scss";
 import { SpaceContext } from "../../../context/spaceContext";
 
-export default function Messages({ roomId }: { roomId: string }) {
+export default function Messages({ roomId, displayname }: { roomId: string; displayname: string }) {
   const { domainId } = useContext(SpaceContext).spaceInfo!;
   const socket = useContext(SocketContext);
   const [draft, setDraft] = useState<string>("");
@@ -23,7 +23,7 @@ export default function Messages({ roomId }: { roomId: string }) {
     if (draft.length === 0) {
       return;
     }
-    socket.emit("message", domainId, roomId, draft);
+    socket.emit("message", roomId, draft, displayname);
     setMessages((prev) =>
       prev.concat([
         {

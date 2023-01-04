@@ -47,7 +47,7 @@ export default function SpaceSetup() {
 
   const backButton = (
     <div className="back">
-      <button onClick={() => setShowCreate(SPACESTATUS.SETUP)}>
+      <button type="button" onClick={() => setShowCreate(SPACESTATUS.SETUP)}>
         <svg
           width="24"
           height="24"
@@ -75,8 +75,15 @@ export default function SpaceSetup() {
   );
 
   const createSpaceContent = (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        createSpace();
+      }}
+    >
+      {backButton}
       <input
+        autoFocus
         type="text"
         name="name"
         placeholder="Space Name"
@@ -86,19 +93,25 @@ export default function SpaceSetup() {
       <div>
         <button onClick={() => createSpace()}>Create Space</button>
       </div>
-    </>
+    </form>
   );
 
   const joinSpaceContent = (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        logIntoSpace();
+      }}
+    >
+      {backButton}
       <input
+        autoFocus
         type="text"
         name="name"
         placeholder="Space id"
         value={spaceId}
         onChange={(e) => setSpaceId(e.target.value)}
       />
-
       <input
         type="password"
         name="name"
@@ -109,7 +122,7 @@ export default function SpaceSetup() {
       <div>
         <button onClick={() => logIntoSpace()}>Log into Space</button>
       </div>
-    </>
+    </form>
   );
 
   return (
@@ -122,17 +135,14 @@ export default function SpaceSetup() {
       </Info>
 
       <div className="start">
-        <form onSubmit={(e) => e.preventDefault()}>
-          {showCreate === SPACESTATUS.SETUP && (
-            <>
-              <button onClick={() => setShowCreate(SPACESTATUS.CREATE)}>Create Space</button>
-              <button onClick={() => setShowCreate(SPACESTATUS.JOIN)}>Join Space</button>
-            </>
-          )}
-          {showCreate !== SPACESTATUS.SETUP && backButton}
-          {showCreate === SPACESTATUS.CREATE && createSpaceContent}
-          {showCreate === SPACESTATUS.JOIN && joinSpaceContent}
-        </form>
+        {showCreate === SPACESTATUS.SETUP && (
+          <>
+            <button onClick={() => setShowCreate(SPACESTATUS.CREATE)}>Create Space</button>
+            <button onClick={() => setShowCreate(SPACESTATUS.JOIN)}>Join Space</button>
+          </>
+        )}
+        {showCreate === SPACESTATUS.CREATE && createSpaceContent}
+        {showCreate === SPACESTATUS.JOIN && joinSpaceContent}
       </div>
     </div>
   );

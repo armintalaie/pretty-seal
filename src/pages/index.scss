@@ -4,6 +4,21 @@
     align-items: center;
     width: 100%;
     padding: 3px;
+    button {
+        border: none;
+        padding: 5px 10px;
+        font-size: 1.6rem;
+        font-weight: 500;
+        width: 100%;
+        max-width: 150px;
+        border-radius: 5px;
+        text-align: center;
+        margin: 5px 0;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
     form {
         display: flex;
         flex-direction: column;
@@ -45,7 +60,6 @@
             }
         }
         input {
-            max-width: 100%;
             background-color: #cfcfcfca;
             border: 0.3px solid transparent;
             padding: 5px 10px;
