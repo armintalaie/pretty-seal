@@ -83,8 +83,8 @@ export default function Room(props: RoomProps) {
                 <h2> {props.roomname}</h2>
               </div>
               <div>
-                {extendedBtns && showCallSection && extendedBtns}
-                {true && (
+
+                {!showCallSection && (
                   <button
                     onClick={() => {
                       setShowCallSection((prev) => !prev);
@@ -144,7 +144,7 @@ export default function Room(props: RoomProps) {
               </div>
             </div>
           </div>
-          {showCallSection && <CallSection roomId={roomId} buttonAccess={setExtendedBtns} />}
+          {showCallSection && <CallSection roomId={roomId} close={() => setShowCallSection(false)}  />}
           <Messages displayname={displayName} roomId={roomId} />
 
           <Modal
