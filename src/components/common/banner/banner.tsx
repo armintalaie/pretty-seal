@@ -1,4 +1,3 @@
-import { CloseOutlined, LoadingOutlined } from "@ant-design/icons";
 import { useContext } from "react";
 import { ThemeContext } from "../../../context/themeContext";
 import "./index.scss";
@@ -19,13 +18,9 @@ export default function Alert(props: AlertProps) {
   return (
     <div className={`banner ${alertType}`} style={{ backgroundColor: `${theme.primaryColor}` }}>
       <h3>
-        <span className="icon">
-          <LoadingOutlined />{" "}
-        </span>
+        <span className="icon">{/* <LoadingOutlined />{" "} */}</span>
         {text}
-        <span className="icon">
-          <CloseOutlined onClick={() => alert("aa")} />
-        </span>
+        <span className="icon">{/* <CloseOutlined onClick={() => alert("aa")} /> */}</span>
       </h3>
     </div>
   );

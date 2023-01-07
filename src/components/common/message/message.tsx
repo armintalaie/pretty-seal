@@ -1,7 +1,3 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../../context/themeContext";
-import Info from "../info/info";
-
 export interface Message {
   text: string;
   date: string;
@@ -11,7 +7,6 @@ export interface Message {
 }
 
 export default function MessageBubble(message: Message) {
-  const { currentTheme } = useContext(ThemeContext);
   const user = "me";
 
   const messageStatus = () => {
@@ -19,21 +14,17 @@ export default function MessageBubble(message: Message) {
     else return false;
   };
 
-  if (message.username === "HECTOR") {
-    return (
-      <Info>
-        <p>{message.text}</p>
-      </Info>
-    );
-  }
+  const date = new Date(message.date);
+
   return (
     <div className={message.displayName === user ? "message right" : "message left"}>
       <div className={`message-wrapper`}>
         {message.displayName !== user && <h6>{message.displayName}</h6>}
-
+        {message.displayName === user && <h6>{user}</h6>}
         <div className={`message-text ${messageStatus() ? "unsent" : "sent"}`}>
           <p>{message.text}</p>
         </div>
+        <h6>{date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</h6>
       </div>
     </div>
   );

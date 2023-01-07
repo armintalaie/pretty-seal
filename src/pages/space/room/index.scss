@@ -2,13 +2,13 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     h1 {
         vertical-align: middle;
+        font-size: 15px;
     }
     button {
-        width: 30px;
-        max-height: 30px;
+        background: none;
         text-align: center;
     }
     div {
@@ -30,10 +30,30 @@
             align-items: center;
             justify-content: center;
         }
-        background-color: rgb(210, 223, 254);
+        // background-color: rgb(210, 223, 254);
         margin: 0px;
         border-radius: 10px;
         padding: 4px 8px;
         width: 100%;
+        .buttons {
+            border-radius: 10px;
+            height: inherit;
+            display: flex;
+            flex-direction: row;
+            svg {
+                height: inherit;
+                * {
+                    stroke: rgb(154, 180, 241);
+                }
+                stroke: rgb(154, 180, 241);
+            }
+        }
+    }
+}
+
+.block {
+    &.room {
+        background-color: rgb(232, 232, 232);
+        border-radius: 15px;
     }
 }

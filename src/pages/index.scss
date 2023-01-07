@@ -1,40 +1,73 @@
 .start {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     padding: 3px;
-    form {
+    button {
+        border: none;
+        padding: 5px 10px;
+        font-size: 1.6rem;
+        font-weight: 500;
         width: 100%;
+        max-width: 150px;
+        border-radius: 5px;
+        text-align: center;
+        margin: 5px 0;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    form {
         display: flex;
         flex-direction: column;
         align-items: center;
+        width: 400px;
+        max-width: 100%;
+        >div {
+            margin: 5px 0;
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+            svg {
+                stroke: black;
+            }
+        }
+        .back {
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            button {
+                width: fit-content;
+                background: transparent;
+                box-shadow: none;
+            }
+        }
         button {
             border: none;
-            padding: 10px 15px;
-            margin: 5px;
-            color: #ffffff;
+            padding: 5px 10px;
             font-size: 1.6rem;
             font-weight: 500;
             width: 100%;
-            max-width: 300px;
+            max-width: 150px;
             border-radius: 5px;
             text-align: center;
+            margin: 5px 0;
             box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
             &:hover {
-                box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 5px 1px;
+                cursor: pointer;
             }
         }
         input {
-            max-width: 300px;
             background-color: #cfcfcfca;
             border: 0.3px solid transparent;
             padding: 5px 10px;
-            margin: 5px;
             min-height: 40px;
-            width: 100%;
+            margin: 5px 0;
             flex: 1;
             border-radius: 5px;
+            width: 100%;
         }
     }
 }
@@ -82,7 +115,7 @@ input:focus {
     align-items: center;
     flex-wrap: wrap;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     height: 100%;
     backdrop-filter: blur(6px);
     width: 100%;
@@ -101,8 +134,8 @@ input:focus {
     }
     &.light {
         color: #141414;
-        background-color: #d7d7d7;
-        box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+        background-color: #866666;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
     }
 }
 
@@ -116,7 +149,6 @@ input:focus {
     width: 100%;
     flex-direction: row;
     a {
-        color: #ffffff;
         font-size: 1.3rem;
         font-weight: bold;
         text-decoration: none;
@@ -138,4 +170,13 @@ input:focus {
         height: 95%;
         width: 1px;
     }
+}
+
+button {
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    max-width: 100%;
+    border: none;
 }

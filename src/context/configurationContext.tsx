@@ -80,7 +80,6 @@ export const ConfigurationContextProvider = ({
       .then((res) => res.json())
       .then((result) => {
         // changeTheme(result.configuration.theme);
-        console.log("ss");
         setConfiguration(result.configuration);
       });
   };

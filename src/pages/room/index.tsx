@@ -26,14 +26,6 @@ export default function RoomView() {
     };
   }, [socket]);
 
-  useEffect(() => {
-    socket.emit("room", {
-      roomId: roomId,
-      name: "displayName",
-      roomName: roomId,
-    });
-  }, []);
-
   if (!space.spaceInfo) {
     return (
       <Block>
